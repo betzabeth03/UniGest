@@ -1,0 +1,48 @@
+Bienvenido al Sistema para la gestión de Planificaciones académicas
+
+Aqui vera varias funcionalidades como añadir, modificar, eliminar y buscar elementos
+
+Ya sea profesores, materias, secciones o eventos
+
+los metodos son muy similares entre si usando la extension de thunder client, primero
+debe tener en claro que accion desea realizar en que entidad
+
+
+ para mostrar todos los profesores del sistema en el thunder client usar la opcion get 
+y colocar el enlace localhost:3000/tablas/profesores
+
+ si desea realizar alguna accion como eliminar o editar la informacion de uno añadir al enlace
+/(id del profesor a editar)
+
+y debajo en body realizar un objeto en json con los datos a editar con el metodo put 
+(o usar delete para eliminar) ejemplo
+{
+    "nombre": "Maria",
+    "materias": [
+      1,
+      2,
+      3
+    ],
+    "eventos": [
+      1,
+      4,
+      2
+    ],
+    "id": 1,
+    "seccion": 2
+  }
+
+
+ y los mismos procesos se repiten tanto como para materias,eventos y secciones, simplemente
+al final del enlace cambie profesores por lo que desea modificar
+
+
+si deseamos ver los proximos eventos de todos los profesores colocaremos la url
+localhost:3000/tablas/eventos/proximos y un objeto con la fecha desde que deseamos observar ejemplo
+
+{
+    "año": 2024,
+    "mes": 4,
+    "día": 25,
+    "hora": 7
+  }
