@@ -31,7 +31,7 @@ class ProfesoresModelos{
   uno(idReq) {
     
      return new Promise((resolve,reject)=>{
-      let consulta = "SELECT * FROM profesores WHERE id =" + idReq
+      let consulta = `SELECT  * FROM profesores WHERE id=${idReq}`
       conexion.query(consulta,function(error,results,fields){
         if(error){
           reject(error)
