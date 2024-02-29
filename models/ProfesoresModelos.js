@@ -30,11 +30,17 @@ class ProfesoresModelos{
   }
   uno(idReq) {
     
-      for(let i=0;i<ProfesoresArr.length;i++){
-        if(idReq==ProfesoresArr[i].id){
-          return ProfesoresArr[i]
+     return new Promise((resolve,reject)=>{
+      let consulta = "SELECT * FROM profesores WHERE id =" + idReq
+      conexion.query(consulta,function(error,results,fields){
+        if(error){
+          reject(error)
+        }else{
+          resolve(results)
+          conexion.end()
         }
-      }
+      })
+     })
   
     
   }
