@@ -1,11 +1,11 @@
 const { resolveInclude } = require('ejs');
 const { v4: uuidv4 } = require ('uuid');
-
+const conexion = require('../conexion')
 let ProfesoresArr = [
    {
     nombre: "Maria",
         materias: [1,2,3],
-        eventos:[1,4,2],
+        eventos:[1,4,2], 
         id:1,
         seccion:2
         
@@ -15,7 +15,18 @@ let ArrTemp = []
 
 class ProfesoresModelos{
   todos() {
-    return ProfesoresArr;
+    return new Promise((resolve,reject)=>{
+      let consulta = "SELECT * FROM profesores"
+      conexion.query(consulta,function(error,results,fields){
+        if(error){
+         reject(error)
+        }else{
+          ProfesoresArr = results
+          resolve(ProfesoresArr)
+          conexion.end()
+        }
+      })
+    });
   }
   uno(idReq) {
     
