@@ -72,13 +72,16 @@ class ProfesoresModelos{
 }
   
 eliminar(idElemento){
-  for(let i=0;i<ProfesoresArr.length;i++){
-    if(idElemento==ProfesoresArr[i].id){
-      let index = ProfesoresArr.indexOf(idElemento)
-      ProfesoresArr.splice(index,1);
-      return 1
-    }
-  }
+  return new Promise((resolve,reject)=>{
+    let consulta = `DELETE FROM profesores WHERE id = ${idElemento}`
+    conexion.query(consulta,function(error,results,fields){
+      if(error){
+        reject(error)
+      }else{
+        resolve(results)
+      }
+    })
+  })
 
 
 }
