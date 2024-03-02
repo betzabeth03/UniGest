@@ -56,15 +56,18 @@ class ProfesoresModelos{
            })
     })
   }
- modificar(idReq, nuevoNombre) {
+ modificar(idReq, nuevosValores) {
   return new Promise((resolve, reject) => {
-    for (let i = 0; i < ProfesoresArr.length; i++) {
-      if (idReq == ProfesoresArr[i].id) {
-        ProfesoresArr[i].nombre = nuevoNombre;
-        resolve(ProfesoresArr[i]);
+    let nombreUs = nuevosValores.nombre
+    let Ci_Us = nuevosValores.CI
+    let consulta = `UPDATE profesores SET nombre = '${nombreUs}', CI = ${Ci_Us} WHERE id = ${idReq}`
+    conexion.query(consulta,function(error,results,fields){
+      if(error){
+        reject(error)
+      }else{
+        resolve(results)
       }
-    }
-    ;
+    })
   });
 }
   

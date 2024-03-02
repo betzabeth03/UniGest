@@ -99,11 +99,14 @@ router.post('/eventos', function(req, res, next) {
 /* PUT modificar user */
 router.put('/profesores/:id', function(req, res, next) {
   const idReq = req.params.id;
-  const nuevoNombre = req.body.nombre;
-  ProfesoresControladores.modificar(idReq, nuevoNombre)
-    .then((usuarioActualizado) => {
-      res.send(usuarioActualizado);
-    })
+  const nuevosValores = req.body;
+  ProfesoresControladores.modificar(idReq, nuevosValores)
+  .then(() => {
+    ProfesoresControladores.todos()
+    .then((resultados) =>{
+    res.send(resultados); 
+  })
+})
     .catch((e) => console.error(e.message));
     });
 

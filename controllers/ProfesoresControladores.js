@@ -34,9 +34,9 @@ class ProfesoresControladores{
   })
     
   }
-  modificar(idReq, nuevoNombre){
+  modificar(idReq, nuevosValores){
     return new Promise((resolve, reject) => {   
-      let promesa = ProfesoresModelos.modificar(idReq,nuevoNombre);
+      let promesa = ProfesoresModelos.modificar(idReq,nuevosValores);
         if(promesa){
           resolve(promesa);
         } else {
