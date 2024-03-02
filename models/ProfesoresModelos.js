@@ -23,7 +23,6 @@ class ProfesoresModelos{
         }else{
           ProfesoresArr = results
           resolve(ProfesoresArr)
-          conexion.end()
         }
       })
     });
@@ -37,7 +36,6 @@ class ProfesoresModelos{
           reject(error)
         }else{
           resolve(results)
-          conexion.end()
         }
       })
      })
@@ -46,9 +44,16 @@ class ProfesoresModelos{
   }
   crear(usuario){
     return new Promise((resolve, reject) => {
-            usuario.id = uuidv4();
-            ProfesoresArr.push(usuario);
-            resolve();
+      let nombreUS = usuario.nombre
+      let CI_US = usuario.CI
+           let consulta = `INSERT INTO profesores (nombre,CI, id) VALUES ('${nombreUS}',${CI_US},"")`
+           conexion.query(consulta,function(error,results,fields){
+            if(error){
+              reject(error)
+            }else{
+              resolve(results)
+            }
+           })
     })
   }
  modificar(idReq, nuevoNombre) {

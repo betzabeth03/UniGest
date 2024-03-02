@@ -4,6 +4,7 @@ var ProfesoresControladores = require("../controllers/ProfesoresControladores");
 let MateriasControladores = require("../controllers/MateriasControlador");
 const SeccionesControladores = require('../controllers/SeccionesControladores');
 const EventosControlador = require('../controllers/EventosControlador');
+const conexion = require('../conexion');
 
 /* GET users listing. */
 router.get('/profesores', function(req, res, next) {
@@ -226,5 +227,4 @@ ProfesoresControladores.eliminar(req.params.id)
           )})
           .catch((e) => console.error(e.message));
           })
-
 module.exports = router;
