@@ -1,22 +1,20 @@
 const { resolveInclude } = require('ejs');
 const { v4: uuidv4 } = require ('uuid');
 
-let EventosArr =[
-    {
-        nombre: "Examen",
-        materia:1,
-        id: 1,
-        fecha:{
-            año: 2024,
-            mes: 4,
-            dia: 25,
-            hora: 7
-        }
-    }
-]
+
  class EventosModelos{
     todos() {
-        return EventosArr;
+      return new Promise((resolve,reject)=>{
+        let consulta = "SELECT * FROM eventos"
+        conexion.query(consulta,function(error,results,fields){
+          if(error){
+           reject(error)
+          }else{
+            resolve(results)
+          }
+        })
+      });
+
       }
       crear(usuario){
         return new Promise((resolve, reject) => {
@@ -49,37 +47,54 @@ let EventosArr =[
   return eventosProximos;
 }
 
+uno(idReq) {
     
-    uno(idReq) {
-      return new Promise((resolve, reject) => {
-        for(let i=0;i<EventosArr.length;i++){
-          if(idReq==EventosArr[i].id){
-            return EventosArrArr[i]
-          }
-        }})
-    } 
-    eliminar(idReq){
-      for(let i=0;i<EventosArr.length;i++){
-        if(idReq==EventosArr[i].id){
-          let index = EventosArr.indexOf(idReq)
-          EventosArr.splice(index,1);
-          return 1
-        }
-      }
-    } 
-     modificar(idReq, nuevoNombre) {
-  return new Promise((resolve, reject) => {
-    for (let i = 0; i < EventosArr.length; i++) {
-      if (idReq == EventosArr[i].id) {
-        EventosArr[i].nombre = nuevoNombre;
-        resolve(EventosArr[i]);
-      }
-    }
-    ;
-  });
-}
-}
+  return new Promise((resolve,reject)=>{
+   let consulta = `SELECT  * FROM eventos WHERE id=${idReq}`
+   conexion.query(consulta,function(error,results,fields){
+     if(error){
+       reject(error)
+     }else{
+       resolve(result)
+     }
+   })
+  })
+
  
+}
+    
+
+    
+    eliminar(idElemento){
+      return new Promise((resolve, reject) => {
+          let consulta = `DELETE FROM eventos WHERE id=${idElemento}`
+            conexion.query(consulta,function(error,results,fields){
+              if(error){
+                reject(error)
+              }else{
+                resolve(results)
+  
+              }
+            })
+           })
+          }
+  
+  
+
+    modificar(idReq, nuevosValores) {
+      let nombreEv = nuevosValores.nombre
+      let tipoEv = nuevosValores.tipoEv
+      let fechaEv = nuevosValores.Ev
+      let consulta = `UPDATE eventos SET nombre = '${nombreEv}', tipo = ${tipoEv}, fecha = ${fechaEv} WHERE id = ${idReq}`
+      conexion.query(consulta,function(error,results,fields){
+        if(error){
+          reject(error)
+        }else{
+          resolve(results)
+       }
+      }
+    )}
+ }
 
 
 

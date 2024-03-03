@@ -48,9 +48,9 @@ class EventosControladores{
     
         })
       }
-      modificar(idReq, nuevoNombre){
+      modificar(idReq, nuevosValores){
         return new Promise((resolve, reject) => {   
-          let promesa = EventosModelos.modificar(idReq,nuevoNombre);
+          let promesa = EventosModelos.modificar(idReq,nuevosValores );
             if(promesa){
               resolve(promesa);
             } else {

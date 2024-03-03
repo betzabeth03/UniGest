@@ -22,9 +22,9 @@ class SeccionesControladores{
 
     })
   }
-  crear(usuario){
+  crear(registro){
     return new Promise((resolve, reject) =>{
-        let promesa= SeccionesModelos.crear(usuario);
+        let promesa= SeccionesModelos.crear(registro);
         if(promesa){
           resolve(promesa);
         } else {
@@ -34,9 +34,9 @@ class SeccionesControladores{
   })
     
   }
-  modificar(idReq, nuevoNombre){
+  modificar(idReq, nuevosValores){
     return new Promise((resolve, reject) => {   
-      let promesa= SeccionesModelos.modificar(idReq, nuevoNombre);
+      let promesa= SeccionesModelos.modificar(idReq, nuevosValores);
         if(promesa){
           resolve(promesa);
         } else {

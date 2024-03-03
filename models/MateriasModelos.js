@@ -1,66 +1,74 @@
 const { resolveInclude } = require('ejs');
 const { v4: uuidv4 } = require ('uuid');
-let MateriasArr = [
-    {
-        nombre:"Matematicas",
-        id:"1",
-
-    }
-]
-
 
 class MateriasModelos{
     todos(){
-        return MateriasArr
+      return new Promise((resolve,reject)=>{
+        let consulta = "SELECT * FROM materias"
+        conexion.query(consulta,function(error,results,fields){
+          if(error){
+           reject(error)
+          }else{
+            resolve(results)
+          }
+        })
+      });
     }
     uno(idReq) {
-    
-        for(let i=0;i<MateriasArr.length;i++){
-          if(idReq==MateriasArr[i].id){
-            return MateriasArr[i]
+      return new Promise((resolve,reject)=>{
+        let consulta = `SELECT  * FROM materias WHERE id=${idReq}`
+        conexion.query(consulta,function(error,results,fields){
+          if(error){
+            reject(error)
+          }else{
+            resolve(results)
           }
-        }
+        })
+       })
     
-      
     }
-    crear(usuario){
-      return new Promise((resolve, reject) => { {
-              usuario.id = uuidv4();
-              MateriasArr.push(usuario);
-              if(usuario){
-                resolve()
-              } else {
-                reject(new Error("Ha ocurrido un error"));
+    
+    crear(registro){
+      return new Promise((resolve, reject) => {
+        let nombreR = registro.nombre
+        let codigoR= registro.codigo
+             let consulta = `INSERT INTO materias (nombre, id, código) VALUES ('${nombreR}',"", '${codigoR}')`
+             conexion.query(consulta,function(error,results,fields){
+              if(error){
+                reject(error)
+              }else{
+                resolve(results)
               }
-         }          
+             })
       })
     }
-   modificar(idReq, nuevoNombre) {
-    return new Promise((resolve, reject) => {
-      for (let i = 0; i < MateriasArr.length; i++) {
-        if (idReq === MateriasArr[i].id) {
-          MateriasArr[i].nombre = nuevoNombre;
-          if(nuevoNombre){
-            resolve(MateriasArr[i]);
-          } else {
-            reject(new Error("Ha ocurrido un error"));
-          }
-        } 
+
+    modificar(idReq, nuevosValores) {
+      let nombreR = nuevosValores.nombre
+      let codigoR = nuevosValores.codigo
+      let consulta = `UPDATE materias SET nombre = '${nombreR}', código = '${codigoR}' WHERE id = ${idReq}`
+      conexion.query(consulta,function(error,results,fields){
+        if(error){
+          reject(error)
+        }else{
+          resolve(results)
+       }
       }
-      ;
-    });
-  }
+    )}
+    
     
   eliminar(idElemento){
-    for(let i=0;i<MateriasArr.length;i++){
-      if(idElemento==MateriasArr[i].id){
-        let index = MateriasArr.indexOf(idElemento)
-        MateriasArr.splice(index,1);
-        return 1
-      }
-    }
-  
-  
-  }
+    return new Promise((resolve, reject) => {
+        let consulta = `DELETE FROM materias WHERE id=${idElemento}`
+          conexion.query(consulta,function(error,results,fields){
+            if(error){
+              reject(error)
+            }else{
+              resolve(results)
+
+            }
+          })
+         })
+        }
 }
 module.exports = new MateriasModelos

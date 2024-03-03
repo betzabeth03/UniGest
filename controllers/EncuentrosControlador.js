@@ -1,11 +1,10 @@
-const MateriasModelos = require("../models/MateriasModelos");
+var EncuentrosModelos = require("../models/EncuentrosModelos");
 
 
-class MateriasControladores{
+class EncuentrosControladores{
     todos(){
       return new Promise((resolve, reject) => {   
-        //resolve(MateriasModelos.todos());
-        let prueba= MateriasModelos.todos();
+        let prueba= EncuentrosModelos.todos();
         if(prueba){
           resolve(prueba);
         } else {
@@ -15,8 +14,7 @@ class MateriasControladores{
     }
     uno(idReq) {
       return new Promise((resolve,reject)=>{
-       //resolve(MateriasModelos.uno(idReq))  
-       let prueba= MateriasModelos.uno(idReq);
+       let prueba= EncuentrosModelos.uno(idReq);
         if(prueba){
           resolve(prueba);
         } else {
@@ -27,8 +25,7 @@ class MateriasControladores{
     }
     crear(registro){
       return new Promise((resolve, reject) =>{
-        //resolve(MateriasModelos.crear(usuario));
-        let prueba= MateriasModelos.crear(registro);
+        let prueba= EncuentrosModelos.crear(registro);
         if(prueba){
           resolve(prueba);
         } else {
@@ -40,7 +37,7 @@ class MateriasControladores{
     }
     modificar(idReq, nuevosValores){
       return new Promise((resolve, reject) => {   
-        let prueba= MateriasModelos.modificar(idReq,nuevosValores);
+        let prueba= EncuentrosModelos.modificar(idReq,nuevosValores);
         if(prueba){
           resolve(prueba);
         } else {
@@ -51,8 +48,7 @@ class MateriasControladores{
     }
     eliminar(idElemento){
       return new Promise((resolve, reject) =>{
-        //resolve(MateriasModelos.eliminar(idElemento));
-        let prueba= MateriasModelos.eliminar(idElemento);
+        let prueba= EncuentrosModelos.eliminar(idElemento);
         if(prueba){
           resolve(prueba);
         } else {
@@ -62,4 +58,4 @@ class MateriasControladores{
       })
     }
   }
-  module.exports = new MateriasControladores();
+  module.exports = new EncuentrosControladores();
