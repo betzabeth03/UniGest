@@ -2,10 +2,10 @@ const { resolveInclude } = require('ejs');
 const { v4: uuidv4 } = require ('uuid');
 const conexion = require('../conexion')
 
-class ActividadModelos{
+class ActividadesModelos{
   todos() {
     return new Promise((resolve,reject)=>{
-      let consulta = "SELECT * FROM actividad"
+      let consulta = "SELECT * FROM actividades"
       conexion.query(consulta,function(error,results,fields){
         if(error){
          reject(error)
@@ -18,7 +18,7 @@ class ActividadModelos{
   uno(idReq) {
     
      return new Promise((resolve,reject)=>{
-      let consulta = `SELECT  * FROM actividad WHERE id=${idReq}`
+      let consulta = `SELECT  * FROM actividades WHERE id=${idReq}`
       conexion.query(consulta,function(error,results,fields){
         if(error){
           reject(error)
@@ -30,12 +30,12 @@ class ActividadModelos{
   
     
   }
-  crear(actividad){
+  crear(actividades){
     return new Promise((resolve, reject) => {
-      let nombreAC = actividad.nombre
-      let fechaAC = actividad.fecha
-      let seccionAC = actividad.secc
-        let consulta = `INSERT INTO actividad (nombre, id, idSeccion, fecha) VALUES (${nombreAC},"", ${seccionAC}, ${fechaAC})}`
+      let nombreAC = actividades.nombre
+      let fechaAC = actividades.fecha
+      let seccionAC = actividades.secc
+        let consulta = `INSERT INTO actividades (nombre, id, idSeccion, fecha) VALUES (${nombreAC},"", ${seccionAC}, ${fechaAC})}`
         conexion.query(consulta,function(error,results,fields){
           if(error){
             reject(error)
@@ -51,7 +51,7 @@ class ActividadModelos{
     let nombreAC = nuevosValores.nombre
     let fechaAC = nuevosValores.fecha
     let seccionAC = nuevosValores.secc
-    let consulta = `UPDATE actividad SET nombre = '${nombreAC}', idSeccion = '${seccionAC}', fecha = '${fechaAC}', WHERE id = ${idReq}`
+    let consulta = `UPDATE actividades SET nombre = '${nombreAC}', idSeccion = '${seccionAC}', fecha = '${fechaAC}', WHERE id = ${idReq}`
     conexion.query(consulta,function(error,results,fields){
       if(error){
         reject(error)
@@ -64,7 +64,7 @@ class ActividadModelos{
   
 eliminar(idElemento){
     return new Promise((resolve, reject) => {
-        let consulta = `DELETE FROM actividad WHERE id=${idElemento}`
+        let consulta = `DELETE FROM actividades WHERE id=${idElemento}`
           conexion.query(consulta,function(error,results,fields){
             if(error){
               reject(error)
@@ -78,4 +78,4 @@ eliminar(idElemento){
 }
 }
 
-module.exports = new ActividadModelos(); 
+module.exports = new ActividadesModelos(); 

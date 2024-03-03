@@ -4,6 +4,7 @@ var ProfesoresControladores = require("../controllers/ProfesoresControladores");
 let MateriasControladores = require("../controllers/MateriasControlador");
 const SeccionesControladores = require('../controllers/SeccionesControladores');
 const EventosControlador = require('../controllers/EventosControlador');
+const ActividadesControladores = require('../controllers/ActividadesControlador')
 const conexion = require('../conexion');
 
 /* GET users listing. */

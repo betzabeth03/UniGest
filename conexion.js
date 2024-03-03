@@ -4,9 +4,7 @@ const conexion = mysql.createConnection({
     host: 'localhost',
     user : 'root',
     password: '',
-    database: 'materias'
+    database: 'sistemadegestionadministrativa'
 })
 conexion.connect()
-
-// Hola
 module.exports = conexion

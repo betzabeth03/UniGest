@@ -1,7 +1,7 @@
-var ActividadModelos = require("../models/ActividadModelos");
+var ActividadModelos = require("../models/ActividadesModelos");
 
 //
-class ActividadControladores{
+class ActividadesControladores{
     todos(){
       return new Promise((resolve, reject) => {   
         let prueba= ActividadModelos.todos();
@@ -58,4 +58,4 @@ class ActividadControladores{
       })
     }
   }
-  module.exports = new ActividadControladores();
+  module.exports = new ActividadesControladores();
