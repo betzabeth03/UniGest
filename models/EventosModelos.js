@@ -1,5 +1,6 @@
 const { resolveInclude } = require('ejs');
 const { v4: uuidv4 } = require ('uuid');
+const conexion = require('../conexion')
 
 
  class EventosModelos{

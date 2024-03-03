@@ -1,6 +1,6 @@
 const { resolveInclude } = require('ejs');
 const { v4: uuidv4 } = require ('uuid');
-
+const conexion = require('../conexion')
 class MateriasModelos{
     todos(){
       return new Promise((resolve,reject)=>{
@@ -32,7 +32,7 @@ class MateriasModelos{
       return new Promise((resolve, reject) => {
         let nombreR = registro.nombre
         let codigoR= registro.codigo
-             let consulta = `INSERT INTO materias (nombre, id, código) VALUES ('${nombreR}',"", '${codigoR}')`
+             let consulta = `INSERT INTO materias (nombre, id, codigo) VALUES ('${nombreR}',"", '${codigoR}')`
              conexion.query(consulta,function(error,results,fields){
               if(error){
                 reject(error)
