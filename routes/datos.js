@@ -253,4 +253,13 @@ router.put("/relaciones/:id",function(req,res,next){
     console.error(e.message)
   })
 })
+router.get("/profesores-materias-secciones",function(req,res,next){
+  RelacionesControladores.profesores_materias_secciones()
+  .then((results)=>{
+    res.send(results)
+  })
+  .catch((e)=>{
+    console.error(e.message)
+  })
+})
 module.exports = router;

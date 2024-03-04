@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-03-2024 a las 00:47:54
+-- Tiempo de generación: 04-03-2024 a las 15:43:21
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `actividades` (
   `nombre` varchar(25) NOT NULL,
   `tipo` varchar(25) NOT NULL,
+  `semana` int(11) NOT NULL,
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -37,9 +38,9 @@ CREATE TABLE `actividades` (
 -- Volcado de datos para la tabla `actividades`
 --
 
-INSERT INTO `actividades` (`nombre`, `tipo`, `id`) VALUES
-('Evaluacion escrita ', 'Examen', 1),
-('Encuentro 1 ', 'Encuentro Presencial', 2);
+INSERT INTO `actividades` (`nombre`, `tipo`, `semana`, `id`) VALUES
+('Evaluacion escrita ', 'Examen', 0, 1),
+('Encuentro 1 ', 'Encuentro Presencial', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -116,16 +117,18 @@ CREATE TABLE `relaciones` (
   `id_materia` int(11) NOT NULL,
   `id_seccion` int(11) NOT NULL,
   `id_actividades` int(11) NOT NULL,
-  `id_eventos` int(11) NOT NULL
+  `id_eventos` int(11) NOT NULL,
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `relaciones`
 --
 
-INSERT INTO `relaciones` (`id_profesor`, `id_materia`, `id_seccion`, `id_actividades`, `id_eventos`) VALUES
-(1, 4, 1, 1, 2),
-(2, 4, 2, 1, 1);
+INSERT INTO `relaciones` (`id_profesor`, `id_materia`, `id_seccion`, `id_actividades`, `id_eventos`, `id`) VALUES
+(1, 1, 1, 1, 1, 1),
+(2, 4, 2, 1, 1, 2),
+(1, 2, 2, 1, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -179,12 +182,13 @@ ALTER TABLE `profesores`
 -- Indices de la tabla `relaciones`
 --
 ALTER TABLE `relaciones`
-  ADD UNIQUE KEY `id_profesor` (`id_profesor`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_materia` (`id_materia`),
   ADD KEY `id_seccion` (`id_seccion`),
   ADD KEY `id_actividades` (`id_actividades`),
   ADD KEY `id_eventos` (`id_eventos`),
-  ADD KEY `id_actividades_2` (`id_actividades`);
+  ADD KEY `id_actividades_2` (`id_actividades`),
+  ADD KEY `id_profesor` (`id_profesor`) USING BTREE;
 
 --
 -- Indices de la tabla `secciones`
@@ -219,6 +223,12 @@ ALTER TABLE `materias`
 --
 ALTER TABLE `profesores`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `relaciones`
+--
+ALTER TABLE `relaciones`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `secciones`
