@@ -6,6 +6,7 @@ const SeccionesControladores = require('../controllers/SeccionesControladores');
 const EventosControlador = require('../controllers/EventosControlador');
 const ActividadesControladores = require('../controllers/ActividadesControlador')
 const conexion = require('../conexion');
+const RelacionesControladores = require('../controllers/RelacionesControladores')
 
 /* GET users listing. */
 router.get('/profesores', function(req, res, next) {
@@ -23,7 +24,7 @@ router.get('/materias', function(req, res, next) {
    })
    .catch((e) => console.error(e.message));
  });
- router.get('/secciones', function(req, res, next) {
+router.get('/secciones', function(req, res, next) {
   SeccionesControladores.todos()
   .then((resultados) =>{
     res.send(resultados); 
@@ -111,15 +112,15 @@ router.put('/profesores/:id', function(req, res, next) {
     .catch((e) => console.error(e.message));
     });
 
-    router.put('/materias/:id', function(req, res, next) {
-      const idReq = req.params.id;
-      const nuevoNombre = req.body.nombre;
-      MateriasControladores.modificar(idReq, nuevoNombre)
-        .then((usuarioActualizado) => {
-          res.send(usuarioActualizado);
-        })
-        .catch((e) => console.error(e.message));
-        });
+router.put('/materias/:id', function(req, res, next) {
+  const idReq = req.params.id;
+  const nuevoNombre = req.body.nombre;
+  MateriasControladores.modificar(idReq, nuevoNombre)
+    .then((usuarioActualizado) => {
+        res.send(usuarioActualizado);
+      })
+    .catch((e) => console.error(e.message));
+      });
 
 router.put('/secciones/:id', function(req, res, next) {
   const idReq = req.params.id;
@@ -212,7 +213,7 @@ ProfesoresControladores.eliminar(req.params.id)
         .catch((e) => console.error(e.message));
       })
       router.get("/profesores-materias",function(req,res,next){
-        ProfesoresControladores.materiasAsociadasTodos()
+        RelacionesControladores.profesores_materias()
         .then((resultados)=>{
           res.send(resultados)
         }
@@ -231,4 +232,15 @@ ProfesoresControladores.eliminar(req.params.id)
           )})
           .catch((e) => console.error(e.message));
           })
+router.post("/relaciones",function(req,res,next){
+  const datos = req.body
+  RelacionesControladores.crear(datos)
+  .then((resultados)=>{
+    res.send(resultados)
+  })
+  .catch((e)=>{
+    console.error(e.message)
+  })
+})
+
 module.exports = router;
