@@ -262,4 +262,22 @@ router.get("/profesores-materias-secciones",function(req,res,next){
     console.error(e.message)
   })
 })
+router.get("/secciones-eventos",function(req,res,next){
+  RelacionesControladores.secciones_eventos()
+  .then((results)=>{
+    res.send(results)
+  })
+  .catch((e)=>{
+    console.error(e.message)
+  })
+})
+router.get("/materias-actividades",function(req,res,next){
+  RelacionesControladores.materias_actividades()
+  .then((results)=>{
+    res.send(results)
+  })
+  .catch((e)=>{
+    console.error(e.message)
+  })
+})
 module.exports = router;

@@ -60,5 +60,29 @@ class RelacionesModelos{
             })
         })
     }
+    secciones_eventos(){
+        return new Promise((resolve,reject)=>{
+            let consulta = 'SELECT secciones.nombre AS seccion, eventos.nombre AS nombreEvento, eventos.tipo AS tipoDeEvento, eventos.fecha AS fecha FROM secciones JOIN relaciones ON secciones.id = relaciones.id_seccion JOIN eventos ON relaciones.id_eventos = eventos.id'
+            conexion.query(consulta,function(error,results,fields){
+                if(error){
+                    reject(error)
+                }else{
+                    resolve(results)
+                }
+            })
+        })
+    }
+    materias_actividades(){
+        return new Promise((resolve,reject)=>{
+            let consulta = 'SELECT materias.nombre AS materia,actividades.nombre AS actividad,actividades.tipo AS tipoDeActividad, actividades.semana AS semanaActividad FROM materias JOIN relaciones ON materias.id = relaciones.id_materia JOIN actividades ON relaciones.id_actividades = actividades.id'
+            conexion.query(consulta, function(error,results,fields){
+                if(error){
+                    reject(error)
+                }else{
+                    resolve(results)
+                }
+            })
+        })
+    }
 }
 module.exports= new RelacionesModelos

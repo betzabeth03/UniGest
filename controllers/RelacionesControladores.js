@@ -43,5 +43,25 @@ class RelacionesControladores{
             }
         })
     }
+    secciones_eventos(){
+        return new Promise((resolve,reject)=>{
+            let promesa = RelacionesModelos.secciones_eventos()
+            if(promesa){
+                resolve(promesa)
+            }else{
+                reject(e)
+            }
+        })
+    }
+    materias_actividades(){
+        return new Promise((resolve,reject)=>{
+            let promesa = RelacionesModelos.materias_actividades()
+            if(promesa){
+                resolve(promesa)
+            }else{
+                reject(e)
+            }
+        })
+    }
 }
 module.exports=new RelacionesControladores();
