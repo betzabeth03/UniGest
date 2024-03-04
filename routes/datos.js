@@ -242,5 +242,15 @@ router.post("/relaciones",function(req,res,next){
     console.error(e.message)
   })
 })
-
+router.put("/relaciones/:id",function(req,res,next){
+  const datos = req.body
+  const id = req.params.id
+  RelacionesControladores.editar(id,datos)
+  .then((results)=>{
+    res.send(results)
+  })
+  .catch((e)=>{
+    console.error(e.message)
+  })
+})
 module.exports = router;

@@ -1,3 +1,4 @@
+const e = require('express')
 const RelacionesModelos = require('../models/RelacionesModelos')
 
 class RelacionesControladores{
@@ -11,6 +12,16 @@ class RelacionesControladores{
             }
         })
        
+    }
+    editar(id,datos){
+        return new Promise((resolve,reject)=>{
+            let promesa = RelacionesModelos.editar(id,datos)
+            if(promesa){
+                resolve(promesa)
+            }else{
+                reject(e)
+            }
+        })
     }
     profesores_materias(){
         return new Promise((resolve,reject)=>{

@@ -18,6 +18,24 @@ class RelacionesModelos{
             })
         })
     }
+    editar(id,datos){
+        return new Promise((resolve,reject)=>{
+            let id_profesorVar = datos.id_profesor
+            let id_materiaVar= datos.id_materia
+            let id_seccionVar = datos.id_seccion  
+            let id_actividadesVar = datos.id_actividades
+            let id_eventosVar = datos.id_eventos
+            let consulta = `UPDATE relaciones SET id_profesor = ${id_profesorVar}, id_materia = ${id_materiaVar}, id_seccion = ${id_seccionVar}, id_actividades = ${id_actividadesVar}, id_eventos = ${id_eventosVar} WHERE id = ${id} `
+            conexion.query(consulta,function(error,results,fields){
+                if(error){
+                    reject(error)
+                }else{
+                    resolve(results)
+                }
+            })
+        })
+            
+        }
     profesores_materias(){
         return new Promise((resolve,reject)=>{
             let consulta = 'SELECT profesores.nombre AS profesor, materias.nombre AS materia FROM profesores JOIN relaciones ON profesores.id = relaciones.id_profesor JOIN materias ON relaciones.id_materia = materias.id'
