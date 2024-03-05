@@ -17,17 +17,15 @@ const conexion = require('../conexion')
       });
 
       }
-      //Necesario de revision 
-    /*  crear(registro){
+      
+    crear(registro){
         return new Promise((resolve, reject) => {
           let nombreR = registro.nombre
           let tipoR = registro.tipo
-          let añoTemp = registro.año
-          let mesTemp = registro.mes
-          let diaTemp = registro.dia
-          let fechaR = `${añoTemp}-${mesTemp}-${diaTemp}`;
-
-            let consulta = `INSERT INTO eventos (nombre, tipo, fecha, id) VALUES ('${nombreR}', '${tipoR}', STR_TO_DATE('${fechaR}', '%Y-%m-%d') ,""}`
+          let fechaString = registro.fecha
+          let fechaDate = new Date(fechaString)
+          let fechaIso = fechaDate.toISOString().slice(0,10).replace('T', '')
+            let consulta = `INSERT INTO eventos (nombre, tipo, fecha, id) VALUES ('${nombreR}', '${tipoR}', '${fechaIso}' , "")`
             conexion.query(consulta,function(error,results,fields){
               if(error){
                 reject(error)
@@ -37,7 +35,7 @@ const conexion = require('../conexion')
               }
             })
          })
-       }*/
+       }
 
     
     semana(fecha) {
@@ -97,9 +95,11 @@ uno(idReq) {
     modificar(idReq, nuevosValores) {
       return new Promise((resolve,reject)=>{
         let nombreEv = nuevosValores.nombre
-        let tipoEv = nuevosValores.tipoEv
-        let fechaEv = nuevosValores.Ev
-        let consulta = `UPDATE eventos SET nombre = '${nombreEv}', tipo = ${tipoEv}, fecha = ${fechaEv} WHERE id = ${idReq}`
+        let tipoEv = nuevosValores.tipo
+        let fechaString = nuevosValores.fecha
+        let fechaDate = new Date(fechaString)
+        let fechaIso = fechaDate.toISOString().slice(0,10).replace('T', '')
+        let consulta = `UPDATE eventos SET nombre = '${nombreEv}', tipo = '${tipoEv}', fecha = '${fechaIso}' WHERE id = ${idReq}`
         conexion.query(consulta,function(error,results,fields){
           if(error){
             reject(error)

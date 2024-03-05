@@ -26,13 +26,14 @@ class RelacionesModelos{
             let id_actividadesVar = datos.id_actividades
             let id_eventosVar = datos.id_eventos
             let consulta = `UPDATE relaciones SET id_profesor = ${id_profesorVar}, id_materia = ${id_materiaVar}, id_seccion = ${id_seccionVar}, id_actividades = ${id_actividadesVar}, id_eventos = ${id_eventosVar} WHERE id = ${id} `
-            conexion.query(consulta,function(error,results,fields){
-                if(error){
-                    reject(error)
-                }else{
-                    resolve(results)
-                }
-            })
+                conexion.query(consulta,function(error,results,fields){
+                    if(error){
+                        reject(error)
+                    }else{
+                        resolve(results)
+                    }
+                })
+            
         })
             
         }
