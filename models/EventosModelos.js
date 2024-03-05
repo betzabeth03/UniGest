@@ -17,16 +17,28 @@ const conexion = require('../conexion')
       });
 
       }
-      crear(usuario){
+      //Necesario de revision 
+    /*  crear(registro){
         return new Promise((resolve, reject) => {
-                usuario.id = uuidv4();
-                EventosArr.push(usuario);
-                if(usuario){
-                  resolve()
-                } else {
-                  reject(new Error("Ha ocurrido un error"));
-                }})
+          let nombreR = registro.nombre
+          let tipoR = registro.tipo
+          let añoTemp = registro.año
+          let mesTemp = registro.mes
+          let diaTemp = registro.dia
+          let fechaR = `${añoTemp}-${mesTemp}-${diaTemp}`;
+
+            let consulta = `INSERT INTO eventos (nombre, tipo, fecha, id) VALUES ('${nombreR}', '${tipoR}', STR_TO_DATE('${fechaR}', '%Y-%m-%d') ,""}`
+            conexion.query(consulta,function(error,results,fields){
+              if(error){
+                reject(error)
+              }else{
+                resolve(results)
+    
               }
+            })
+         })
+       }*/
+
     
     semana(fecha) {
   var Fechainicial = new Date(fecha['año'], fecha['mes'] , fecha['dia']);
@@ -83,18 +95,21 @@ uno(idReq) {
   
 
     modificar(idReq, nuevosValores) {
-      let nombreEv = nuevosValores.nombre
-      let tipoEv = nuevosValores.tipoEv
-      let fechaEv = nuevosValores.Ev
-      let consulta = `UPDATE eventos SET nombre = '${nombreEv}', tipo = ${tipoEv}, fecha = ${fechaEv} WHERE id = ${idReq}`
-      conexion.query(consulta,function(error,results,fields){
-        if(error){
-          reject(error)
-        }else{
-          resolve(results)
-       }
+      return new Promise((resolve,reject)=>{
+        let nombreEv = nuevosValores.nombre
+        let tipoEv = nuevosValores.tipoEv
+        let fechaEv = nuevosValores.Ev
+        let consulta = `UPDATE eventos SET nombre = '${nombreEv}', tipo = ${tipoEv}, fecha = ${fechaEv} WHERE id = ${idReq}`
+        conexion.query(consulta,function(error,results,fields){
+          if(error){
+            reject(error)
+          }else{
+            resolve(results)
+         }
+        }
+      )
+      })
       }
-    )}
  }
 
 

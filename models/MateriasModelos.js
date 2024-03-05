@@ -31,8 +31,7 @@ class MateriasModelos{
     crear(registro){
       return new Promise((resolve, reject) => {
         let nombreR = registro.nombre
-        let codigoR= registro.codigo
-             let consulta = `INSERT INTO materias (nombre, id, codigo) VALUES ('${nombreR}',"", '${codigoR}')`
+             let consulta = `INSERT INTO materias (nombre, id) VALUES ('${nombreR}',"")`
              conexion.query(consulta,function(error,results,fields){
               if(error){
                 reject(error)
@@ -44,17 +43,19 @@ class MateriasModelos{
     }
 
     modificar(idReq, nuevosValores) {
-      let nombreR = nuevosValores.nombre
-      let codigoR = nuevosValores.codigo
-      let consulta = `UPDATE materias SET nombre = '${nombreR}', código = '${codigoR}' WHERE id = ${idReq}`
-      conexion.query(consulta,function(error,results,fields){
-        if(error){
-          reject(error)
-        }else{
-          resolve(results)
-       }
-      }
-    )}
+      return new Promise((resolve,reject)=>{
+        let nombreR = nuevosValores.nombre
+        let consulta = `UPDATE materias SET nombre = '${nombreR}' WHERE id = ${idReq}`
+        conexion.query(consulta,function(error,results,fields){
+          if(error){
+            reject(error)
+          }else{
+            resolve(results)
+         }
+        })
+      })
+      
+    }
     
     
   eliminar(idElemento){

@@ -33,7 +33,8 @@ class SeccionesModelos{
     crear(registro){
       return new Promise((resolve, reject) => {
         let nombreR = registro.nombre
-             let consulta = `INSERT INTO secciones (nombre, id) VALUES ('${nombreR},"")`
+        let periodoAcademicoR= registro.periodoAcademico
+             let consulta = `INSERT INTO secciones (nombre, periodoAcademico, id) VALUES ('${nombreR}', ${periodoAcademicoR}, "")`
              conexion.query(consulta,function(error,results,fields){
               if(error){
                 reject(error)
@@ -45,16 +46,20 @@ class SeccionesModelos{
     }
 
     modificar(idReq, nuevosValores) {
-      let nombreR = nuevosValores.nombre
-      let consulta = `UPDATE secciones SET nombre = '${nombreR}' WHERE id = ${idReq}`
-      conexion.query(consulta,function(error,results,fields){
-        if(error){
-          reject(error)
-        }else{
-          resolve(results)
-       }
+      return new Promise((resolve,reject)=>{
+        let nombreR = nuevosValores.nombre
+        let periodoAcademicoR= nuevosValores.periodoAcademico
+        let consulta = `UPDATE secciones SET nombre = '${nombreR}', periodoAcademico = '${periodoAcademicoR}' WHERE id = ${idReq}`
+        conexion.query(consulta,function(error,results,fields){
+          if(error){
+            reject(error)
+          }else{
+            resolve(results)
+         }
+        }
+      )
+      })
       }
-    )}
 
     eliminar(idElemento){
       return new Promise((resolve, reject) => {

@@ -33,9 +33,9 @@ class ActividadesModelos{
   crear(actividades){
     return new Promise((resolve, reject) => {
       let nombreAC = actividades.nombre
-      let fechaAC = actividades.fecha
-      let seccionAC = actividades.secc
-        let consulta = `INSERT INTO actividades (nombre, id, idSeccion, fecha) VALUES (${nombreAC},"", ${seccionAC}, ${fechaAC})}`
+      let tipoAC = actividades.tipo
+      let semanaAC = actividades.semana
+      let consulta = `INSERT INTO actividades (nombre, tipo, semana, id) VALUES ('${nombreAC}','${tipoAC}',${semanaAC}, "")`
         conexion.query(consulta,function(error,results,fields){
           if(error){
             reject(error)
@@ -48,18 +48,21 @@ class ActividadesModelos{
   }
 
   modificar(idReq, nuevosValores) {
-    let nombreAC = nuevosValores.nombre
-    let fechaAC = nuevosValores.fecha
-    let seccionAC = nuevosValores.secc
-    let consulta = `UPDATE actividades SET nombre = '${nombreAC}', idSeccion = '${seccionAC}', fecha = '${fechaAC}', WHERE id = ${idReq}`
-    conexion.query(consulta,function(error,results,fields){
-      if(error){
-        reject(error)
-      }else{
-        resolve(results)
-     }
+    return new Promise((resolve,reject)=>{
+      let nombreAC = nuevosValores.nombre
+      let tipoAC = nuevosValores.tipo
+      let semanaAC = nuevosValores.semana
+      let consulta = `UPDATE actividades SET nombre = '${nombreAC}', tipo = '${tipoAC}', semana = '${semanaAC}' WHERE id = ${idReq}`
+      conexion.query(consulta,function(error,results,fields){
+        if(error){
+          reject(error)
+        }else{
+          resolve(results)
+       }
+      }
+    )
+    })
     }
-  )}
   
   
 eliminar(idElemento){

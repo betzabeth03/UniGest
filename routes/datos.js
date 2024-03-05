@@ -5,10 +5,18 @@ let MateriasControladores = require("../controllers/MateriasControlador");
 const SeccionesControladores = require('../controllers/SeccionesControladores');
 const EventosControlador = require('../controllers/EventosControlador');
 const ActividadesControladores = require('../controllers/ActividadesControlador')
-const conexion = require('../conexion');
 const RelacionesControladores = require('../controllers/RelacionesControladores')
+const conexion = require('../conexion');
 
 /* GET users listing. */
+router.get('/actividades', function(req, res, next) {
+  ActividadesControladores.todos()
+  .then((resultados) =>{
+    res.send(resultados); 
+  })
+  .catch((e) => console.error(e.message));
+});
+
 router.get('/profesores', function(req, res, next) {
   ProfesoresControladores.todos()
   .then((resultados) =>{
@@ -24,7 +32,7 @@ router.get('/materias', function(req, res, next) {
    })
    .catch((e) => console.error(e.message));
  });
-router.get('/secciones', function(req, res, next) {
+ router.get('/secciones', function(req, res, next) {
   SeccionesControladores.todos()
   .then((resultados) =>{
     res.send(resultados); 
@@ -56,6 +64,17 @@ router.post('/eventos/proximos', (req, res, next) => {
     });
 });
 /* POST crear users. */
+router.post('/actividades', function(req, res, next) {
+  ActividadesControladores.crear(req.body)
+  .then(() => {
+      ActividadesControladores.todos()
+      .then((resultados) =>{
+      res.send(resultados); 
+    })
+  })
+  .catch((e) => console.error(e.message));
+});
+
 router.post('/profesores', function(req, res, next) {
   ProfesoresControladores.crear(req.body)
   .then(() => {
@@ -99,6 +118,19 @@ router.post('/eventos', function(req, res, next) {
 });
 
 /* PUT modificar user */
+router.put('/actividades/:id', function(req, res, next) {
+  const idReq = req.params.id;
+  const nuevosValores = req.body;
+  ActividadesControladores.modificar(idReq, nuevosValores)
+  .then(() => {
+    ActividadesControladores.todos()
+    .then((resultados) =>{
+    res.send(resultados); 
+  })
+})
+    .catch((e) => console.error(e.message));
+    });
+
 router.put('/profesores/:id', function(req, res, next) {
   const idReq = req.params.id;
   const nuevosValores = req.body;
@@ -112,32 +144,41 @@ router.put('/profesores/:id', function(req, res, next) {
     .catch((e) => console.error(e.message));
     });
 
-router.put('/materias/:id', function(req, res, next) {
-  const idReq = req.params.id;
-  const nuevoNombre = req.body.nombre;
-  MateriasControladores.modificar(idReq, nuevoNombre)
-    .then((usuarioActualizado) => {
-        res.send(usuarioActualizado);
-      })
-    .catch((e) => console.error(e.message));
-      });
+    router.put('/materias/:id', function(req, res, next) {
+      const idReq = req.params.id;
+      const nuevosValores = req.body;
+      MateriasControladores.modificar(idReq, nuevosValores)
+        .then(() => {
+          MateriasControladores.todos()
+          .then((resultados)=>{
+            res.send(resultados)
+          })
+        })
+        .catch((e) => console.error(e.message));
+        });
 
 router.put('/secciones/:id', function(req, res, next) {
   const idReq = req.params.id;
-  const nuevoNombre = req.body.nombre;
-  SeccionesControladores.modificar(idReq, nuevoNombre)
-    .then((usuarioActualizado) => {
-      res.send(usuarioActualizado);
+  const nuevosValores = req.body;
+  SeccionesControladores.modificar(idReq, nuevosValores)
+    .then(() => {
+      SeccionesControladores.todos()
+      .then((results)=>{
+        res.send(results)
+      })
     })
     .catch((e) => console.error(e.message));
     });
 
     router.put('/eventos/:id', function(req, res, next) {
       const idReq = req.params.id;
-      const nuevoNombre = req.body.nombre;
-      EventosControlador.modificar(idReq, nuevoNombre)
-        .then((usuarioActualizado) => {
-          res.send(usuarioActualizado);
+      const nuevosValores = req.body;
+      EventosControlador.modificar(idReq, nuevosValores)
+        .then(() => {
+          EventosControlador.todos()
+          .then((results)=>{
+            res.send(results)
+          })
         })
         .catch((e) => console.error(e.message));
         });
@@ -145,6 +186,14 @@ router.put('/secciones/:id', function(req, res, next) {
 
 
 /* GET one user  */
+router.get("/actividades/:id",function(req,res,next){
+  ActividadesControladores.uno(req.params.id)
+  .then((resultados)=>{
+    res.send(resultados)
+  })
+  .catch((e) => console.error(e.message));
+})
+
 router.get("/profesores/:id",function(req,res,next){
   ProfesoresControladores.uno(req.params.id)
   .then((resultados)=>{
@@ -167,6 +216,19 @@ router.get("/secciones/:id",function(req,res,next){
   })
   .catch((e) => console.error(e.message));
 })
+
+// DELETE
+router.delete("/actividades/:id",function(req,res,next){
+  actividadesControladores.eliminar(req.params.id)
+    .then(()=>{
+      actividadesControladores.todos()
+      .then((resultados) =>{
+      res.send(resultados);  }
+    )})
+      .catch((e) => console.error(e.message));
+    })
+  
+
 router.delete("/profesores/:id",function(req,res,next){
 ProfesoresControladores.eliminar(req.params.id)
   .then(()=>{
@@ -186,6 +248,7 @@ ProfesoresControladores.eliminar(req.params.id)
       )})
       .catch((e) => console.error(e.message));
       })
+      
       router.delete("/secciones/:id",function(req,res,next){
         SeccionesControladores.eliminar(req.params.id)
           .then(()=>{
@@ -195,6 +258,7 @@ ProfesoresControladores.eliminar(req.params.id)
           )})
             .catch((e) => console.error(e.message));
           })
+
   router.delete("/eventos/:id",function(req,res,next){
     EventosControlador.eliminar(req.params.id)
       .then(()=>{
@@ -205,13 +269,6 @@ ProfesoresControladores.eliminar(req.params.id)
       .catch((e) => console.error(e.message));
       })    
           
-      router.get("/profesores-materias/:id",function(req,res,next){
-        ProfesoresControladores.materiasAsociadasUno(req.params.id)
-        .then((resultados)=>{
-          res.send(resultados)
-        })
-        .catch((e) => console.error(e.message));
-      })
       router.get("/profesores-materias",function(req,res,next){
         RelacionesControladores.profesores_materias()
         .then((resultados)=>{
@@ -221,17 +278,7 @@ ProfesoresControladores.eliminar(req.params.id)
         )
         .catch((e) => console.error(e.message));
       })
-      router.delete("/profesores-materias",function(req,res,next){
-        const idProf= req.query.idProf
-        const idMateria = req.query.idMateria
-        ProfesoresControladores.eliminarRelacion(idProf,idMateria)
-          .then(()=>{
-            ProfesoresControladores.todos()
-            .then((resultados) =>{
-            res.send(resultados);  }
-          )})
-          .catch((e) => console.error(e.message));
-          })
+      
 router.post("/relaciones",function(req,res,next){
   const datos = req.body
   RelacionesControladores.crear(datos)

@@ -56,36 +56,6 @@ class ProfesoresControladores{
 
     })
   }
-  materiasAsociadasUno(idReq){
-    return new Promise((resolve,reject)=>{
-      let promesa = ProfesoresModelos.materiasAsociadasUno(idReq)
-      if(promesa){
-        resolve(promesa)
-       }else{
-        reject(new Error("Ha ocurrido un error"))
-       }
-    })
-  }
-  materiasAsociadasTodos(){
-    return new Promise((resolve,reject)=>{
-      let promesa = ProfesoresModelos.materiasAsociadasTodos()
-      if(promesa){
-        resolve(promesa)
-       }else{
-        reject(new Error("Ha ocurrido un error"))
-       }
-    })
-  }
-  eliminarRelacion(idProf,idMateria){
-    return new Promise((resolve,reject)=>{
-      let promesa = ProfesoresModelos.eliminarRelacion(idProf,idMateria)
-      if(promesa){
-        resolve(promesa)
-       }else{
-        reject(new Error("Ha ocurrido un error"))
-       }
-    })
-  }
   }
 
 

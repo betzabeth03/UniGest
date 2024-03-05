@@ -4,7 +4,6 @@ const MateriasModelos = require("../models/MateriasModelos");
 class MateriasControladores{
     todos(){
       return new Promise((resolve, reject) => {   
-        //resolve(MateriasModelos.todos());
         let prueba= MateriasModelos.todos();
         if(prueba){
           resolve(prueba);
@@ -14,8 +13,7 @@ class MateriasControladores{
       })
     }
     uno(idReq) {
-      return new Promise((resolve,reject)=>{
-       //resolve(MateriasModelos.uno(idReq))  
+      return new Promise((resolve,reject)=>{ 
        let prueba= MateriasModelos.uno(idReq);
         if(prueba){
           resolve(prueba);
@@ -27,7 +25,6 @@ class MateriasControladores{
     }
     crear(registro){
       return new Promise((resolve, reject) =>{
-        //resolve(MateriasModelos.crear(usuario));
         let prueba= MateriasModelos.crear(registro);
         if(prueba){
           resolve(prueba);
@@ -51,7 +48,6 @@ class MateriasControladores{
     }
     eliminar(idElemento){
       return new Promise((resolve, reject) =>{
-        //resolve(MateriasModelos.eliminar(idElemento));
         let prueba= MateriasModelos.eliminar(idElemento);
         if(prueba){
           resolve(prueba);

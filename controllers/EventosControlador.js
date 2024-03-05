@@ -6,10 +6,9 @@ class EventosControladores{
           resolve(EventosModelos.todos());
         })
       }
-      crear(usuario){
+      crear(registro){
         return new Promise((resolve, reject) =>{
-          //resolve(EventosModelos.crear(usuario));
-          let prueba= EventosModelos.crear(usuario);
+          let prueba= EventosModelos.crear(registro);
           if(prueba){
             resolve(prueba);
           } else {
@@ -38,7 +37,6 @@ class EventosControladores{
       }
       eliminar(idReq){
         return new Promise((resolve, reject) =>{
-          //resolve(EventosModelos.eliminar(idElemento));
           let prueba= EventosModelos.eliminar(idReq);
           if(prueba){
             resolve(prueba);
