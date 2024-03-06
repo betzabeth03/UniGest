@@ -327,4 +327,13 @@ router.get("/materias-actividades",function(req,res,next){
     console.error(e.message)
   })
 })
+router.get("/actividades-fecha",function(req,res,next){
+  RelacionesControladores.profesores_materias_secciones_actividades()
+  .then((results)=>{
+    res.send(results)
+  })
+  .catch((e)=>{
+    console.error(e)
+  })
+})
 module.exports = router;

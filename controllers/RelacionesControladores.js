@@ -63,5 +63,15 @@ class RelacionesControladores{
             }
         })
     }
+    profesores_materias_secciones_actividades(){
+        return new Promise((resolve,reject)=>{
+            let promesa = RelacionesModelos.profesores_materias_secciones_actividades()
+            if(promesa){
+                resolve(promesa)
+            }else{
+                reject(e)
+            }
+        })
+    }
 }
 module.exports=new RelacionesControladores();
