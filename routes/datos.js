@@ -18,12 +18,22 @@ router.get('/actividades', function(req, res, next) {
 });
 
 router.get('/profesores', function(req, res, next) {
-  ProfesoresControladores.todos()
-  .then((resultados) =>{
-    res.send(resultados); 
+  if(req.query.id){
+    ProfesoresControladores.uno(req.query.id)
+    .then((resultado)=>{
+      res.render("profesores", {"resultados": resultado});
   })
-  .catch((e) => console.error(e.message));
-});
+  .catch((e)=>{console.error(e.message)})
+  }else{
+    ProfesoresControladores.todos()
+    .then((resultados) =>{
+      res.render("profesores",{
+        "resultados" : resultados
+    }); 
+    })
+    .catch((e) => console.error(e.message));
+  }
+  })
 
 router.get('/materias', function(req, res, next) {
    MateriasControladores.todos()
@@ -80,7 +90,7 @@ router.post('/profesores', function(req, res, next) {
   .then(() => {
       ProfesoresControladores.todos()
       .then((resultados) =>{
-      res.send(resultados); 
+      res.render("profesores",{"resultados": resultados}); 
     })
   })
   .catch((e) => console.error(e.message));
@@ -194,13 +204,14 @@ router.get("/actividades/:id",function(req,res,next){
   .catch((e) => console.error(e.message));
 })
 
-router.get("/profesores/:id",function(req,res,next){
-  ProfesoresControladores.uno(req.params.id)
-  .then((resultados)=>{
-    res.send(resultados)
-  })
-  .catch((e) => console.error(e.message));
-})
+// router.get("/profesores",function(req,res,next){
+//   idprof = req.query.id
+//   ProfesoresControladores.uno(idprof)
+//   .then((resultados)=>{
+//     res.render("profesoresUno",{"resultados": resultados});
+//   })
+//   .catch((e) => console.error(e.message));
+// })
 
 router.get("/materias/:id",function(req,res,next){
   MateriasControladores.uno(req.params.id)

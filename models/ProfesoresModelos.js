@@ -48,7 +48,7 @@ class ProfesoresModelos{
   return new Promise((resolve, reject) => {
     let nombreUs = nuevosValores.nombre
     let apellidoUS= nuevosValores.apellido
-    let consulta = `UPDATE profesores SET nombre = '${nombreUs}', apellido = ${apellidoUS} WHERE id = ${idReq}`
+    let consulta = `UPDATE profesores SET nombre = '${nombreUs}', apellido = '${apellidoUS}' WHERE id = ${idReq}`
     conexion.query(consulta,function(error,results,fields){
       if(error){
         reject(error)
