@@ -34,14 +34,20 @@ class ProfesoresModelos{
     return new Promise((resolve, reject) => {
       let nombreUS = usuario.nombre
       let apellidoUS = usuario.apellido
-           let consulta = `INSERT INTO profesores (nombre, apellido, id) VALUES ('${nombreUS}','${apellidoUS}',"")`
-           conexion.query(consulta,function(error,results,fields){
-            if(error){
-              reject(error)
-            }else{
-              resolve(results)
-            }
-           })
+      if(nombreUS && apellidoUS){
+        let consulta = `INSERT INTO profesores (nombre, apellido, id) VALUES ('${nombreUS}','${apellidoUS}',"")`
+        conexion.query(consulta,function(error,results,fields){
+         if(error){
+           reject(error)
+         }else{
+           resolve(results)
+         }
+        })
+      }else{
+        reject(new Error( 'No se enviaron los datos completos'))
+      }
+     
+           
     })
   }
  modificar(idReq, nuevosValores) {
