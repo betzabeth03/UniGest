@@ -1,0 +1,52 @@
+<%- include('./parciales/cabecera', {"direccion": direccion}) %>
+
+ 
+      </div>
+    </div>
+  </nav>  
+
+
+    <input type="hidden" id="valor" value="<%= id %>" >
+    
+    <div class="container-md">
+        <div class="col-10">
+            <div class="row">
+                <h1>Valores a Cambiar</h1>
+                <form action="" method="post">
+                    <input type="text" placeholder="Nombre" name = "nombre" id="nombre" class="form-control me-2" required>
+                    <input type="text" placeholder="Apellido" name = "apellido" id="apellido" class="form-control me-2" required>
+                    <button id="cambiar" type="submit" class="btn btn-success ">Cambiar</button>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+   
+<script>
+    const formulario = document.querySelector( 'form' );
+    formulario.addEventListener('submit',function(evento){
+        event.preventDefault()
+        const nombreInput = document.getElementById('nombre')
+        const nombre = nombreInput.value
+        const apellidoInput = document.getElementById("apellido")
+        const apellido = apellidoInput.value
+        const idElemento = document.getElementById("valor")
+        const id = document.getElementById("valor")
+        const datosBody = {
+            nombre : nombre,
+            apellido : apellido
+        }
+        fetch(direccion+id.value,{method : "PUT",headers : {"Content-Type" : "application/json"},body:  JSON.stringify(datosBody)})
+        .then(response =>{
+            if(!response.ok){
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }else{
+              location.replace('/tablas/profesores')
+          } 
+        })
+    })
+    const direccion = '/tablas/profesores/'
+          
+</script>
+</body>
+</html>

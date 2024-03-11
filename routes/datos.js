@@ -21,14 +21,17 @@ router.get('/profesores', function(req, res, next) {
   if(req.query.id){
     ProfesoresControladores.uno(req.query.id)
     .then((resultado)=>{
-      res.render("profesores", {"resultados": resultado});
+      res.render("profesores", {
+      "resultados": resultado,
+      "direccion" : '/tablas/profesores'});
   })
   .catch((e)=>{console.error(e.message)})
   }else{
     ProfesoresControladores.todos()
     .then((resultados) =>{
       res.render("profesores",{
-        "resultados" : resultados
+        "resultados" : resultados,
+        "direccion" : '/tablas/profesores'
     }); 
     })
     .catch((e) => console.error(e.message));
@@ -90,7 +93,7 @@ router.post('/profesores', function(req, res, next) {
   .then(() => {
       ProfesoresControladores.todos()
       .then((resultados) =>{
-      res.render("profesores",{"resultados": resultados}); 
+      res.render("profesores",{"resultados": resultados, "direccion": '/tablas/profesores'}); 
     })
   })
   .catch((e) => console.error(e.message));
@@ -347,4 +350,8 @@ router.get("/actividades-fecha",function(req,res,next){
     console.error(e)
   })
 })
+router.get("/editar/:id",function(req,res,next){
+  res.render("editar",{id:req.params.id, direccion : "/tablas/profesores"});
+})
+
 module.exports = router;

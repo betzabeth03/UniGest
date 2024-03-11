@@ -1,61 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profesores</title>
-    <link rel="stylesheet" href="/css/bootstrap.css">
-</head>
-<body>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/tablas/profesores">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li>
-        </ul>
-        <form class="d-flex" method="post"  >
-          <input class="form-control me-2" type="input" placeholder="Nombre" name="nombre" required>
-          <input class="form-control me-2" type="input" placeholder="Apellido" name="apellido"  required>
-          
-          <button class="btn btn-outline-success" type="submit">Agregar</button>
-        </form>
-        <form class="d-flex" method="get">
-          <input class="form-control me-2" type="number" placeholder="ID" name="id" min="0" max="1000" required  >
-          <button class="btn btn-outline-success" type="submit">Buscar</button>
-        </form>
-      </div>
-    </div>
-  </nav>
+<%- include('./parciales/cabecera', {"direccion": direccion}) %><
+<form class="d-flex" method="post"  >
+  <input class="form-control me-2" type="input" placeholder="Nombre" name="nombre" required>
+  <input class="form-control me-2" type="input" placeholder="Apellido" name="apellido"  required>
+  
+  <button class="btn btn-outline-success" type="submit">Agregar</button>
+</form>
+<form class="d-flex" method="get">
+  <input class="form-control me-2" type="number" placeholder="ID" name="id" min="0" max="1000" required  >
+  <button class="btn btn-outline-success" type="submit">Buscar</button>
+</form>
+
+</div>
+</div>
+</nav>
     <div class="container-md">
-      <table class="table table-striped table-primary table-sm table-hover">
+      <table class="table table-secundary table-sm table-hover">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
+            <th scope="col">Eliminar Elemento</th>
+            <th scope="col">Cambiar Elemento</th>
           </tr>
         </thead>
         <tbody>
@@ -64,6 +30,8 @@
                     <th scope="row"><%= profesor.id %></th>
                     <td><%=  profesor.nombre%></td>
                     <td><%=  profesor.apellido%></td>
+                    <td> <button value="<%= profesor.id %>"  class="btn btn-danger botonEliminar">Eliminar Elemento</button></td>
+                    <td> <button value="<%= profesor.id %>"  class="btn btn-warning botonEdit" >Cambiar Elemento</button></td>
                   </tr>
            <% }) %>
           
@@ -72,6 +40,37 @@
    
     
     </div>
+  <input type="hidden"  id="test" value="<%= direccion %>">
     <script src="/js/bootstrap.js"></script>
-    
+    <script>
+      const botonEdit = document.getElementsByClassName("botonEdit")
+      const direccion = document.getElementById("test")
+      const direccionActual = direccion.value
+      const botonEliminar = document.getElementsByClassName("botonEliminar")
+      for(let i=0;i<botonEliminar.length;i++){
+        botonEliminar[i].addEventListener("click", function(){
+          let id = botonEliminar[i].value
+          console.log(id + direccionActual)
+          fetch(direccionActual+"/"+id,{method: 'DELETE'})
+          .then(response =>{
+            if(!response.ok){
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }else{
+              location.reload()
+          } 
+        })
+            
+           })
+         }
+      for(let j = 0;j<botonEdit.length;j++){
+        botonEdit[j].addEventListener('click',function(){
+        let id = botonEdit[j].value
+        let link = document.createElement("a")
+        link.setAttribute("href",`editar/${id}`)
+        link.click()
+        console.log("Me termine de eejcutar")
+        })
+      }
+          </script>
+    </body>
     </html>                                                          
