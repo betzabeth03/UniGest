@@ -353,5 +353,7 @@ router.get("/actividades-fecha",function(req,res,next){
 router.get("/editar/:id",function(req,res,next){
   res.render("editar",{id:req.params.id, direccion : "/tablas/profesores"});
 })
-
+router.get("/",function(req,res,next){
+  res.render("tablas",{direccion: "/tablas/relaciones"})
+})
 module.exports = router;
