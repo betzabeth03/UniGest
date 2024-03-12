@@ -7,6 +7,7 @@ const EventosControlador = require('../controllers/EventosControlador');
 const ActividadesControladores = require('../controllers/ActividadesControlador')
 const RelacionesControladores = require('../controllers/RelacionesControladores')
 const conexion = require('../conexion');
+const Autenticar = require('../controllers/AutenticacionControlador')
 
 /* GET users listing. */
 router.get('/actividades', function(req, res, next) {
@@ -23,8 +24,7 @@ router.get('/profesores', function(req, res, next) {
     .then((resultado)=>{
       res.render("profesores", {
       "resultados": resultado,
-      "direccion" : '/tablas/profesores',
-      "cantidadValores" : 2});
+      "direccion" : '/tablas/profesores'});
   })
   .catch((e)=>{console.error(e.message)})
   }else{
