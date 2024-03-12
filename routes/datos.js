@@ -23,7 +23,8 @@ router.get('/profesores', function(req, res, next) {
     .then((resultado)=>{
       res.render("profesores", {
       "resultados": resultado,
-      "direccion" : '/tablas/profesores'});
+      "direccion" : '/tablas/profesores',
+      "cantidadValores" : 2});
   })
   .catch((e)=>{console.error(e.message)})
   }else{

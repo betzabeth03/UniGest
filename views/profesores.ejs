@@ -1,10 +1,15 @@
 <%- include('./parciales/cabecera', {"direccion": direccion}) %>
-<form class="d-flex" method="post"  >
-  <input class="form-control me-2" type="input" placeholder="Nombre" name="nombre" required>
-  <input class="form-control me-2" type="input" placeholder="Apellido" name="apellido"  required>
-  
-  <button class="btn btn-success" type="submit">Agregar</button>
-</form>
+
+  <form class="d-flex" method="post"  >
+    <input class="form-control me-2" type="input" placeholder="Nombre" name="nombre" required>
+    <input class="form-control me-2" type="input" placeholder="Apellido" name="apellido"  required>
+    
+    <button class="btn btn-success" type="submit">Agregar</button>
+  </form>
+
+
+
+
 <form class="d-flex" method="get">
   <input class="form-control me-2" type="number" placeholder="ID" name="id" min="0" max="1000" required  >
   <button class="btn btn-success" type="submit">Buscar</button>
@@ -56,7 +61,9 @@
       for(let i=0;i<botonEliminar.length;i++){
         botonEliminar[i].addEventListener("click", function(){
           let id = botonEliminar[i].value
-          console.log(id + direccionActual)
+          let confirmacion = confirm("Realmente desea eliminar este elemento?");
+          if(confirmacion){
+            console.log(id + direccionActual)
           fetch(direccionActual+"/"+id,{method: 'DELETE'})
           .then(response =>{
             if(!response.ok){
@@ -64,7 +71,9 @@
             }else{
               location.reload()
           } 
-        })
+             })
+          }
+          
             
            })
          }
