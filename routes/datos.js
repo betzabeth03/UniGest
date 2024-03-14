@@ -512,7 +512,7 @@ router.delete("/profesores/:id",function(req,res,next){
       router.get("/profesores-materias",function(req,res,next){
         RelacionesControladores.profesores_materias()
         .then((resultados)=>{
-          res.send(resultados)
+          res.render("profesores-materias",{resultados: resultados,direccion:"/tablas/relaciones"})
         }
         
         )
@@ -643,15 +643,25 @@ router.post("/registrarse",function(req,res,next){
   const userDatos = req.body
  Autenticar.registrarse(userDatos)
  .then(()=>{
-  RelacionesControladores.profesores_materias_secciones_actividades()
-  .then((results)=>{
-    res.render("tablas", {
-      resultados: results,
-      direccion : "/tablas/relaciones"
-    }
-  )
-  })
   
+  AutenticacionControlador.login(req.body)
+  .then((resultados)=>{
+    res.cookie('jwt',resultados)
+    RelacionesControladores.profesores_materias_secciones_actividades()
+    .then((results)=>{
+      res.render("tablas", {
+        resultados: results,
+        direccion : "/tablas/relaciones"
+      }
+    )
+    })
+    .catch((e)=>{
+      console.error(e)
+    })
+  })
+  .catch((error)=>{
+    console.log(error)
+  })
  })
  .catch((e)=>{
   console.error(e)
