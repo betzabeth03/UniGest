@@ -12,30 +12,43 @@ const e = require('express');
 
 /* GET users listing. */
 router.get('/actividades', function(req, res, next) {
-  if(req.query.id){
-    ActividadesControladores.uno(req.query.id)
-    .then((resultado) =>{
-      res.render("actividades", {
-        "resultados" : resultado,
-        "direccion" : '/tablas/actividades',
-        "cantidadValores" : 3 });
-    })
-    .catch((e)=>{console.error(e.message)})
-  } else {
-    ActividadesControladores.todos()
-    .then((resultados) =>{
-      res.render("actividades",{
-        "resultados": resultados,
-        "direccion" : '/tablas/actividades'
-      });
-    })
-    .catch((e) => console.error(e.message))
-  }
+  AutenticacionControlador.verificar(req.cookies.jwt)
+  .then(()=>{
+    if(req.query.id){
+      ActividadesControladores.uno(req.query.id)
+      .then((resultado) =>{
+        res.render("actividades", {
+          "resultados" : resultado,
+          "direccion" : '/tablas/actividades'});
+      })
+      .catch(()=>{
+        console.error(e.message) 
+        res.redirect("/tablas")
+      })
+    } else {
+      ActividadesControladores.todos()
+      .then((resultados) =>{
+        res.render("actividades",{
+          "resultados": resultados,
+          "direccion" : '/tablas/actividades'
+        });
+      })
+      .catch((e) => {
+        console.error(e.message) 
+        res.redirect("/tablas")
+      }  )
+    }
+
+  })
+  .catch(()=>{
+    res.redirect("/tablas")
+  })
+  
 })
 
 
 router.get('/profesores', function(req, res, next) {
-  AutenticacionControlador.verificarDirector(req.cookies.jwt)
+  AutenticacionControlador.verificar(req.cookies.jwt)
       .then(() => {
           if (req.query.id) {
               ProfesoresControladores.uno(req.query.id)
@@ -55,7 +68,10 @@ router.get('/profesores', function(req, res, next) {
                           "direccion": '/tablas/profesores'
                       });
                   })
-                  .catch((e) => console.error(e.message));
+                  .catch((e) =>{
+                    console.error(e.message)
+                    res.redirect("/tablas")
+                   })
           }
       })
       .catch((e) => {
@@ -67,15 +83,19 @@ router.get('/profesores', function(req, res, next) {
 
 
   router.get('/materias', function(req, res, next) {
+    AutenticacionControlador.verificar(req.cookies.jwt)
+  .then(()=>{
     if(req.query.id){
       MateriasControladores.uno(req.query.id)
       .then((resultado)=>{
         res.render("materias", {
         "resultados": resultado,
-        "direccion" : '/tablas/materias',
-        "cantidadValores" : 1});
+        "direccion" : '/tablas/materias'});
     })
-    .catch((e)=>{console.error(e.message)})
+      .catch((e) =>{
+                    console.error(e.message)
+                    res.redirect("/tablas")
+                   })
     }else{
       MateriasControladores.todos()
       .then((resultados) =>{
@@ -84,54 +104,81 @@ router.get('/profesores', function(req, res, next) {
           "direccion" : '/tablas/materias'
       }); 
       })
-      .catch((e) => console.error(e.message));
+      .catch((e) =>{
+        console.error(e.message)
+        res.redirect("/tablas")
+       })
     }
+
+  })
+  .catch(()=>{
+    res.redirect("/tablas")
+  })
+    
     })
 
 
     router.get('/secciones', function(req, res, next) {
-      if(req.query.id){
-        SeccionesControladores.uno(req.query.id)
-        .then((resultado)=>{
-          res.render("secciones", {
-          "resultados": resultado,
-          "direccion" : '/tablas/secciones',
-          "cantidadValores" : 2});
+      AutenticacionControlador.verificar(req.cookies.jwt)
+  .then(()=>{
+    if(req.query.id){
+      SeccionesControladores.uno(req.query.id)
+      .then((resultado)=>{
+        res.render("secciones", {
+        "resultados": resultado,
+        "direccion" : '/tablas/secciones'});
+    })
+     .catch((e) =>{
+                  console.error(e.message)
+                  res.redirect("/tablas")
+                 })
+    }else{
+      SeccionesControladores.todos()
+      .then((resultados) =>{
+        res.render("secciones",{
+          "resultados" : resultados,
+          "direccion" : '/tablas/secciones'
+      }); 
       })
-      .catch((e)=>{console.error(e.message)})
-      }else{
-        SeccionesControladores.todos()
-        .then((resultados) =>{
-          res.render("secciones",{
-            "resultados" : resultados,
-            "direccion" : '/tablas/secciones'
-        }); 
-        })
-        .catch((e) => console.error(e.message));
-      }
+      .catch((e) => console.error(e.message));
+    }
+
+  })
+  .catch(()=>{
+    res.redirect("/tablas")
+  })
+      
       })
 
 
       router.get('/eventos', function(req, res, next) {
-        if(req.query.id){
-          EventosControladores.uno(req.query.id)
-          .then((resultado)=>{
-            res.render("eventos", {
-            "resultados": resultado,
-            "direccion" : '/tablas/eventos',
-            "cantidadValores" : 3});
-        })
-        .catch((e)=>{console.error(e.message)})
-        }else{
-          EventosControladores.todos()
-          .then((resultados) =>{
-            res.render("eventos",{
-              "resultados" : resultados,
-              "direccion" : '/tablas/eventos'
-          }); 
-          })
-          .catch((e) => console.error(e.message));
-        }
+        AutenticacionControlador.verificar(req.cookies.jwt)
+  .then(()=>{
+    if(req.query.id){
+      EventosControladores.uno(req.query.id)
+      .then((resultado)=>{
+        res.render("eventos", {
+        "resultados": resultado,
+        "direccion" : '/tablas/eventos',
+        "cantidadValores" : 3});
+    })
+    .catch((e)=>{console.error(e.message)})
+    }else{
+      EventosControladores.todos()
+      .then((resultados) =>{
+        res.render("eventos",{
+          "resultados" : resultados,
+          "direccion" : '/tablas/eventos'
+      }); 
+      })
+      .catch((e) => console.error(e.message));
+    }
+
+  })
+  .catch(()=>{
+    res.redirect("/tablas")
+  })
+      
         })
 
 
@@ -141,181 +188,326 @@ router.get('/profesores', function(req, res, next) {
 
 /* POST crear users. */
 router.post('/actividades', function(req, res, next) {
-  ActividadesControladores.crear(req.body)
-  .then(() => {
-      ActividadesControladores.todos()
-      .then((resultados) =>{
-      res.render("actividades",{"resultados": resultados, "direccion": '/tablas/actividades'});
+  AutenticacionControlador.verificar(req.cookies.jwt)
+  .then(()=>{
+    ActividadesControladores.crear(req.body)
+    .then(() => {
+        ActividadesControladores.todos()
+        .then((resultados) =>{
+        res.render("actividades",{"resultados": resultados, "direccion": '/tablas/actividades'});
+      })
+    })
+    .catch(()=>{
+      res.redirect("/tablas")
     })
   })
-  .catch((e) => console.error(e.message));
-});
+.catch(()=>{
+  res.redirect("/tablas")
+})
+  })
+  
+  
 
 router.post('/profesores', function(req, res, next) {
-  ProfesoresControladores.crear(req.body)
-  .then(() => {
-      ProfesoresControladores.todos()
-      .then((resultados) =>{
-      res.render("profesores",{"resultados": resultados, "direccion": '/tablas/profesores'}); 
+  AutenticacionControlador.verificarDirector(req.cookies.jwt)
+  .then(()=>{
+    ProfesoresControladores.crear(req.body)
+    .then(() => {
+        ProfesoresControladores.todos()
+        .then((resultados) =>{
+        res.render("profesores",{"resultados": resultados, "direccion": '/tablas/profesores'}); 
+      })
     })
+    .catch(()=>{
+      res.redirect("/tablas")
+    })
+
   })
-  .catch((e) => console.error(e.message));
-});
+  .catch(()=>{
+    res.redirect("/tablas")
+  })
+  
+})
 
 router.post('/materias', function(req, res, next) {
-  MateriasControladores.crear(req.body)
-  .then(() => {
-      MateriasControladores.todos()
-      .then((resultados) =>{
-      res.render("materias",{"resultados": resultados, "direccion": '/tablas/materias'});
+  AutenticacionControlador.verificarDirector(req.cookies.jwt)
+  .then(()=>{
+    MateriasControladores.crear(req.body)
+    .then(() => {
+        MateriasControladores.todos()
+        .then((resultados) =>{
+        res.render("materias",{"resultados": resultados, "direccion": '/tablas/materias'});
+      })
+    })
+    .catch(()=>{
+      res.redirect("/tablas")
     })
   })
-  .catch((e) => console.error(e.message));
-});
+  .catch(()=>{
+    res.redirect("/tablas")
+   })
+  })
+  
+  
 
 router.post('/secciones', function(req, res, next) {
-  SeccionesControladores.crear(req.body)
-  .then(() => {
-      SeccionesControladores.todos()
-      .then((resultados) =>{
-      res.render("secciones",{"resultados": resultados, "direccion": '/tablas/secciones'});
+  AutenticacionControlador.verificarDirector(req.cookies.jwt)
+  .then(()=>{
+    SeccionesControladores.crear(req.body)
+    .then(() => {
+        SeccionesControladores.todos()
+        .then((resultados) =>{
+        res.render("secciones",{"resultados": resultados, "direccion": '/tablas/secciones'});
+      })
+    })
+    .catch(()=>{
+      res.redirect("/tablas")
     })
   })
-  .catch((e) => console.error(e.message));
-});
+  .catch(()=>{
+    res.redirect("/tablas")
+  })
+  
+})
 
 router.post('/eventos', function(req, res, next) {
-  EventosControladores.crear(req.body)
-  .then(() => {
-      EventosControladores.todos()
-      .then((resultados) =>{
-      res.render("eventos",{"resultados": resultados, "direccion": '/tablas/eventos'});
+  AutenticacionControlador.verificarDirector(req.cookies.jwt)
+  .then(()=>{
+    EventosControladores.crear(req.body)
+    .then(() => {
+        EventosControladores.todos()
+        .then((resultados) =>{
+        res.render("eventos",{"resultados": resultados, "direccion": '/tablas/eventos'});
+      })
+    })
+    .catch(()=>{
+      res.redirect("/tablas")
     })
   })
-  .catch((e) => console.error(e.message));
+  .catch(()=>{
+    res.redirect("/tablas")
+  })
+  
 });
 
 /* PUT modificar user */
 router.put('/actividades/:id', function(req, res, next) {
-  const idReq = req.params.id;
-  const nuevosValores = req.body;
-  ActividadesControladores.modificar(idReq, nuevosValores)
-  .then(() => {
-    ActividadesControladores.todos()
-    .then((resultados) =>{
-    res.send(resultados); 
+  AutenticacionControlador.verificar(req.cookies.jwt)
+  .then(()=>{
+    const idReq = req.params.id;
+    const nuevosValores = req.body;
+    ActividadesControladores.modificar(idReq, nuevosValores)
+    .then(() => {
+      ActividadesControladores.todos()
+      .then((resultados) =>{
+      res.send(resultados); 
+    })
   })
-})
-    .catch((e) => console.error(e.message));
+  .catch(()=>{
+    res.redirect("/tablas")
+  })
+  })
+  .catch(()=>{
+    res.redirect("/tablas")
+  })
+  
     });
 
 
 router.put('/profesores/:id', function(req, res, next) {
-  const idReq = req.params.id;
-  const nuevosValores = req.body;
-  ProfesoresControladores.modificar(idReq, nuevosValores)
-  .then(() => {
-    ProfesoresControladores.todos()
-    .then((resultados) =>{
-    res.send(resultados); 
+  AutenticacionControlador.verificarDirector(req.cookies.jwt)
+  .then(()=>{
+    const idReq = req.params.id;
+    const nuevosValores = req.body;
+    ProfesoresControladores.modificar(idReq, nuevosValores)
+    .then(() => {
+      ProfesoresControladores.todos()
+      .then((resultados) =>{
+      res.send(resultados); 
+    })
   })
-})
-    .catch((e) => console.error(e.message));
+  .catch(()=>{
+    res.redirect("/tablas")
+  })
+
+  })
+  .catch(()=>{
+    res.redirect("/tablas")
+  })
+  
     });
 
 
 router.put('/materias/:id', function(req, res, next) {
-   const idReq = req.params.id;
-   const nuevosValores = req.body;
-    MateriasControladores.modificar(idReq, nuevosValores)
-      .then(() => {
-          MateriasControladores.todos()
-          .then((resultados)=>{
-            res.send(resultados)
-          })
+  AutenticacionControlador.verificarDirector(req.cookies.jwt)
+  .then(()=>{
+    const idReq = req.params.id;
+    const nuevosValores = req.body;
+     MateriasControladores.modificar(idReq, nuevosValores)
+       .then(() => {
+           MateriasControladores.todos()
+           .then((resultados)=>{
+             res.send(resultados)
+           })
+         })
+         .catch(()=>{
+          res.redirect("/tablas")
         })
-        .catch((e) => console.error(e.message));
+
+  })
+  .catch(()=>{
+    res.redirect("/tablas")
+  })
+   
         });
 
 
 router.put('/secciones/:id', function(req, res, next) {
-  const idReq = req.params.id;
-  const nuevosValores = req.body;
-  SeccionesControladores.modificar(idReq, nuevosValores)
-    .then(() => {
-      SeccionesControladores.todos()
-      .then((results)=>{
-        res.send(results)
+  AutenticacionControlador.verificarDirector(req.cookies.jwt)
+  .then(()=>{
+    const idReq = req.params.id;
+    const nuevosValores = req.body;
+    SeccionesControladores.modificar(idReq, nuevosValores)
+      .then(() => {
+        SeccionesControladores.todos()
+        .then((results)=>{
+          res.send(results)
+        })
       })
-    })
-    .catch((e) => console.error(e.message));
+      .catch(()=>{
+        res.redirect("/tablas")
+      })
+
+  })
+  .catch(()=>{
+    res.redirect("/tablas")
+  })
+  
     });
 
 router.put('/eventos/:id', function(req, res, next) {
-   const idReq = req.params.id;
-   const nuevosValores = req.body;
-   EventosControladores.modificar(idReq, nuevosValores)
-     .then(() => {
-       EventosControladores.todos()
-        .then((results)=>{
-          res.send(results)
-          })
+  AutenticacionControlador.verificarDirector(req.cookies.jwt)
+  .then(()=>{
+    const idReq = req.params.id;
+    const nuevosValores = req.body;
+    EventosControladores.modificar(idReq, nuevosValores)
+      .then(() => {
+        EventosControladores.todos()
+         .then((results)=>{
+           res.send(results)
+           })
+         })
+         .catch(()=>{
+          res.redirect("/tablas")
         })
-        .catch((e) => console.error(e.message));
+
+  })
+  .catch(()=>{
+    res.redirect("/tablas")
+  })
+   
         });
     
 
 
 // DELETE
 router.delete("/actividades/:id",function(req,res,next){
-  ActividadesControladores.eliminar(req.params.id)
+  AutenticacionControlador.verificar(req.cookies.jwt)
+  .then(()=>{
+    ActividadesControladores.eliminar(req.params.id)
     .then(()=>{
       ActividadesControladores.todos()
       .then((resultados) =>{
       res.send(resultados);  }
     )})
-      .catch((e) => console.error(e.message));
+      .catch(()=>{
+    res.redirect("/tablas")
+  })
     })
+    .catch(()=>{
+      res.redirect("/tablas")
+    })
+  })
+  
+  
   
 
 router.delete("/profesores/:id",function(req,res,next){
-ProfesoresControladores.eliminar(req.params.id)
+  AutenticacionControlador.verificarDirector(req.cookies.jwt)
   .then(()=>{
-    ProfesoresControladores.todos()
-    .then((resultados) =>{
-    res.send(resultados);  }
-  )})
-    .catch((e) => console.error(e.message));
+    ProfesoresControladores.eliminar(req.params.id)
+    .then(()=>{
+      ProfesoresControladores.todos()
+      .then((resultados) =>{
+      res.send(resultados);  }
+    )})
+    .catch(()=>{
+      res.redirect("/tablas")
+    })
+
+  })
+  .catch(()=>{
+    res.redirect("/tablas")
+  })
+
   })
 
   router.delete("/materias/:id",function(req,res,next){
+    AutenticacionControlador.verificarDirector(req.cookies.jwt)
+  .then(()=>{
     MateriasControladores.eliminar(req.params.id)
-      .then(()=>{
-        MateriasControladores.todos()
-        .then((resultados) =>{
-        res.send(resultados);  }
-      )})
-      .catch((e) => console.error(e.message));
+    .then(()=>{
+      MateriasControladores.todos()
+      .then((resultados) =>{
+      res.send(resultados);  }
+    )})
+    .catch(()=>{
+      res.redirect("/tablas")
+    })
+
+  })
+  .catch(()=>{
+    res.redirect("/tablas")
+  })
+    
       })
       
       router.delete("/secciones/:id",function(req,res,next){
-        SeccionesControladores.eliminar(req.params.id)
-          .then(()=>{
-           SeccionesControladores.todos()
-            .then((resultados) =>{
-            res.send(resultados);  }
-          )})
-            .catch((e) => console.error(e.message));
+        AutenticacionControlador.verificarDirector(req.cookies.jwt)
+  .then(()=>{
+    SeccionesControladores.eliminar(req.params.id)
+    .then(()=>{
+     SeccionesControladores.todos()
+      .then((resultados) =>{
+      res.send(resultados);  }
+    )})
+      .catch(()=>{
+        res.redirect("/tablas")
+      })
+
+  })
+  .catch(()=>{
+    res.redirect("/tablas")
+  })
+        
           })
 
   router.delete("/eventos/:id",function(req,res,next){
+    AutenticacionControlador.verificarDirector(req.cookies.jwt)
+  .then(()=>{
     EventosControladores.eliminar(req.params.id)
-      .then(()=>{
-        EventosControladores.todos()
-        .then((resultados) =>{
-        res.send(resultados);  }
-      )})
-      .catch((e) => console.error(e.message));
+    .then(()=>{
+      EventosControladores.todos()
+      .then((resultados) =>{
+      res.send(resultados);  }
+    )})
+    .catch((e) => console.error(e.message));
+
+  })
+  .catch(()=>{
+    res.redirect("/tablas")
+  })
+   
       })    
           
       router.get("/profesores-materias",function(req,res,next){
@@ -329,29 +521,45 @@ ProfesoresControladores.eliminar(req.params.id)
       })
       
 router.post("/relaciones",function(req,res,next){
-  const datos = req.body
-  RelacionesControladores.crear(datos)
+  AutenticacionControlador.verificarDirector(req.cookies.jwt)
   .then(()=>{
-    RelacionesControladores.profesores_materias_secciones_actividades()
-    .then((resultados)=>{
-      res.render("relaciones",{resultados : resultados, direccion: "/tablas/relaciones"})
+    const datos = req.body
+    RelacionesControladores.crear(datos)
+    .then(()=>{
+      RelacionesControladores.profesores_materias_secciones_actividades()
+      .then((resultados)=>{
+        res.render("relaciones",{resultados : resultados, direccion: "/tablas/relaciones"})
+      })
+      .catch((e)=>{ console.error(e)})
     })
-    .catch((e)=>{ console.error(e)})
+    .catch((e)=>{
+      console.error(e.message)
+    })
+
   })
-  .catch((e)=>{
-    console.error(e.message)
+  .catch(()=>{
+    res.redirect("/tablas")
   })
+  
 })
 router.put("/relaciones/:id",function(req,res,next){
-  const datos = req.body
-  const id = req.params.id
-  RelacionesControladores.editar(id,datos)
-  .then((results)=>{
-    res.send(results)
+  AutenticacionControlador.verificarDirector(req.cookies.jwt)
+  .then(()=>{
+    const datos = req.body
+    const id = req.params.id
+    RelacionesControladores.editar(id,datos)
+    .then((results)=>{
+      res.send(results)
+    })
+    .catch((e)=>{
+      console.error(e.message)
+    })
+
   })
-  .catch((e)=>{
-    console.error(e.message)
+  .catch(()=>{
+    res.redirect("/tablas")
   })
+  
 })
 router.get("/profesores-materias-secciones",function(req,res,next){
   RelacionesControladores.profesores_materias_secciones()
@@ -432,7 +640,6 @@ router.get("/registrarse",function(req,res,next){
   res.render("registrarse",{direccion: "/tablas/relaciones"})
 })
 router.post("/registrarse",function(req,res,next){
-  console.log("llegue a la ruta")
   const userDatos = req.body
  Autenticar.registrarse(userDatos)
  .then((resultados)=>{
@@ -447,7 +654,16 @@ router.post("/",function(req,res,next){
   AutenticacionControlador.login(req.body)
 .then((resultados)=>{
   res.cookie('jwt',resultados)
-  res.render("tablas",{direccion: "/tablas/relaciones"})
+  RelacionesControladores.profesores_materias_secciones_actividades()
+  .then((results)=>{
+    res.render("tablas", {
+      resultados: results,
+      direccion : "/tablas/relaciones"
+    });
+  })
+  .catch((e)=>{
+    console.error(e)
+  })
 })
 .catch((error)=>{
   console.log(error)
@@ -456,10 +672,12 @@ router.post("/",function(req,res,next){
 router.post("/logout",function(req,res,next){
   AutenticacionControlador.logout(req.cookies.jwt)
   .then(()=>{
+    res.clearCookie("jwt")
     res.redirect("/tablas")
   })
   .catch((e)=>{
     console.error(e)
+    res.redirect("/tablas")
   })
 })
 

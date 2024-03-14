@@ -119,7 +119,6 @@ logout(cookie){
         if(!cookie){
             reject(new Error("No has iniciado sesion"))
         }else{
-            cookie = 
             resolve()
         }
     })
