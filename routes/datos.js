@@ -41,7 +41,7 @@ router.get('/actividades', function(req, res, next) {
 
   })
   .catch(()=>{
-    res.redirect("/tablas")
+    res.redirect(401,"/tablas",1)
   })
   
 })
@@ -55,8 +55,7 @@ router.get('/profesores', function(req, res, next) {
                   .then((resultado) => {
                       res.render("profesores", {
                           "resultados": resultado,
-                          "direccion": '/tablas/profesores',
-                          "cantidadValores": 2
+                          "direccion": '/tablas/profesores'
                       });
                   })
                   .catch((e) => console.error(e.message));
@@ -75,7 +74,7 @@ router.get('/profesores', function(req, res, next) {
           }
       })
       .catch((e) => {
-          res.redirect("/tablas")
+          res.redirect(401,"/tablas",1)
       });
 });
   
@@ -112,7 +111,7 @@ router.get('/profesores', function(req, res, next) {
 
   })
   .catch(()=>{
-    res.redirect("/tablas")
+    res.redirect(401,"/tablas",1)
   })
     
     })
@@ -145,7 +144,7 @@ router.get('/profesores', function(req, res, next) {
 
   })
   .catch(()=>{
-    res.redirect("/tablas")
+    res.redirect(401,"/tablas",1)
   })
       
       })
@@ -176,7 +175,7 @@ router.get('/profesores', function(req, res, next) {
 
   })
   .catch(()=>{
-    res.redirect("/tablas")
+    res.redirect(401,"/tablas",1)
   })
       
         })
@@ -202,7 +201,7 @@ router.post('/actividades', function(req, res, next) {
     })
   })
 .catch(()=>{
-  res.redirect("/tablas")
+  res.redirect(401,"/tablas",1)
 })
   })
   
@@ -224,7 +223,7 @@ router.post('/profesores', function(req, res, next) {
 
   })
   .catch(()=>{
-    res.redirect("/tablas")
+    res.redirect(401,"/tablas",1)
   })
   
 })
@@ -244,8 +243,8 @@ router.post('/materias', function(req, res, next) {
     })
   })
   .catch(()=>{
-    res.redirect("/tablas")
-   })
+    res.redirect(401,"/tablas",1)
+  })
   })
   
   
@@ -265,7 +264,7 @@ router.post('/secciones', function(req, res, next) {
     })
   })
   .catch(()=>{
-    res.redirect("/tablas")
+    res.redirect(401,"/tablas",1)
   })
   
 })
@@ -285,7 +284,7 @@ router.post('/eventos', function(req, res, next) {
     })
   })
   .catch(()=>{
-    res.redirect("/tablas")
+    res.redirect(401,"/tablas",1)
   })
   
 });
@@ -308,7 +307,7 @@ router.put('/actividades/:id', function(req, res, next) {
   })
   })
   .catch(()=>{
-    res.redirect("/tablas")
+    res.redirect(401,"/tablas",1)
   })
   
     });
@@ -332,7 +331,7 @@ router.put('/profesores/:id', function(req, res, next) {
 
   })
   .catch(()=>{
-    res.redirect("/tablas")
+    res.redirect(401,"/tablas",1)
   })
   
     });
@@ -356,7 +355,7 @@ router.put('/materias/:id', function(req, res, next) {
 
   })
   .catch(()=>{
-    res.redirect("/tablas")
+    res.redirect(401,"/tablas",1)
   })
    
         });
@@ -380,7 +379,7 @@ router.put('/secciones/:id', function(req, res, next) {
 
   })
   .catch(()=>{
-    res.redirect("/tablas")
+    res.redirect(401,"/tablas",1)
   })
   
     });
@@ -403,7 +402,7 @@ router.put('/eventos/:id', function(req, res, next) {
 
   })
   .catch(()=>{
-    res.redirect("/tablas")
+    res.redirect(401,"/tablas",1)
   })
    
         });
@@ -425,7 +424,7 @@ router.delete("/actividades/:id",function(req,res,next){
   })
     })
     .catch(()=>{
-      res.redirect("/tablas")
+      res.redirect(401,"/tablas",1)
     })
   })
   
@@ -447,7 +446,7 @@ router.delete("/profesores/:id",function(req,res,next){
 
   })
   .catch(()=>{
-    res.redirect("/tablas")
+    res.redirect(401,"/tablas",1)
   })
 
   })
@@ -467,7 +466,7 @@ router.delete("/profesores/:id",function(req,res,next){
 
   })
   .catch(()=>{
-    res.redirect("/tablas")
+    res.redirect(401,"/tablas",1)
   })
     
       })
@@ -487,7 +486,7 @@ router.delete("/profesores/:id",function(req,res,next){
 
   })
   .catch(()=>{
-    res.redirect("/tablas")
+    res.redirect(401,"/tablas",1)
   })
         
           })
@@ -505,7 +504,7 @@ router.delete("/profesores/:id",function(req,res,next){
 
   })
   .catch(()=>{
-    res.redirect("/tablas")
+    res.redirect(401,"/tablas",1)
   })
    
       })    
@@ -538,7 +537,7 @@ router.post("/relaciones",function(req,res,next){
 
   })
   .catch(()=>{
-    res.redirect("/tablas")
+    res.redirect(401,"/tablas",1)
   })
   
 })
@@ -629,7 +628,8 @@ router.get("/",function(req,res,next){
   .then((results)=>{
     res.render("tablas", {
       resultados: results,
-      direccion : "/tablas/relaciones"
+      direccion : "/tablas/relaciones",
+      fallo : null
     });
   })
   .catch((e)=>{
@@ -680,6 +680,9 @@ router.post("/logout",function(req,res,next){
     console.error(e)
     res.redirect("/tablas")
   })
+})
+router.get("/401",function(req,res){
+  res.render("401")
 })
 
 module.exports = router;
