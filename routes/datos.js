@@ -626,10 +626,10 @@ router.get("/editarRelaciones/:id",function(req,res,next){
 router.get("/",function(req,res,next){
   RelacionesControladores.profesores_materias_secciones_actividades()
   .then((results)=>{
+    console.log(results)
     res.render("tablas", {
       resultados: results,
-      direccion : "/tablas/relaciones",
-      fallo : null
+      direccion : "/tablas/relaciones"
     });
   })
   .catch((e)=>{
