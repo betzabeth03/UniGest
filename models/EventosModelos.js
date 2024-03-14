@@ -37,27 +37,6 @@ const conexion = require('../conexion')
          })
        }
 
-    
-    semana(fecha) {
-  var Fechainicial = new Date(fecha['año'], fecha['mes'] , fecha['dia']);
-  var Fechafinal = new Date(fecha['año'], fecha['mes'] , fecha['dia'] + 14);
-
-  var eventosProximos = [];
-
-  for (let i = 0; i < EventosArr.length; i++) {
-    var FechaEvento = new Date(
-      EventosArr[i].fecha['año'],
-      EventosArr[i].fecha['mes'],
-      EventosArr[i].fecha['dia'],
-      EventosArr[i].fecha['hora']
-    );
-    if (Fechainicial <= FechaEvento && FechaEvento <= Fechafinal) {
-      eventosProximos.push(EventosArr[i]);
-    }
-  }
-  return eventosProximos;
-}
-
 uno(idReq) {
     
   return new Promise((resolve,reject)=>{
@@ -66,12 +45,10 @@ uno(idReq) {
      if(error){
        reject(error)
      }else{
-       resolve(result)
+       resolve(results)
      }
    })
   })
-
- 
 }
     
 

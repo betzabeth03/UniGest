@@ -1,89 +1,151 @@
-var express = require('express');
-var router = express.Router();
-var ProfesoresControladores = require("../controllers/ProfesoresControladores");
-let MateriasControladores = require("../controllers/MateriasControlador");
+const express = require('express');
+const router = express.Router();
+const ProfesoresControladores = require("../controllers/ProfesoresControladores");
+const MateriasControladores = require("../controllers/MateriasControlador");
 const SeccionesControladores = require('../controllers/SeccionesControladores');
-const EventosControlador = require('../controllers/EventosControlador');
+const EventosControladores = require('../controllers/EventosControlador');
 const ActividadesControladores = require('../controllers/ActividadesControlador')
 const RelacionesControladores = require('../controllers/RelacionesControladores')
-const conexion = require('../conexion');
 const Autenticar = require('../controllers/AutenticacionControlador')
+const AutenticacionControlador = require('../controllers/AutenticacionControlador');
+const e = require('express');
 
 /* GET users listing. */
 router.get('/actividades', function(req, res, next) {
-  ActividadesControladores.todos()
-  .then((resultados) =>{
-    res.send(resultados); 
-  })
-  .catch((e) => console.error(e.message));
-});
+  if(req.query.id){
+    ActividadesControladores.uno(req.query.id)
+    .then((resultado) =>{
+      res.render("actividades", {
+        "resultados" : resultado,
+        "direccion" : '/tablas/actividades',
+        "cantidadValores" : 3 });
+    })
+    .catch((e)=>{console.error(e.message)})
+  } else {
+    ActividadesControladores.todos()
+    .then((resultados) =>{
+      res.render("actividades",{
+        "resultados": resultados,
+        "direccion" : '/tablas/actividades'
+      });
+    })
+    .catch((e) => console.error(e.message))
+  }
+})
+
 
 router.get('/profesores', function(req, res, next) {
-  if(req.query.id){
-    ProfesoresControladores.uno(req.query.id)
-    .then((resultado)=>{
-      res.render("profesores", {
-      "resultados": resultado,
-      "direccion" : '/tablas/profesores'});
-  })
-  .catch((e)=>{console.error(e.message)})
-  }else{
-    ProfesoresControladores.todos()
-    .then((resultados) =>{
-      res.render("profesores",{
-        "resultados" : resultados,
-        "direccion" : '/tablas/profesores'
-    }); 
-    })
-    .catch((e) => console.error(e.message));
-  }
-  })
+  AutenticacionControlador.verificarDirector(req.cookies.jwt)
+      .then(() => {
+          if (req.query.id) {
+              ProfesoresControladores.uno(req.query.id)
+                  .then((resultado) => {
+                      res.render("profesores", {
+                          "resultados": resultado,
+                          "direccion": '/tablas/profesores',
+                          "cantidadValores": 2
+                      });
+                  })
+                  .catch((e) => console.error(e.message));
+          } else {
+              ProfesoresControladores.todos()
+                  .then((resultados) => {
+                      res.render("profesores", {
+                          "resultados": resultados,
+                          "direccion": '/tablas/profesores'
+                      });
+                  })
+                  .catch((e) => console.error(e.message));
+          }
+      })
+      .catch((e) => {
+          res.redirect("/tablas")
+      });
+});
+  
+  
 
-router.get('/materias', function(req, res, next) {
-   MateriasControladores.todos()
-   .then((resultados) =>{
-     res.send(resultados); 
-   })
-   .catch((e) => console.error(e.message));
- });
- router.get('/secciones', function(req, res, next) {
-  SeccionesControladores.todos()
-  .then((resultados) =>{
-    res.send(resultados); 
-  })
-  .catch((e) => console.error(e.message));
-});
-//obtener todos los eventos//
-router.get('/eventos', function(req, res, next) {
-  EventosControlador.todos()
-  .then((resultados) =>{
-    res.send(resultados); 
-  })
-  .catch((e) => console.error(e.message));
-});
-//obtener eventos proximos//
-router.post('/eventos/proximos', (req, res, next) => {
-  const fecha = {
-    año: req.body.año,
-    mes: req.body.mes,
-    dia: req.body.día,
-    hora: req.body.hora,
-  };
-  EventosControlador.semana(fecha)
-    .then((eventosProximos) => {
-      res.status(200).json(eventosProximos);
+
+  router.get('/materias', function(req, res, next) {
+    if(req.query.id){
+      MateriasControladores.uno(req.query.id)
+      .then((resultado)=>{
+        res.render("materias", {
+        "resultados": resultado,
+        "direccion" : '/tablas/materias',
+        "cantidadValores" : 1});
     })
-    .catch((error) => {
-      res.status(500).json({ error: error.message });
-    });
-});
+    .catch((e)=>{console.error(e.message)})
+    }else{
+      MateriasControladores.todos()
+      .then((resultados) =>{
+        res.render("materias",{
+          "resultados" : resultados,
+          "direccion" : '/tablas/materias'
+      }); 
+      })
+      .catch((e) => console.error(e.message));
+    }
+    })
+
+
+    router.get('/secciones', function(req, res, next) {
+      if(req.query.id){
+        SeccionesControladores.uno(req.query.id)
+        .then((resultado)=>{
+          res.render("secciones", {
+          "resultados": resultado,
+          "direccion" : '/tablas/secciones',
+          "cantidadValores" : 2});
+      })
+      .catch((e)=>{console.error(e.message)})
+      }else{
+        SeccionesControladores.todos()
+        .then((resultados) =>{
+          res.render("secciones",{
+            "resultados" : resultados,
+            "direccion" : '/tablas/secciones'
+        }); 
+        })
+        .catch((e) => console.error(e.message));
+      }
+      })
+
+
+      router.get('/eventos', function(req, res, next) {
+        if(req.query.id){
+          EventosControladores.uno(req.query.id)
+          .then((resultado)=>{
+            res.render("eventos", {
+            "resultados": resultado,
+            "direccion" : '/tablas/eventos',
+            "cantidadValores" : 3});
+        })
+        .catch((e)=>{console.error(e.message)})
+        }else{
+          EventosControladores.todos()
+          .then((resultados) =>{
+            res.render("eventos",{
+              "resultados" : resultados,
+              "direccion" : '/tablas/eventos'
+          }); 
+          })
+          .catch((e) => console.error(e.message));
+        }
+        })
+
+
+
+
+
+
 /* POST crear users. */
 router.post('/actividades', function(req, res, next) {
   ActividadesControladores.crear(req.body)
   .then(() => {
       ActividadesControladores.todos()
       .then((resultados) =>{
-      res.send(resultados); 
+      res.render("actividades",{"resultados": resultados, "direccion": '/tablas/actividades'});
     })
   })
   .catch((e) => console.error(e.message));
@@ -105,27 +167,29 @@ router.post('/materias', function(req, res, next) {
   .then(() => {
       MateriasControladores.todos()
       .then((resultados) =>{
-      res.send(resultados); 
+      res.render("materias",{"resultados": resultados, "direccion": '/tablas/materias'});
     })
   })
   .catch((e) => console.error(e.message));
 });
+
 router.post('/secciones', function(req, res, next) {
   SeccionesControladores.crear(req.body)
   .then(() => {
       SeccionesControladores.todos()
       .then((resultados) =>{
-      res.send(resultados); 
+      res.render("secciones",{"resultados": resultados, "direccion": '/tablas/secciones'});
     })
   })
   .catch((e) => console.error(e.message));
 });
+
 router.post('/eventos', function(req, res, next) {
-  EventosControlador.crear(req.body)
+  EventosControladores.crear(req.body)
   .then(() => {
-      EventosControlador.todos()
+      EventosControladores.todos()
       .then((resultados) =>{
-      res.send(resultados); 
+      res.render("eventos",{"resultados": resultados, "direccion": '/tablas/eventos'});
     })
   })
   .catch((e) => console.error(e.message));
@@ -145,6 +209,7 @@ router.put('/actividades/:id', function(req, res, next) {
     .catch((e) => console.error(e.message));
     });
 
+
 router.put('/profesores/:id', function(req, res, next) {
   const idReq = req.params.id;
   const nuevosValores = req.body;
@@ -158,11 +223,12 @@ router.put('/profesores/:id', function(req, res, next) {
     .catch((e) => console.error(e.message));
     });
 
-    router.put('/materias/:id', function(req, res, next) {
-      const idReq = req.params.id;
-      const nuevosValores = req.body;
-      MateriasControladores.modificar(idReq, nuevosValores)
-        .then(() => {
+
+router.put('/materias/:id', function(req, res, next) {
+   const idReq = req.params.id;
+   const nuevosValores = req.body;
+    MateriasControladores.modificar(idReq, nuevosValores)
+      .then(() => {
           MateriasControladores.todos()
           .then((resultados)=>{
             res.send(resultados)
@@ -170,6 +236,7 @@ router.put('/profesores/:id', function(req, res, next) {
         })
         .catch((e) => console.error(e.message));
         });
+
 
 router.put('/secciones/:id', function(req, res, next) {
   const idReq = req.params.id;
@@ -184,14 +251,14 @@ router.put('/secciones/:id', function(req, res, next) {
     .catch((e) => console.error(e.message));
     });
 
-    router.put('/eventos/:id', function(req, res, next) {
-      const idReq = req.params.id;
-      const nuevosValores = req.body;
-      EventosControlador.modificar(idReq, nuevosValores)
-        .then(() => {
-          EventosControlador.todos()
-          .then((results)=>{
-            res.send(results)
+router.put('/eventos/:id', function(req, res, next) {
+   const idReq = req.params.id;
+   const nuevosValores = req.body;
+   EventosControladores.modificar(idReq, nuevosValores)
+     .then(() => {
+       EventosControladores.todos()
+        .then((results)=>{
+          res.send(results)
           })
         })
         .catch((e) => console.error(e.message));
@@ -199,44 +266,11 @@ router.put('/secciones/:id', function(req, res, next) {
     
 
 
-/* GET one user  */
-router.get("/actividades/:id",function(req,res,next){
-  ActividadesControladores.uno(req.params.id)
-  .then((resultados)=>{
-    res.send(resultados)
-  })
-  .catch((e) => console.error(e.message));
-})
-
-// router.get("/profesores",function(req,res,next){
-//   idprof = req.query.id
-//   ProfesoresControladores.uno(idprof)
-//   .then((resultados)=>{
-//     res.render("profesoresUno",{"resultados": resultados});
-//   })
-//   .catch((e) => console.error(e.message));
-// })
-
-router.get("/materias/:id",function(req,res,next){
-  MateriasControladores.uno(req.params.id)
-  .then((resultados)=>{
-    res.send(resultados)
-  })
-  .catch((e) => console.error(e.message));
-})
-router.get("/secciones/:id",function(req,res,next){
-  SeccionesControladores.uno(req.params.id)
-  .then((resultados)=>{
-    res.send(resultados)
-  })
-  .catch((e) => console.error(e.message));
-})
-
 // DELETE
 router.delete("/actividades/:id",function(req,res,next){
-  actividadesControladores.eliminar(req.params.id)
+  ActividadesControladores.eliminar(req.params.id)
     .then(()=>{
-      actividadesControladores.todos()
+      ActividadesControladores.todos()
       .then((resultados) =>{
       res.send(resultados);  }
     )})
@@ -275,9 +309,9 @@ ProfesoresControladores.eliminar(req.params.id)
           })
 
   router.delete("/eventos/:id",function(req,res,next){
-    EventosControlador.eliminar(req.params.id)
+    EventosControladores.eliminar(req.params.id)
       .then(()=>{
-        EventosControlador.todos()
+        EventosControladores.todos()
         .then((resultados) =>{
         res.send(resultados);  }
       )})
@@ -297,8 +331,12 @@ ProfesoresControladores.eliminar(req.params.id)
 router.post("/relaciones",function(req,res,next){
   const datos = req.body
   RelacionesControladores.crear(datos)
-  .then((resultados)=>{
-    res.send(resultados)
+  .then(()=>{
+    RelacionesControladores.profesores_materias_secciones_actividades()
+    .then((resultados)=>{
+      res.render("relaciones",{resultados : resultados, direccion: "/tablas/relaciones"})
+    })
+    .catch((e)=>{ console.error(e)})
   })
   .catch((e)=>{
     console.error(e.message)
@@ -342,19 +380,87 @@ router.get("/materias-actividades",function(req,res,next){
     console.error(e.message)
   })
 })
-router.get("/actividades-fecha",function(req,res,next){
+router.get("/relaciones",function(req,res,next){
   RelacionesControladores.profesores_materias_secciones_actividades()
   .then((results)=>{
-    res.send(results)
+    res.render("relaciones", {
+      resultados: results,
+      direccion : "/tablas/relaciones"
+    });
   })
   .catch((e)=>{
     console.error(e)
   })
 })
-router.get("/editar/:id",function(req,res,next){
-  res.render("editar",{id:req.params.id, direccion : "/tablas/profesores"});
+
+//Editar 
+router.get("/editarProfesores/:id",function(req,res,next){
+  res.render("editarProfesores",{id:req.params.id, direccion : "/tablas/profesores"});
+})
+
+router.get("/editarActividades/:id",function(req,res,next){
+  res.render("editarActividades",{id:req.params.id, direccion : "/tablas/actividades"});
+})
+
+router.get("/editarSecciones/:id",function(req,res,next){
+  res.render("editarSecciones",{id:req.params.id, direccion : "/tablas/secciones"});
+})
+
+router.get("/editarMaterias/:id",function(req,res,next){
+  res.render("editarMaterias",{id:req.params.id, direccion : "/tablas/materias"});
+})
+
+router.get("/editarEventos/:id",function(req,res,next){
+  res.render("editarEventos",{id:req.params.id, direccion : "/tablas/eventos"});
+})
+router.get("/editarRelaciones/:id",function(req,res,next){
+  res.render("editarRelaciones",{id:req.params.id, direccion : "/tablas/relaciones"});
 })
 router.get("/",function(req,res,next){
+  RelacionesControladores.profesores_materias_secciones_actividades()
+  .then((results)=>{
+    res.render("tablas", {
+      resultados: results,
+      direccion : "/tablas/relaciones"
+    });
+  })
+  .catch((e)=>{
+    console.error(e)
+  })
+})
+router.get("/registrarse",function(req,res,next){
+  res.render("registrarse",{direccion: "/tablas/relaciones"})
+})
+router.post("/registrarse",function(req,res,next){
+  console.log("llegue a la ruta")
+  const userDatos = req.body
+ Autenticar.registrarse(userDatos)
+ .then((resultados)=>{
+  console.log(resultados)
+  res.render("tablas",{direccion: "/tablas/relaciones"})
+ })
+ .catch((e)=>{
+  console.error(e)
+ })
+})
+router.post("/",function(req,res,next){
+  AutenticacionControlador.login(req.body)
+.then((resultados)=>{
+  res.cookie('jwt',resultados)
   res.render("tablas",{direccion: "/tablas/relaciones"})
 })
+.catch((error)=>{
+  console.log(error)
+})
+})
+router.post("/logout",function(req,res,next){
+  AutenticacionControlador.logout(req.cookies.jwt)
+  .then(()=>{
+    res.redirect("/tablas")
+  })
+  .catch((e)=>{
+    console.error(e)
+  })
+})
+
 module.exports = router;

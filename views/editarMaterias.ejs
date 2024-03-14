@@ -1,0 +1,48 @@
+<%- include('./parciales/cabecera', {"direccion": direccion}) %>
+
+ 
+      </div>
+    </div>
+  </nav>  
+
+
+    <input type="hidden" id="valor" value="<%= id %>" >
+    
+    <div class="container-md d-flex justify-content-center align-items-center w-50 mt-5">
+        <div class="col-10 ">
+            <div class="row bg-light border rounded p-3 border-primary">
+                <h1>Valores a Cambiar</h1>
+                <form action="" method="post">
+                    <input type="text" placeholder="Nombre" name = "nombre" id="nombre" class="form-control me-2 w-50 m-1 border-primary" required>
+                    <button id="cambiar" type="submit" class="btn btn-success m-1">Cambiar</button>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+   
+<script>
+    const formulario = document.querySelector( 'form' );
+    formulario.addEventListener('submit',function(evento){
+        event.preventDefault()
+        const nombreInput = document.getElementById('nombre')
+        const nombre = nombreInput.value
+        const idElemento = document.getElementById("valor")
+        const id = document.getElementById("valor")
+        const datosBody = {
+            nombre : nombre,
+        }
+        fetch(direccion+id.value,{method : "PUT",headers : {"Content-Type" : "application/json"},body:  JSON.stringify(datosBody)})
+        .then(response =>{
+            if(!response.ok){
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }else{
+              location.replace('/tablas/materias')
+          } 
+        })
+    })
+    const direccion = '/tablas/materias/'
+          
+</script>
+</body>
+</html>

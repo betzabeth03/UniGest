@@ -2,7 +2,7 @@
 
   <form class="d-flex" method="post"  >
     <input class="form-control me-2" type="input" placeholder="Nombre" name="nombre" required>
-    <input class="form-control me-2" type="input" placeholder="Apellido" name="apellido"  required>
+    <input class="form-control me-2" type="date" placeholder="PeriodoAcademico" name="periodoAcademico"  required>
     
     <button class="btn btn-success" type="submit">Agregar</button>
   </form>
@@ -26,19 +26,19 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
+                <th scope="col">PeriodoAcademico</th>
                 <th scope="col">Modificar Elemento</th>
              
               </tr>
             </thead>
             <tbody>
-                <% resultados.forEach(profesor => { %>
+                <% resultados.forEach(seccion => { %>
                     <tr>
-                        <th scope="row"><%= profesor.id %></th>
-                        <td><%=  profesor.nombre%></td>
-                        <td><%=  profesor.apellido%></td>
-                        <td class="d-flex justify-content-evenly "> <button value="<%= profesor.id %>"  class="btn btn-danger botonEliminar btn-sm w-25">Eliminar Elemento</button>
-                          <button value="<%= profesor.id %>"  class="btn btn-primary botonEdit btn-sm w-25 h-25"  >Cambiar Elemento</button></td>
+                        <th scope="row"><%= seccion.id %></th>
+                        <td><%=  seccion.nombre%></td>
+                        <td><%=  seccion.periodoAcademico%></td>
+                        <td class="d-flex justify-content-evenly "> <button value="<%= seccion.id %>"  class="btn btn-danger botonEliminar btn-sm w-25">Eliminar Elemento</button>
+                          <button value="<%= seccion.id %>"  class="btn btn-primary botonEdit btn-sm w-25 h-25"  >Cambiar Elemento</button></td>
                         
                       </tr>
                <% }) %>
@@ -81,10 +81,11 @@
         botonEdit[j].addEventListener('click',function(){
         let id = botonEdit[j].value
         let link = document.createElement("a")
-        link.setAttribute("href",`editarProfesores/${id}`)
+        link.setAttribute("href",`editarSecciones/${id}`)
         link.click()
+        console.log("Me termine de ejecutar")
         })
       }
           </script>
     </body>
-    </html>                                                          
+    </html>       

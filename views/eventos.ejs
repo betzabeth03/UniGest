@@ -1,8 +1,9 @@
 <%- include('./parciales/cabecera', {"direccion": direccion}) %>
 
   <form class="d-flex" method="post"  >
-    <input class="form-control me-2" type="input" placeholder="Nombre" name="nombre" required>
-    <input class="form-control me-2" type="input" placeholder="Apellido" name="apellido"  required>
+    <input class="form-control me-2" type="input" placeholder="Nombre" name="nombre" maxlength="25" required>
+    <input class="form-control me-2" type="input" placeholder="TipoEvento" name="tipo"  required>
+    <input class="form-control me-2" type="date" placeholder="Fecha" name="fecha"  required>
     
     <button class="btn btn-success" type="submit">Agregar</button>
   </form>
@@ -26,19 +27,21 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Fecha</th>
                 <th scope="col">Modificar Elemento</th>
              
               </tr>
             </thead>
             <tbody>
-                <% resultados.forEach(profesor => { %>
+                <% resultados.forEach(evento => { %>
                     <tr>
-                        <th scope="row"><%= profesor.id %></th>
-                        <td><%=  profesor.nombre%></td>
-                        <td><%=  profesor.apellido%></td>
-                        <td class="d-flex justify-content-evenly "> <button value="<%= profesor.id %>"  class="btn btn-danger botonEliminar btn-sm w-25">Eliminar Elemento</button>
-                          <button value="<%= profesor.id %>"  class="btn btn-primary botonEdit btn-sm w-25 h-25"  >Cambiar Elemento</button></td>
+                        <th scope="row"><%= evento.id %></th>
+                        <td><%=  evento.nombre%></td>
+                        <td><%=  evento.tipo%></td>
+                        <td><%=  evento.fecha%></td>
+                        <td class="d-flex justify-content-evenly "> <button value="<%= evento.id %>"  class="btn btn-danger botonEliminar btn-sm w-25">Eliminar Elemento</button>
+                          <button value="<%= evento.id %>"  class="btn btn-primary botonEdit btn-sm w-25 h-25"  >Cambiar Elemento</button></td>
                         
                       </tr>
                <% }) %>
@@ -73,15 +76,17 @@
           } 
              })
           }
+
+        })
+        
+      }
           
-            
-           })
-         }
+
       for(let j = 0;j<botonEdit.length;j++){
         botonEdit[j].addEventListener('click',function(){
         let id = botonEdit[j].value
         let link = document.createElement("a")
-        link.setAttribute("href",`editarProfesores/${id}`)
+        link.setAttribute("href",`editarEventos/${id}`)
         link.click()
         console.log("Me termine de ejecutar")
         })

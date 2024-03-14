@@ -5,12 +5,64 @@
     
     <button class="btn btn-success" type="submit">Ingresar</button>
   </form>
+  <form action="/tablas/logout" method="post">
+    <button type="submit" class="btn btn-danger mx-2">Logout</button>
+  </form>
+
 <a href="/tablas/registrarse" class="btn btn-success">Registrate</a>
 </div>
 </div>
 </nav>
-<div class="container">
-    <div class="col-8">
-        <a href="/tablas/profesores" class="btn btn-sm btn-outline-dark">Tabla Profesores</a>
+<div class="container d-flex justify-content-center align-items-center h-25 text-center">
+    <div class="col-12 background h-50 d-flex  justify-content-center ">
+      
+        <a href="/tablas/profesores" class="btn btn-sm btn-primary m-2 w-25 h-25 d-flex justify-content-center align-items-center ">Tabla Profesores</a>
+      
+      
+        <a href="/tablas/materias" class="btn btn-sm btn-primary m-2 w-25 h-25 d-flex justify-content-center align-items-center">Tabla Materias</a>
+    
+      
+        <a href="/tablas/actividades" class="btn btn-sm btn-primary m-2 w-25 h-25 d-flex justify-content-center align-items-center">Tabla Actividades</a>
+      
+  
+        <a href="/tablas/secciones" class="btn btn-sm btn-primary m-2 w-25 h-25 d-flex justify-content-center align-items-center ">Tabla Secciones</a>
+      
+      
+        <a href="/tablas/eventos" class="btn btn-sm btn-primary m-2 w-25 h-25 d-flex justify-content-center align-items-center">Tabla Eventos</a>
+
     </div>
 </div>
+<div class="container-lg ">
+  <div class="row d-flex justify-content-center ">
+    <div class="col">
+      <table class="table table-light table-striped table-hover table-bordered text-center">
+        <thead class="table-secondary" >
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Profesor</th>
+            <th scope="col">Materia</th>
+            <th scope="col">Seccion</th>
+            <th scope="col">Actividad</th>
+            <th scope="col">Fecha de la Actividad</th>
+         
+          </tr>
+        </thead>
+        <tbody>
+            <% resultados.forEach(actividades_fecha => { %>
+                <tr>
+                    <th scope="row"><%= actividades_fecha.id %></th>
+                    <td><%=  actividades_fecha.profesor%></td>
+                    <td><%=  actividades_fecha.materia%></td>
+                    <td><%=  actividades_fecha.seccion%></td>
+                    <td><%=  actividades_fecha.nombreActividad%></td>
+                    <td><%=  actividades_fecha.fechaActividad%></td>
+                    
+                  </tr>
+           <% }) %>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>                                                          
