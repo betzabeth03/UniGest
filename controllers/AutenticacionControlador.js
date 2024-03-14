@@ -1,29 +1,28 @@
 const AutenticarModelos = require('../models/AutenticacionModelos')
 class AutenticarControlador{
     registrarse(userDatos){
-        return new Promise((resolve,reject)=>{
+        return new Promise((resolve, reject) => {
             AutenticarModelos.registrarse(userDatos)
-            .then(() => {
-                resolve()
-            })
-            .catch((error) => {
-                reject(error)
-            });
-        });
+                .then((resultados) => {
+                    resolve(resultados)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+        })
     }
-
+   
     login(userDatos){
-        return new Promise((resolve,reject)=>{
+        return new Promise((resolve, reject) => {
             AutenticarModelos.login(userDatos)
-            .then((results) => {
-                resolve(results)
-            })
-            .catch((error) => {
-                reject(error)
-            });
-        });
+                .then((resultados) => {
+                    resolve(resultados)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+        })
     }
-
     verificar(cookie){
         return new Promise((resolve, reject) => {
             AutenticarModelos.verificar(cookie)
@@ -57,5 +56,7 @@ class AutenticarControlador{
                 })
         })
     }
- }
+    }
+    
+  
 module.exports = new AutenticarControlador()

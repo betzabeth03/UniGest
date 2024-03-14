@@ -642,9 +642,16 @@ router.get("/registrarse",function(req,res,next){
 router.post("/registrarse",function(req,res,next){
   const userDatos = req.body
  Autenticar.registrarse(userDatos)
- .then((resultados)=>{
-  console.log(resultados)
-  res.render("tablas",{direccion: "/tablas/relaciones"})
+ .then(()=>{
+  RelacionesControladores.profesores_materias_secciones_actividades()
+  .then((results)=>{
+    res.render("tablas", {
+      resultados: results,
+      direccion : "/tablas/relaciones"
+    }
+  )
+  })
+  
  })
  .catch((e)=>{
   console.error(e)
