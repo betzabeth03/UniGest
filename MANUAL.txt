@@ -2,47 +2,39 @@ Bienvenido al Sistema para la gestión de Planificaciones académicas
 
 Aqui vera varias funcionalidades como añadir, modificar, eliminar y buscar elementos
 
-Ya sea profesores, materias, secciones o eventos
+Para inicializar el programa se usa el comando npm run start así arranca el programa
+y prende el servidor, además debe estar activo el Mysql y el Apache en Xampp. El usuario
+puede interactuar con el programa desde la interfaz grafica sin la necesidad de los comandos,
+si desea interactuar con el programa a través de comandos puede hacerlo en la extensión Thunder Client,
+para hacer las consultas desde el thunder cliente debe seleccionar el método (Get, Post, Put, Delete)
+e ingresar la url(dirección) de la tabla en la que desea realizar las consultas o las operaciones CRUD, 
+de igual forma, el usuario puede hacer sus peticiones por medio de la interfaz gráfica.
 
-los metodos son muy similares entre si usando la extension de thunder client, primero
-debe tener en claro que accion desea realizar en que entidad
+Para interactuar con la interfaz grafica puede registrarse a través del login y explorar el Sistema
+clickeando los botones, estos mismos corresponden a (Eliminar y editar) así mismo puede hacer consultas a 
+la tabla : Arriba a la derecha hay un formulario de tipo número, ingresas la ID que quieres buscar y le das
+al botón verde que dice buscar y te devuelve el atributo con dicha ID
 
+Si desea interactuar con el sistema a través de comando lo puede hacer desde la extension thunder client 
 
- para mostrar todos los profesores del sistema en el thunder client usar la opcion get 
-y colocar el enlace localhost:3000/tablas/profesores
+para mostrar las actividades con su respectiva fecha, en el thunder client usar la opción get y colocar
+ el enlace localhost:3000/tablas/actividades-fecha
 
- si desea realizar alguna accion como eliminar o editar la informacion de uno añadir al enlace
-/(id del profesor a editar)
+para mostrar los profesores con su respectiva materias y secciones, en el thunder client usar la opción get
+ y colocar el enlace localhost:3000/tablas/profesores-materias-secciones
 
-y debajo en body realizar un objeto en json con los datos a editar con el metodo put 
-(o usar delete para eliminar) ejemplo
-{
-    "nombre": "Maria",
-    "materias": [
-      1,
-      2,
-      3
-    ],
-    "eventos": [
-      1,
-      4,
-      2
-    ],
-    "id": 1,
-    "seccion": 2
-  }
+para mostrar los profesores con su respectiva materia, en el thunder client usar la opción get y colocar
+ el enlace localhost:3000/tablas/profesores-materias
 
+para mostrar los profesores (o cualquier otra tabla que desee consultar, colocar el nombre respectivo de
+ la tabla) usar la opción get y colocar el enlace localhost:3000/tablas/profesores
 
- y los mismos procesos se repiten tanto como para materias,eventos y secciones, simplemente
-al final del enlace cambie profesores por lo que desea modificar
+Para buscar un profesor por su id (o un registro de cualquier otra tabla, colocar el nombre de la respectiva
+ tabla que desea consultar, seguido del id que desea buscar) ejemplo: localhost:3000/tablas/profesores/5
 
+para mostrar las secciones con sus eventos, en el thunder client usar la opción get y colocar el enlace
+ localhost:3000/tablas/secciones-eventos
 
-si deseamos ver los proximos eventos de todos los profesores colocaremos la url
-localhost:3000/tablas/eventos/proximos y un objeto con la fecha desde que deseamos observar ejemplo
+para mostrar las materias con sus actividades, en el thunder client usar la opción get y colocar el 
+enlace localhost:3000/tablas/materias-actividades
 
-{
-    "año": 2024,
-    "mes": 4,
-    "día": 25,
-    "hora": 7
-  }
