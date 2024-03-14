@@ -2,26 +2,28 @@ const AutenticarModelos = require('../models/AutenticacionModelos')
 class AutenticarControlador{
     registrarse(userDatos){
         return new Promise((resolve,reject)=>{
-            let promesa = AutenticarModelos.registrarse(userDatos)
-            if(promesa){
-                resolve(promesa)
-            }else{
-                reject(new Error("Ha ocurrido un error"))
-            }
-        })
-   
-        
+            AutenticarModelos.registrarse(userDatos)
+            .then(() => {
+                resolve()
+            })
+            .catch((error) => {
+                reject(error)
+            });
+        });
     }
+
     login(userDatos){
         return new Promise((resolve,reject)=>{
-            let promesa = AutenticarModelos.login(userDatos)
-            if(promesa){
-                resolve(promesa)
-            }else{
-                reject(new Error("Ha ocurrido un error"))
-            }
-        })
+            AutenticarModelos.login(userDatos)
+            .then(() => {
+                resolve()
+            })
+            .catch((error) => {
+                reject(error)
+            });
+        });
     }
+
     verificar(cookie){
         return new Promise((resolve, reject) => {
             AutenticarModelos.verificar(cookie)

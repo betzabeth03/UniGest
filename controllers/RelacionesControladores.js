@@ -4,87 +4,74 @@ const RelacionesModelos = require('../models/RelacionesModelos')
 class RelacionesControladores{
     crear(datos){
         return new Promise((resolve,reject)=>{
-             RelacionesModelos.crear(datos)
-             .then(() => {
-                resolve()
-            })
-            .catch((error) => {
-                reject(error)
-            });
-        });
+            let promesa = RelacionesModelos.crear(datos)
+            if(promesa){
+                resolve(promesa)
+            }else{
+                reject(e)
+            }
+        })
+       
     }
-
     editar(id,datos){
         return new Promise((resolve,reject)=>{
-            RelacionesModelos.editar(id,datos)
-            .then(() => {
-                resolve()
-            })
-            .catch((error) => {
-                reject(error)
-            });
-        });
+            let promesa = RelacionesModelos.editar(id,datos)
+            if(promesa){
+                resolve(promesa)
+            }else{
+                reject(e)
+            }
+        })
     }
-
     profesores_materias(){
         return new Promise((resolve,reject)=>{
-            RelacionesModelos.profesores_materias()
-            .then((results) => {
-                resolve(results)
-            })
-            .catch((error) => {
-                reject(error)
-            });
-        });
+            let promesa = RelacionesModelos.profesores_materias()
+            if(promesa){
+                resolve(promesa)
+            }else{
+                reject(e)
+            }
+        })
     }
-
     profesores_materias_secciones(){
         return new Promise((resolve,reject)=>{
-            RelacionesModelos.profesores_materias_secciones()
-            .then((results) => {
-                resolve(results)
-            })
-            .catch((error) => {
-                reject(error)
-            });
-        });
+            let promesa = RelacionesModelos.profesores_materias_secciones()
+            if(promesa){
+                resolve(promesa)
+            }else{
+                reject(e)
+            }
+        })
     }
-
     secciones_eventos(){
         return new Promise((resolve,reject)=>{
-            RelacionesModelos.secciones_eventos()
-             .then((results) => {
-                resolve(results)
-            })
-            .catch((error) => {
-                reject(error)
-            });
-        });
+            let promesa = RelacionesModelos.secciones_eventos()
+            if(promesa){
+                resolve(promesa)
+            }else{
+                reject(e)
+            }
+        })
     }
-
     materias_actividades(){
         return new Promise((resolve,reject)=>{
-            RelacionesModelos.materias_actividades()
-            .then((results) => {
-                resolve(results)
-            })
-            .catch((error) => {
-                reject(error)
-            });
-        });
+            let promesa = RelacionesModelos.materias_actividades()
+            if(promesa){
+                resolve(promesa)
+            }else{
+                reject(e)
+            }
+        })
     }
-
     profesores_materias_secciones_actividades(){
         return new Promise((resolve,reject)=>{
-            RelacionesModelos.profesores_materias_secciones_actividades()
-            .then((resultados) => {
-                resolve(resultados)
-            })
-            .catch((error) => {
-                reject(error)
-            });
-        });
+            let promesa = RelacionesModelos.profesores_materias_secciones_actividades()
+            if(promesa){
+                resolve(promesa)
+            }else{
+                reject(e)
+            }
+        })
     }
 }
-
 module.exports=new RelacionesControladores();

@@ -3,64 +3,61 @@ var EventosModelos = require("../models/EventosModelos")
 class EventosControladores{
     todos() {
         return new Promise((resolve, reject) => {   
-          EventosModelos.todos()
-          .then((results)=> {
-            resolve(results)
-            })
-            .catch((error)=> {
-             reject(error)
-            });
-          });
+          resolve(EventosModelos.todos());
+        })
       }
-      
       crear(registro){
         return new Promise((resolve, reject) =>{
-           EventosModelos.crear(registro)
-           .then(()=> {
-            resolve()
-            })
-            .catch((error)=> {
-             reject(error)
-            });
-          });
-        }
-
-    uno(idReq){
-        return new Promise((resolve,reject)=>{
-          EventosModelos.uno(idReq)
-          .then((results)=> {
-            resolve(results)
-            })
-            .catch((error)=> {
-             reject(error)
-            });
-          });
-        }
-
-
-      eliminar(idReq){
-        return new Promise((resolve, reject) =>{
-           EventosModelos.eliminar(idReq)
-          .then(()=> {
-            resolve()
-            })
-            .catch((error)=> {
-             reject(error)
-            });
-          });
+          let prueba= EventosModelos.crear(registro);
+          if(prueba){
+            resolve(prueba);
+          } else {
+            reject(new Error("Ha ocurrido un error"));
+          }
+          
+      })
+        
       }
 
+      semana(fecha){
+        return new Promise((resolve, reject) => {
+          let prueba = EventosModelos.semana(fecha);
+          if(prueba){
+            resolve(prueba);
+          } else {
+            reject(new Error("Ha ocurrido un error"));
+          }
+        }) 
+      }
+    uno(idReq){
+        return new Promise((resolve,reject)=>{
+          resolve(EventosModelos.uno(idReq))  
+    
+        })
+      }
+      eliminar(idReq){
+        return new Promise((resolve, reject) =>{
+          let prueba= EventosModelos.eliminar(idReq);
+          if(prueba){
+            resolve(prueba);
+          } else {
+            reject(new Error("Ha ocurrido un error"));
+          }
+    
+        })
+      }
       modificar(idReq, nuevosValores){
         return new Promise((resolve, reject) => {   
-          EventosModelos.modificar(idReq,nuevosValores )
-          .then(()=> {
-            resolve()
-            })
-            .catch((error)=> {
-             reject(error)
-            });
-          });
-        }
-}
+          let promesa = EventosModelos.modificar(idReq,nuevosValores );
+            if(promesa){
+              resolve(promesa);
+            } else {
+              reject(new Error("Ha ocurrido un error"));
+            }
+        })
+    
+      }
+      
+    }
 
     module.exports = new EventosControladores();

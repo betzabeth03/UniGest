@@ -3,64 +3,60 @@ var ProfesoresModelos = require("../models/ProfesoresModelos");
 class ProfesoresControladores{
   todos() {
     return new Promise((resolve, reject) => {   
-     ProfesoresModelos.todos()
-     .then((results) => {
-      resolve(results)
-      })
-        .catch((error) => {
-         reject(error)
-      });
-    });
+     let promesa = ProfesoresModelos.todos();
+        if(promesa){
+          resolve(promesa);
+        } else {
+          reject(new Error("Ha ocurrido un error"));
+        }
+    })
   }
-
   uno(idReq) {
     return new Promise((resolve,reject)=>{
-        ProfesoresModelos.uno(idReq)
-        .then((results) => {
-          resolve(results)
-      })
-      .catch((error) => {
-          reject(error)
-      });
-    });  
-  }
+      let promesa= ProfesoresModelos.uno(idReq);
+        if(promesa){
+          resolve(promesa);
+        } else {
+          reject(new Error("Ha ocurrido un error"));
+        }
 
+    })
+  }
   crear(usuario){
     return new Promise((resolve, reject) =>{
-        ProfesoresModelos.crear(usuario)
-        .then(() => {
-          resolve()
-      })
-      .catch((error) => {
-          reject(error)
-      });
-    });
+        let promesa= ProfesoresModelos.crear(usuario);
+        if(promesa){
+          resolve(promesa);
+        } else {
+          reject(new Error("Ha ocurrido un error"));
+        }
+      
+  })
+    
   }
-
   modificar(idReq, nuevosValores){
     return new Promise((resolve, reject) => {   
-      ProfesoresModelos.modificar(idReq,nuevosValores)
-      .then(() => {
-        resolve()
-      })
-      .catch((error) => {
-        reject(error)
-      });
-    });
-  }
+      let promesa = ProfesoresModelos.modificar(idReq,nuevosValores);
+        if(promesa){
+          resolve(promesa);
+        } else {
+          reject(new Error("Ha ocurrido un error"));
+        }
+    })
 
+  }
   eliminar(idElemento){
     return new Promise((resolve, reject) =>{
-      ProfesoresModelos.eliminar(idElemento)
-      .then(() => {
-        resolve()
-      })
-      .catch((error) => {
-        reject(error)
-      });
-    });
+      let promesa= ProfesoresModelos.eliminar(idElemento);
+        if(promesa){
+          resolve(promesa);
+        } else {
+          reject(new Error("Ha ocurrido un error"));
+        }
+
+    })
   }
-}
+  }
 
 
 module.exports = new ProfesoresControladores();
