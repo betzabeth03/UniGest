@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const bcryptjs = require('bcryptjs')
 const {promisify} = require('util')
 const cookieParser = require('cookie-parser')
-const JWT_SECRETO = "shhhhhh"
+
 
 class AutenticarModelos{
          registrarse(userDatos){
@@ -47,7 +47,7 @@ class AutenticarModelos{
                         if (comparacion) {
                             const id = results[0].id
                             const tipo = results[0].tipo
-                            const token = jwt.sign({ id: id,tipo:tipo }, JWT_SECRETO);
+                            const token = jwt.sign({ id: id,tipo:tipo }, process.env.JWT_SECRETO);
                             resolve(token)
                         } else {
                             reject(new Error("Contraseña incorrecta"))
@@ -64,7 +64,7 @@ class AutenticarModelos{
     return new Promise((resolve, reject) => {
         if (cookie) {
             try {
-                const decodificado = jwt.verify(cookie, JWT_SECRETO);
+                const decodificado = jwt.verify(cookie, process.env.JWT_SECRETO);
                 let consulta = `SELECT * FROM usuarios WHERE id = ?`;
                 conexion.query(consulta, [decodificado.id], function(error, results, fields) {
                     if (error) {
@@ -89,7 +89,7 @@ verificarDirector(cookie){
     return new Promise((resolve, reject) => {
         if (cookie) {
             try {
-                const decodificado = jwt.verify(cookie, JWT_SECRETO);
+                const decodificado = jwt.verify(cookie, process.env.JWT_SECRETO);
                 let consulta = `SELECT * FROM usuarios WHERE id = ?`;
                 conexion.query(consulta, [decodificado.id], function(error, results, fields) {
                     if (error) {

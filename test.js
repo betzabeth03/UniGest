@@ -1,2 +1,1 @@
-const prueba = process.env.hola
-console.log(prueba)
+const dotenv = require('dotenv')

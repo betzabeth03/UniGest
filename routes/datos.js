@@ -659,7 +659,8 @@ router.post("/",function(req,res,next){
     res.render("tablas", {
       resultados: results,
       direccion : "/tablas/relaciones"
-    });
+    }
+  )
   })
   .catch((e)=>{
     console.error(e)
