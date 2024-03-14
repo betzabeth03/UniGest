@@ -20,6 +20,16 @@
 </div>
 </nav>
 <div class="container-lg ">
+  <div class="row d-flex justify-content-center">
+    <a href="/tablas/profesores-materias" class="btn btn-sm btn-primary m-2 w-25 h-50 d-flex justify-content-center align-items-center">Tabla Profesores-Materias</a>
+    <a href="/tablas/materias-actividades" class="btn btn-sm btn-primary m-2 w-25 h-50 d-flex justify-content-center align-items-center">Tabla Actividades-Materias</a>
+    <a href="/tablas/profesores-materias-secciones" class="btn btn-sm btn-primary m-2 w-25 h-50 d-flex justify-content-center align-items-center">Tabla Profesores-Secciones-Materias</a>
+
+
+  </div>
+  <div class="row d-flex justify-content-center">
+    <a href="/tablas/secciones-eventos" class="btn btn-sm btn-primary m-2 w-25 h-50 d-flex justify-content-center align-items-center">Tabla Secciones Eventos</a>
+  </div>
     <div class="row d-flex justify-content-center ">
       <div class="col">
         <table class="table table-light table-striped table-hover table-bordered text-center">
@@ -45,7 +55,7 @@
                       <td><%=  actividades_fecha.nombreActividad%></td>
                       <td><%=  actividades_fecha.fechaActividad%></td>
                       <td class="d-flex justify-content-evenly "> <button value="<%= actividades_fecha.id %>"  class="btn btn-danger botonEliminar btn-sm w-25">Eliminar Elemento</button>
-                        <button value="<%= actividades_fecha.id %>"  class="btn btn-primary botonEdit btn-sm w-25 h-25"  >Cambiar Elemento</button></td>
+                        <button value="<%= actividades_fecha.id %>"  class="btn btn-primary botonEdit btn-sm w-25 h-50"  >Cambiar Elemento</button></td>
                       
                     </tr>
              <% }) %>

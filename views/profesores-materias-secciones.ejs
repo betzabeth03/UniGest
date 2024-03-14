@@ -1,12 +1,13 @@
-<<<<<<< HEAD
 <%- include('./parciales/cabecera', {"direccion": direccion}) %>
+</div>
+</div>
+</nav>
 <div class="container-lg ">
     <div class="row d-flex justify-content-center ">
       <div class="col">
         <table class="table table-light table-striped table-hover table-bordered text-center">
           <thead class="table-secondary" >
             <tr>
-              <th scope="col">#</th>
               <th scope="col">Profesor</th>
               <th scope="col">Materia</th>
               <th scope="col">Seccion</th>
@@ -15,7 +16,6 @@
           <tbody>
               <% resultados.forEach(profesor_materia => { %>
                   <tr>
-                      <th scope="row"><%= profesor_materia_seccion.id %></th>
                       <td><%=  profesor_materia.profesor%></td>
                       <td><%=  profesor_materia.materia%></td>
                       <td><%=  profesor_materia.seccion%></td>
@@ -26,33 +26,4 @@
         </table>
       </div>
     </div>
-=======
-<%- include('./parciales/cabecera', {"direccion": direccion}) %>
-<div class="container-lg ">
-    <div class="row d-flex justify-content-center ">
-      <div class="col">
-        <table class="table table-light table-striped table-hover table-bordered text-center">
-          <thead class="table-secondary" >
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Profesor</th>
-              <th scope="col">Materia</th>
-              <th scope="col">Seccion</th>
-            </tr>
-          </thead>
-          <tbody>
-              <% resultados.forEach(profesor_materia => { %>
-                  <tr>
-                      <th scope="row"><%= profesor_materia_seccion.id %></th>
-                      <td><%=  profesor_materia.profesor%></td>
-                      <td><%=  profesor_materia.materia%></td>
-                      <td><%=  profesor_materia.seccion%></td>
-                    </tr>
-             <% }) %>
-            
-          </tbody>
-        </table>
-      </div>
-    </div>
->>>>>>> 2784957e6f98cbb209fb69dc0dedf65bace4f20e
 </div>
