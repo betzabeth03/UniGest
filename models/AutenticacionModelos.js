@@ -1,8 +1,7 @@
 const conexion = require('../conexion')
 const jwt = require('jsonwebtoken')
 const bcryptjs = require('bcryptjs')
-const {promisify} = require('util')
-const cookieParser = require('cookie-parser')
+
 
 
 class AutenticarModelos{
