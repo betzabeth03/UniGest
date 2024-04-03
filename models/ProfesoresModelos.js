@@ -17,7 +17,7 @@ class ProfesoresModelos{
   }
   uno(idReq) {
     
-     return new Promis((resolve,reject)=>{
+     return new Promise((resolve,reject)=>{
       let consulta = `SELECT  * FROM profesores WHERE id=${idReq}`
       conexion.query(consulta,function(error,results,fields){
         if(error){
