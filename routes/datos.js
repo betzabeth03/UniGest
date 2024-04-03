@@ -9,6 +9,7 @@ const RelacionesControladores = require('../controllers/RelacionesControladores'
 const Autenticar = require('../controllers/AutenticacionControlador')
 const AutenticacionControlador = require('../controllers/AutenticacionControlador');
 const e = require('express');
+const jwt = require('jsonwebtoken')
 
 /* GET users listing. */
 router.get('/actividades', function(req, res, next) {
@@ -342,7 +343,7 @@ router.put('/profesores/:id', function(req, res, next) {
 
   })
   .catch(()=>{
-    res.redirect(401,"/tablas",1)
+    res.redirect(401,"/tablas/401",1)
   })
   
     });
@@ -452,7 +453,7 @@ router.delete("/profesores/:id",function(req,res,next){
       res.send(resultados);  }
     )})
     .catch(()=>{
-      res.redirect(401,"/tablas",1)
+      res.redirect(500,"/tablas",1)
     })
 
   })
@@ -635,11 +636,17 @@ router.get("/editarRelaciones/:id",function(req,res,next){
   res.render("editarRelaciones",{id:req.params.id, direccion : "/tablas/relaciones"});
 })
 router.get("/",function(req,res,next){
+  let nombreUser = "Estudiante"
+  if(req.cookies.jwt){
+    const decodificado = jwt.verify(req.cookies.jwt, process.env.JWT_SECRETO);
+    nombreUser = decodificado.nombre
+  }
   RelacionesControladores.profesores_materias_secciones_actividades()
   .then((results)=>{
     res.render("tablas", {
       resultados: results,
-      direccion : "/tablas/relaciones"
+      direccion : "/tablas/relaciones",
+      nombreUser: nombreUser
     });
   })
   .catch((e)=>{
@@ -651,6 +658,10 @@ router.get("/registrarse",function(req,res,next){
 })
 router.post("/registrarse",function(req,res,next){
   const userDatos = req.body
+  if(req.cookies.jwt){
+    const decodificado = jwt.verify(req.cookies.jwt, process.env.JWT_SECRETO);
+    nombreUser = decodificado.nombre 
+    }
  Autenticar.registrarse(userDatos)
  .then(()=>{
   
@@ -662,7 +673,8 @@ router.post("/registrarse",function(req,res,next){
       req.body = {}
       res.render("tablas", {
         resultados: results,
-        direccion : "/tablas/relaciones"
+        direccion : "/tablas/relaciones",
+        nombreUser:nombreUser
       }
     )
     })
@@ -679,6 +691,11 @@ router.post("/registrarse",function(req,res,next){
 })
 })
 router.post("/",function(req,res,next){
+  
+  if(req.cookies.jwt){
+    const decodificado = jwt.verify(req.cookies.jwt, process.env.JWT_SECRETO);
+    nombreUser = decodificado.nombre
+   }
   AutenticacionControlador.login(req.body)
 .then((resultados)=>{
   res.cookie('jwt',resultados)
@@ -686,7 +703,8 @@ router.post("/",function(req,res,next){
   .then((results)=>{
     res.render("tablas", {
       resultados: results,
-      direccion : "/tablas/relaciones"
+      direccion : "/tablas/relaciones",
+      nombreUser:nombreUser
     }
   )
   })
@@ -695,7 +713,7 @@ router.post("/",function(req,res,next){
   })
 })
 .catch((error)=>{
-  res.redirect(500,"/tablas",1)
+  res.redirect("/tablas/500")
 })
 })
 router.post("/logout",function(req,res,next){

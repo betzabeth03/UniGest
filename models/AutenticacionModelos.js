@@ -46,7 +46,8 @@ class AutenticarModelos{
                         if (comparacion) {
                             const id = results[0].id
                             const tipo = results[0].tipo
-                            const token = jwt.sign({ id: id,tipo:tipo }, process.env.JWT_SECRETO);
+                            const nombre = results[0].nombre
+                            const token = jwt.sign({ id: id,tipo:tipo,nombre:nombre }, process.env.JWT_SECRETO);
                             resolve(token)
                         } else {
                             reject(new Error("Contraseña incorrecta"))
