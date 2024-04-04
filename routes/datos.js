@@ -544,7 +544,7 @@ router.post("/relaciones",function(req,res,next){
       .catch((e)=>{ console.error(e)})
     })
     .catch((e)=>{
-      res.redirect(401,"/tablas",1)
+      res.redirect(500,"/tablas",1)
     })
 
   })
