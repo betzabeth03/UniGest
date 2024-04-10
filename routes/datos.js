@@ -537,12 +537,35 @@ router.post("/relaciones",function(req,res,next){
     const datos = req.body
     RelacionesControladores.crear(datos)
     .then(()=>{
-      RelacionesControladores.profesores_materias_secciones_actividades()
-      .then((resultados)=>{
-        res.render("relaciones",{resultados : resultados, direccion: "/tablas/relaciones"})
-      })
-      .catch((e)=>{ console.error(e)})
-    })
+      ProfesoresControladores.todos()
+      .then((resultadosProf)=>{
+        MateriasControladores.todos()
+        .then( (resultadosMat)=> {
+          SeccionesControladores.todos()
+          .then( (resultadosSec)=>{
+            ActividadesControladores.todos()
+            .then( (resultadosAct)=>{
+              EventosControladores.todos()
+              .then((resultadosEve)=>{
+                RelacionesControladores.profesores_materias_secciones_actividades()
+                .then((results)=>{
+                  res.render("relaciones", {
+                    resultados: results,
+                    direccion : "/tablas/relaciones",
+                    resultadosProf:resultadosProf,
+                    resultadosMat:resultadosMat,
+                    resultadosAct:resultadosAct,
+                    resultadosSec:resultadosSec,
+                    resultadosEve:resultadosEve
+                  })
+                })
+                .catch((e)=>{
+                  console.error(e)
+                })
+              })
+              })
+      })})
+    })})
     .catch((e)=>{
       res.redirect(500,"/tablas",1)
     })
@@ -600,17 +623,36 @@ router.get("/materias-actividades",function(req,res,next){
   })
 })
 router.get("/relaciones",function(req,res,next){
-  RelacionesControladores.profesores_materias_secciones_actividades()
-  .then((results)=>{
-    res.render("relaciones", {
-      resultados: results,
-      direccion : "/tablas/relaciones"
-    });
-  })
-  .catch((e)=>{
-    console.error(e)
-  })
-})
+  ProfesoresControladores.todos()
+  .then((resultadosProf)=>{
+    MateriasControladores.todos()
+    .then( (resultadosMat)=> {
+      SeccionesControladores.todos()
+      .then( (resultadosSec)=>{
+        ActividadesControladores.todos()
+        .then( (resultadosAct)=>{
+          EventosControladores.todos()
+          .then((resultadosEve)=>{
+            RelacionesControladores.profesores_materias_secciones_actividades()
+            .then((results)=>{
+              res.render("relaciones", {
+                resultados: results,
+                direccion : "/tablas/relaciones",
+                resultadosProf:resultadosProf,
+                resultadosMat:resultadosMat,
+                resultadosAct:resultadosAct,
+                resultadosSec:resultadosSec,
+                resultadosEve:resultadosEve
+              })
+            })
+            .catch((e)=>{
+              console.error(e)
+            })
+          })
+          })
+  })})
+})})
+  
 
 //Editar 
 router.get("/editarProfesores/:id",function(req,res,next){

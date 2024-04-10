@@ -87,7 +87,7 @@ class RelacionesModelos{
     }
     profesores_materias_secciones_actividades(){
         return new Promise((resolve,reject)=>{
-            let consulta = 'SELECT profesores.nombre AS profesor, materias.nombre AS materia, secciones.nombre AS seccion, actividades.nombre AS nombreActividad, DATE_ADD(secciones.periodoAcademico, interval actividades.semana week) AS fechaActividad, relaciones.id AS id FROM profesores JOIN relaciones ON profesores.id = relaciones.id_profesor JOIN materias ON relaciones.id_materia = materias.id JOIN secciones ON relaciones.id_seccion = secciones.id JOIN actividades ON relaciones.id_actividades = actividades.id '
+            let consulta = 'SELECT profesores.nombre AS profesor, materias.nombre AS materia, secciones.nombre AS seccion, actividades.nombre AS nombreActividad, DATE_ADD(secciones.periodoAcademico, interval actividades.semana week) AS fechaActividad, relaciones.id AS id, relaciones.id_profesor AS id_profesor, relaciones.id_materia AS id_materia, relaciones.id_seccion AS id_seccion, relaciones.id_actividades AS id_actividades, relaciones.id_eventos AS id_eventos FROM profesores JOIN relaciones ON profesores.id = relaciones.id_profesor JOIN materias ON relaciones.id_materia = materias.id JOIN secciones ON relaciones.id_seccion = secciones.id JOIN actividades ON relaciones.id_actividades = actividades.id '
             conexion.query(consulta,function(error,results,fields){
                 if(error){
                     reject(error)
