@@ -721,11 +721,11 @@ router.post("/registrarse",function(req,res,next){
     )
     })
     .catch(()=>{
-      res.redirect(500,"/tablas",1)
+      res.redirect("/tablas")
     })
   })
   .catch(()=>{
-    res.redirect(500,"/tablas",1)
+    res.redirect("/tablas")
   })
  })
  .catch(()=>{
@@ -751,7 +751,7 @@ router.post("/",function(req,res,next){
   )
   })
   .catch((e)=>{
-    res.redirect(500,"/tablas",1)
+    res.redirect("/tablas")
   })
 })
 .catch((error)=>{
