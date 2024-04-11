@@ -774,4 +774,19 @@ router.get("/401",function(req,res){
 router.get("/500",function(req,res){
   res.render("500")
 })
+router.delete("/relaciones/:id",function(req,res,next){
+  AutenticacionControlador.verificarDirector(req.cookies.jwt)
+.then(()=>{
+  RelacionesControladores.eliminar(req.params.id)
+  .then(()=>{
+  location.reload()
+})
+.catch(()=>{
+  res.redirect("/tablas/500")
+})
+.catch(()=>{
+  res.redirect("/tablas/401")
+})
+ 
+})}) 
 module.exports = router;

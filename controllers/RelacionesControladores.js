@@ -85,6 +85,17 @@ class RelacionesControladores{
             });
         });
     }
+    eliminar(idElemento){
+        return new Promise((resolve, reject) =>{
+          RelacionesModelos.eliminar(idElemento)
+          .then(() => {
+            resolve()
+          })
+          .catch((error) => {
+            reject(error)
+          });
+        });
+      }
 }
 
 module.exports=new RelacionesControladores();

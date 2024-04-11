@@ -97,5 +97,19 @@ class RelacionesModelos{
             })
         })
     }
+    eliminar(idElemento){
+        return new Promise((resolve,reject)=>{
+            let consulta = `DELETE FROM relaciones WHERE id = ${idElemento}`
+            conexion.query(consulta,function(error,results,fields){
+              if(error){
+                reject(error)
+              }else{
+                resolve(results)
+              }
+            })
+          })
+        
+        
+    }
 }
 module.exports= new RelacionesModelos
