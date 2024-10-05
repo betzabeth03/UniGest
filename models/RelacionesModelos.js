@@ -1,4 +1,4 @@
-const conexion = require('../conexion')
+const conexion = require('../connection')
 
 class RelacionesModelos{
     crear(datos){
