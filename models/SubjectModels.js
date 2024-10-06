@@ -29,7 +29,8 @@ class SubjectsModels{
     Create(registro){
       return new Promise((resolve, reject) => {
         let nombreR = registro.nombre
-             let consult = `INSERT INTO materias (nombre, id) VALUES ('${nombreR}',"")`
+        let diaClase = registro.diaClase
+             let consult = `INSERT INTO materias (nombre,diaClase) VALUES ('${nombreR}','${diaClase}')`
              connection.query(consult,function(error,results,fields){
               if(error){
                 reject(error)

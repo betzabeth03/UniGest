@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const AutenticationControllers = require('../controllers/AutenticationControllers')
+const AutenticationControllers = require('../controllers/AutenticationControllers');
+const RelacionesModelos = require('../models/RelacionesModelos');
 
 
 
@@ -41,6 +42,14 @@ router.get("/verify/:token", function(req,res,next){
 })
 router.get("/500",(req,res,next)=>{
   res.send("Ha ocurrido un fallo en tu solicitud")
+})
+router.get("/test",function(req,res){
+  RelacionesModelos.prueba()
+  .then((result) => {
+    res.send(result)  
+  }).catch((err) => {
+    res.send(err)
+  });
 })
 
 

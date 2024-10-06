@@ -9,6 +9,8 @@ let profesoresRouter = require('./routes/ProfessorsRoutes')
 let materiasRouter = require('./routes/SubjectsRoutes')
 let seccionesRouter = require('./routes/SectionsRoutes')
 let actividadesRouter = require('./routes/ActivitiesRoutes')
+let PMSRouter = require('./routes/PMSRoutes')
+let APMSRouter = require('./routes/APMSRoutes')
 
 var app = express();
 
@@ -25,6 +27,8 @@ app.use('/profesores',profesoresRouter)
 app.use('/materias',materiasRouter)
 app.use('/secciones', seccionesRouter)
 app.use('/actividades', actividadesRouter)
+app.use('/pms', PMSRouter)
+app.use('/apms', APMSRouter)
 
 
 // catch 404 and forward to error handler

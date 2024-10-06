@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-10-2024 a las 18:42:09
+-- Tiempo de generación: 06-10-2024 a las 23:47:52
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -37,6 +37,18 @@ CREATE TABLE `actividades` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `a_p_m_s`
+--
+
+CREATE TABLE `a_p_m_s` (
+  `idActividades` int(11) NOT NULL,
+  `idPMS` int(11) NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `materias`
 --
 
@@ -61,6 +73,19 @@ CREATE TABLE `profesores` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `p_m_s`
+--
+
+CREATE TABLE `p_m_s` (
+  `idProfesor` int(11) NOT NULL,
+  `idMaterias` int(11) NOT NULL,
+  `idSecciones` int(11) NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `secciones`
 --
 
@@ -80,6 +105,7 @@ CREATE TABLE `users` (
   `name` varchar(25) NOT NULL,
   `userName` varchar(25) NOT NULL,
   `password` varchar(300) NOT NULL,
+  `rol` varchar(18) NOT NULL,
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -94,6 +120,14 @@ ALTER TABLE `actividades`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `a_p_m_s`
+--
+ALTER TABLE `a_p_m_s`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idActividades` (`idActividades`),
+  ADD KEY `idPMS` (`idPMS`);
+
+--
 -- Indices de la tabla `materias`
 --
 ALTER TABLE `materias`
@@ -104,6 +138,15 @@ ALTER TABLE `materias`
 --
 ALTER TABLE `profesores`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `p_m_s`
+--
+ALTER TABLE `p_m_s`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idProfesor` (`idProfesor`),
+  ADD KEY `idMaterias` (`idMaterias`),
+  ADD KEY `idSecciones` (`idSecciones`);
 
 --
 -- Indices de la tabla `secciones`
@@ -129,6 +172,12 @@ ALTER TABLE `actividades`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `a_p_m_s`
+--
+ALTER TABLE `a_p_m_s`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `materias`
 --
 ALTER TABLE `materias`
@@ -141,6 +190,12 @@ ALTER TABLE `profesores`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `p_m_s`
+--
+ALTER TABLE `p_m_s`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `secciones`
 --
 ALTER TABLE `secciones`
@@ -151,6 +206,25 @@ ALTER TABLE `secciones`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `a_p_m_s`
+--
+ALTER TABLE `a_p_m_s`
+  ADD CONSTRAINT `a_p_m_s_ibfk_1` FOREIGN KEY (`idPMS`) REFERENCES `p_m_s` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `a_p_m_s_ibfk_2` FOREIGN KEY (`idActividades`) REFERENCES `actividades` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `p_m_s`
+--
+ALTER TABLE `p_m_s`
+  ADD CONSTRAINT `p_m_s_ibfk_1` FOREIGN KEY (`idProfesor`) REFERENCES `profesores` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `p_m_s_ibfk_2` FOREIGN KEY (`idSecciones`) REFERENCES `secciones` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `p_m_s_ibfk_3` FOREIGN KEY (`idMaterias`) REFERENCES `materias` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
