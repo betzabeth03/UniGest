@@ -8,6 +8,9 @@ class SectionsModels{
         if(error){
          reject(error)
         }else{
+          results.forEach(Element => {
+            Element.periodoAcademico = Element.periodoAcademico.toISOString().slice(0,10).replace('T','')
+          });
           resolve(results)
         }
       })
@@ -34,6 +37,7 @@ class SectionsModels{
         let periodoAcademicoR= registro.periodoAcademico
         let periodoDate = new Date(periodoAcademicoR)
         let periodoAcademicoIso = periodoDate.toISOString().slice(0,10).replace('T','')
+        console.log(periodoAcademicoIso)
              let consult = `INSERT INTO secciones (nombre, periodoAcademico, id) VALUES ('${nombreR}', '${periodoAcademicoIso}', "")`
              connection.query(consult,function(error,results,fields){
               if(error){

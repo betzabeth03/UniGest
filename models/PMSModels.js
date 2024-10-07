@@ -4,7 +4,9 @@ class PMSModels {
   All() {
     return new Promise((resolve, reject) => {
       let consulta =
-        `SELECT profesores.nombre AS profesor, materias.nombre AS materia, secciones.nombre AS seccion FROM profesores  
+        `SELECT profesores.nombre AS profesor, materias.nombre AS materia, secciones.nombre AS seccion,
+        p_m_s.idProfesor AS idProf, p_m_s.idMaterias AS idMat, p_m_s.idSecciones AS idSec
+        FROM profesores
         JOIN p_m_s ON profesores.id = p_m_s.idProfesor 
         JOIN materias ON p_m_s.idMaterias = materias.id 
         JOIN secciones ON p_m_s.idSecciones = secciones.id`;
