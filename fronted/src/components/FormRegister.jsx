@@ -13,9 +13,9 @@ export default function FormRegister() {
             rol:e.target.puesto.value,
             registerpass: e.target.registerpass.value
         }
-        await axios.post('http://localhost:8000/register',data)
+        await axios.post('http://localhost:3000/register',data)
        .then(async() => {
-        await axios.post('http://localhost:8000/login',data)
+        await axios.post('http://localhost:3000/login',data)
         .then((result) => {
          const token = result.data
          Cookies.set('jwt', token, { expires: 1 })

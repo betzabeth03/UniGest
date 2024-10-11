@@ -11,12 +11,11 @@ export default function Header({active}) {
             </div>
             <ul className='links'>
                 <li><a href="s" className='link'>Planificación</a></li>
-                <li><a href="Login" className='link'>Iniciar Sesión</a></li>
-                <li><a href="RegisterUser" className='link'>Registrarse</a></li>
+               {active?null:<li><a href="RegisterUser" className='link'>Registrarse</a></li>} 
                 
                 { active ? <li><a href="s" className='link'>Actividades</a></li> : null }
                 { active ? <li><a href="s" className='link'>Inicio</a></li> : null}
-                { active ? <li><a href="s" className='link'>Cerrar Sesión</a></li> : null }
+                { active ? <li><a href="s" className='link'>Cerrar Sesión</a></li> :<li><a href="Login" className='link'>Iniciar Sesión</a></li>}
             </ul>
         </header>
     </div>

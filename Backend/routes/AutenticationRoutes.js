@@ -35,10 +35,10 @@ router.get("/logout", function (req, res, next) {
 router.get("/verify/:token", function (req, res, next) {
   const token = req.params.token;
   AutenticationControllers.Verify(token)
-    .then((userName) => {
+    .then((rol) => {
       res
         .status(200)
-        .json({ result: "Usuario Autenticado", userName: userName });
+        .json({ result: "Usuario Autenticado", rol: rol });
     })
     .catch((e) => {
       res
