@@ -1,0 +1,63 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+footer{
+    background-color: #F0F0F0;
+    display: flex;
+    padding: 2vw;
+    align-items: center;
+}
+
+.logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 50%;
+    gap: 1vw;
+}
+
+.textFooter{
+    text-align: left;
+}
+
+.textFooter > h1{
+    font-size: 32px;
+}
+
+.textFooter > p{
+    font-size: 24px;
+}
+
+.Collaborators{
+    display: flex; 
+    width: 50%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2vw;
+}
+
+.github{
+    display: flex;
+    flex-direction: row;
+}
+
+.name, .github{
+    text-align: left;
+}
+
+.name, .github, .logoGit{
+    display: flex;
+    flex-direction: column;
+    gap: .5vw;
+    font-size: 20px;
+
+}
+
+.github > a {
+    color: black;
+    text-decoration: none;
+}

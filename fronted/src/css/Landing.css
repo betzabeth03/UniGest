@@ -1,0 +1,103 @@
+@font-face {
+    font-family: mont;
+    src: url('../fonts/Montserrat-Regular.otf');
+}
+
+@font-face {
+    font-family: mont-ExtraBold;
+    src: url('../fonts/Montserrat-ExtraBold.otf');
+}
+
+@font-face {
+    font-family: mont-Bold;
+    src: url('../fonts/Montserrat-Bold.otf');
+}
+
+@font-face {
+    font-family: mont-light;
+    src: url('../fonts/Montserrat-Light.otf');
+}
+
+*{
+    font-family: mont;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.landing{
+    height: 90vh;
+    background: url('../assets/fondoLanding.png');
+    background-repeat: no-repeat;
+    background-size: 100vw;
+    background-position-x: center;
+    background-position-y: bottom;
+    
+}
+
+
+.mainLanding{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1vw 10vw;
+    gap: 7vw;
+}
+
+.textLanding{
+    text-align: justify;
+    width: 60%;
+}
+
+.textLanding > h1 {
+    font-family: mont-Bold;
+    font-size: 7.5vw;
+    text-shadow:  1px 1px 2px rgba(0, 0, 0, 0.527),
+    0 0 1em rgba(0, 0, 0, 0.30),
+    0 0 0.2em rgba(0, 0, 0, 0.30);
+}
+
+.textLanding > p {
+    width: 70%;
+    padding: .5vw;
+    background-color: rgba(255, 255, 255, 0.42);
+    font-size: 30px;
+
+}
+
+.description{
+    display: flex;
+    flex-direction: row;
+    padding: 1vw;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.90) ;
+}
+
+.textRegister, .textDescription{
+    color: white;
+    text-align: justify;
+    padding: 1vw;
+}
+.textDescription{
+    width: 50%;
+}
+
+.textRegister{
+    width: 38%;
+    padding: 1vw;
+}
+
+.textRegister >h1{
+    font-family: mont-ExtraBold;
+    font-size: 64px;
+}
+
+.textRegister > p{
+    text-align: left;
+    font-size: 50px;
+}
+
+.textDescription > p{
+    font-size: 36px;
+    font-family: mont-light;
+}

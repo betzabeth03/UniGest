@@ -1,5 +1,0 @@
-JWT_SECRETO= #Nombre DEl Secreto
-BD_HOST= #Direccion del servidor de BD 
-BD_USER= #NOmbre Del Usuario De LA BD
-BD_PASSWORD= #Contraseña De LA BD
-BD_NAME= # Nombre De LA BD
