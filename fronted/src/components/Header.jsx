@@ -10,13 +10,13 @@ export default function Header({active}) {
                 <img src={img} alt="logoImg" />
             </div>
             <ul className='links'>
-                <li><a href="" className='link'>Planificación</a></li>
-                <li><a href="" className='link'>Iniciar Sesión</a></li>
-                <li><a href="" className='link'>Registrarse</a></li>
+                <li><a href="s" className='link'>Planificación</a></li>
+                <li><a href="s" className='link'>Iniciar Sesión</a></li>
+                <li><a href="RegisterUser" className='link'>Registrarse</a></li>
                 
-                { active ? <li><a href="" className='link'>Actividades</a></li> : null }
-                { active ? <li><a href="" className='link'>Inicio</a></li> : null}
-                { active ? <li><a href="" className='link'>Cerrar Sesión</a></li> : null }
+                { active ? <li><a href="s" className='link'>Actividades</a></li> : null }
+                { active ? <li><a href="s" className='link'>Inicio</a></li> : null}
+                { active ? <li><a href="s" className='link'>Cerrar Sesión</a></li> : null }
             </ul>
         </header>
     </div>
