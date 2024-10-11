@@ -7,7 +7,7 @@ export default function Footer() {
   return (
         <footer>
             <div className='logo'>
-                <img src={logo} alt="Logo" />
+                <img src={logo} alt="Logo" width='9%'/>
                 <TextBox 
                     title={['Unigest']}
                     text={['Sistema de gestión administrativo']}
