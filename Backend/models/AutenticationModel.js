@@ -12,8 +12,9 @@ class AutenticationModels{
             const user = userData.user
             const name = userData.name
             const password = userData.password 
+            const rol = userData.rol
             let passwordHash = await bcryptjs.hash(password,8)
-            let consult = `INSERT INTO users (name,userName,password,id) VALUES ('${name}','${user}','${passwordHash}', "")`
+            let consult = `INSERT INTO users (name,userName,password,rol) VALUES ('${name}','${user}','${passwordHash}', '${rol}')`
             connection.query(consult,function(error,results,fields){
                 if(error){
                     reject(error)
