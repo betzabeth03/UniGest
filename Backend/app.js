@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const dotenv = require('dotenv').config();
+const cors = require('cors')
 let usersRouter = require('./routes/AutenticationRoutes');
 let profesoresRouter = require('./routes/ProfessorsRoutes')
 let materiasRouter = require('./routes/SubjectsRoutes')
@@ -14,6 +15,7 @@ let APMSRouter = require('./routes/APMSRoutes')
 
 var app = express();
 
+app.use(cors());
 
 
 app.use(logger('dev'));

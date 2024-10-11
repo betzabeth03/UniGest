@@ -10,17 +10,22 @@ class AutenticationModels{
         return new Promise(async(resolve,reject)=>{
             console.log(userData)
             const user = userData.user
-            const name = userData.name
             const password = userData.password 
-            let passwordHash = await bcryptjs.hash(password,8)
-            let consult = `INSERT INTO users (name,userName,password,id) VALUES ('${name}','${user}','${passwordHash}', "")`
-            connection.query(consult,function(error,results,fields){
-                if(error){
-                    reject(error)
-                }else{
-                    resolve(results)
-                }
-            })
+            const rol = userData.rol
+            const registerpass = userData.registerpass
+            if(registerpass === process.env.REGISTERPROFESSOR&&rol=="Profesor" || registerpass === process.env.REGISTERDIRECTOR&&rol=="Director"){
+                let passwordHash = await bcryptjs.hash(password,8)
+                let consult = `INSERT INTO users (userName,password,rol) VALUES ('${user}','${passwordHash}', '${rol}')`
+                connection.query(consult,function(error,results,fields){
+                    if(error){
+                        reject(error)
+                    }else{
+                        resolve(results)
+                    }
+                })
+            }else{
+                reject(new Error("No tiene permisos para registrarse"))
+            }
         })
      
     }
@@ -45,9 +50,9 @@ class AutenticationModels{
                         let comparation = await bcryptjs.compare(password, results[0].password);
                         if (comparation) {
                             const id = results[0].id
-                            const name = results[0].name
+                            const rol = results[0].rol
                             const userName = results[0].userName
-                            const token = jwt.sign({ id: id, name:name, userName:userName }, process.env.JWT_SECRET);
+                            const token = jwt.sign({ id: id, userName:userName, rol:rol  }, process.env.JWT_SECRET);
                             resolve(token)
                         } else {
                             reject(new Error("Contraseña incorrecta"))

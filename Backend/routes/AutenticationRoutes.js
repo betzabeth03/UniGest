@@ -11,7 +11,7 @@ router.post("/register", function (req, res, next) {
     .catch((e) => {
       res
         .status(400)
-        .json({ error: "Nombre de usuario ya utilizado", message: e.message });
+        .json({error: e.message });
     });
 });
 
