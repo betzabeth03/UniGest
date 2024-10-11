@@ -9,9 +9,12 @@ import RegisterUser from './pages/RegisterUser';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <BrowserRouter>
+    <Routes>
+      <Route path='/' exact element={<App/>} />
+      <Route path='RegisterUser' element={<RegisterUser/>}/>
+    </Routes>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
