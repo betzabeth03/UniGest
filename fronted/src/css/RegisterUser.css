@@ -1,0 +1,20 @@
+.registerForm{
+    display: flex;
+    height: 100vh;
+    padding: 1vw;
+    background: linear-gradient(to right, white 50%, #1C1D21 50%);
+}
+
+.image{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    padding-top: 3vw;
+}
+
+.logoRegister, .imageRegister{
+    text-align: center;
+}
+

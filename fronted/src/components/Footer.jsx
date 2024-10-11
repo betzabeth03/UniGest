@@ -22,10 +22,10 @@ export default function Footer() {
                     <p>Ricardo Briceño</p>
                 </div>
                 <div className='github'>
-                    <a href="">GitHub</a>
-                    <a href="">betzabeth03</a>
-                    <a href="">Rafael048</a>
-                    <a href="">RicardoBRJ</a>
+                    <p>GitHub</p>
+                    <a href="https://github.com/betzabeth03">betzabeth03</a>
+                    <a href="https://github.com/Rafael048">Rafael048</a>
+                    <a href="https://github.com/RicardoBRJ-Dev">RicardoBRJ</a>
             
                 </div>
                 
