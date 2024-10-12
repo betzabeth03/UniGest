@@ -13,21 +13,7 @@ class ActivitiesModels{
       })
     });
   }
-  One(idReq) {
-    
-     return new Promise((resolve,reject)=>{
-      let consult = `SELECT  * FROM actividades WHERE id=${idReq}`
-      connection.query(consult,function(error,results,fields){
-        if(error){
-          reject(error)
-        }else{
-          resolve(results)
-        }
-      })
-     })
-  
-    
-  }
+
   Create(actividades){
     return new Promise((resolve, reject) => {
       let nombreAC = actividades.nombre

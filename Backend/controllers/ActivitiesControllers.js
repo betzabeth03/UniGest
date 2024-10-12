@@ -11,16 +11,7 @@ class ActivitiesControllers{
        });
       })
     }
-    One(idReq) {
-      return new Promise((resolve,reject)=>{
-       ActivitiesModels.One(idReq)
-       .then((result) => {
-        resolve(result)
-       }).catch((e) => {
-        reject(e)
-       });
-      })
-    }
+   
     Create(actividad){
       return new Promise((resolve, reject) =>{
         ActivitiesModels.Create(actividad)

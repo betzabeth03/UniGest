@@ -12,19 +12,7 @@ class SubjectsModels{
         })
       });
     }
-    One(idReq) {
-      return new Promise((resolve,reject)=>{
-        let consult = `SELECT  * FROM materias WHERE id=${idReq}`
-        connection.query(consult,function(error,results,fields){
-          if(error){
-            reject(error)
-          }else{
-            resolve(results)
-          }
-        })
-       })
-    
-    }
+   
     
     Create(registro){
       return new Promise((resolve, reject) => {

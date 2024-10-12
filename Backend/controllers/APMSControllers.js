@@ -11,16 +11,7 @@ class APMSControllers{
        });
       })
     }
-    One(idReq) {
-      return new Promise((resolve,reject)=>{
-       APMSModels.One(idReq)
-       .then((result) => {
-        resolve(result)
-       }).catch((e) => {
-        reject(e)
-       });
-      })
-    }
+    
     Create(actividad){
       return new Promise((resolve, reject) =>{
         APMSModels.Create(actividad)

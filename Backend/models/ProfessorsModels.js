@@ -13,20 +13,7 @@ class ProfessorsModels{
       })
     });
   }
-  One(idReq) {
-    
-     return new Promise((resolve,reject)=>{
-      let consult = `SELECT  * FROM profesores WHERE id=${idReq}`
-      connection.query(consult,function(error,results,fields){
-        if(error){
-          reject(error)
-        }else{
-          resolve(results)
-        }
-      })
-     })
-    
-  }
+  
   Create(usuario){
     return new Promise((resolve, reject) => {
       let nombreUS = usuario.nombre

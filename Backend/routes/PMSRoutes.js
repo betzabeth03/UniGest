@@ -2,25 +2,12 @@ const express = require("express");
 const PMSControllers = require("../controllers/PMSControllers");
 const router = express.Router();
 router.get("/", function (req, res, next) {
-  if (req.query.id) {
-    PMSControllers.One(req.query.id)
-      .then((result) => {
-        res.status(200).json({ message: "Peticion exitosa", body: result });
-      })
-      .catch((e) => {
-        res
-          .status(500)
-          .json({
-            message: "Algo no ha salido como se esperaba",
-            error: e.message,
-          });
-      });
-  } else {
+  
     PMSControllers.All().then((result) => {
       res.status(200).json({ message: "Peticion exitosa", body: result });
     });
   }
-});
+);
 
 router.post("/agregar", function (req, res, next) {
   PMSControllers.Create(req.body)

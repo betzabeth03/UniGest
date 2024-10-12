@@ -11,16 +11,7 @@ class PMSControllers{
        });
       })
     }
-    One(idReq) {
-      return new Promise((resolve,reject)=>{
-       PMSModels.One(idReq)
-       .then((result) => {
-        resolve(result)
-       }).catch((e) => {
-        reject(e)
-       });
-      })
-    }
+    
     Create(actividad){
       return new Promise((resolve, reject) =>{
         PMSModels.Create(actividad)

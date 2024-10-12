@@ -13,18 +13,7 @@ class ProfessorsControllers{
     });
   }
 
-  One(idReq) {
-    return new Promise((resolve,reject)=>{
-        ProfessorsModels.One(idReq)
-        .then((results) => {
-          resolve(results)
-      })
-      .catch((error) => {
-          reject(error)
-      });
-    });  
-  }
-
+  
   Create(usuario){
     return new Promise((resolve, reject) =>{
         ProfessorsModels.Create(usuario)

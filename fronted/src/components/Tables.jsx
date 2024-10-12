@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from "react";
 import axios from 'axios'
 import '../css/Tables.css'
+import Cookies from 'js-cookie'
 export default function Tables(props){
     const [data, setData] = useState([])
     const [propertyName, setPropertyName] = useState([])
@@ -8,6 +9,8 @@ export default function Tables(props){
     const [previusData, setPreviusData] = useState([])
     const [allData, setAllData] = useState([])
     const [clicked, setClicked] = useState(false)
+    const [role, setRole] = useState(null)
+    const token = Cookies.get('jwt')
   function getNextData(){
     if (nextData.length > 0) {
       setPreviusData([...previusData, ...data]);
@@ -46,6 +49,18 @@ export default function Tables(props){
         setClicked(true)
       }
     }
+    async function deleteElement(e){
+      let id = e.target.name
+      let verify = prompt("¿Realmente desea eliminar este elemento?(Y/N)")
+      if(verify.toLowerCase() === "y"){
+        await axios.delete(`http://localhost:3000/${props.uri}/eliminar/${id}`)
+        .then(() => {
+          window.location.reload()
+        }).catch((err) => {
+          console.log(err)
+        });
+      }
+    }
     useEffect(()=>{
         async function getData(){
             await axios.get(`http://localhost:3000/${props.uri}`)
@@ -61,9 +76,17 @@ export default function Tables(props){
               console.log(err)
             })
         }
-        
+        async function verify(){
+          await axios.get(`http://localhost:3000/verify/${token}`)
+          .then((result) => {
+            setRole(result.data.rol)
+          }).catch((err) => {
+            console.log(err)
+          });
+        }
+        verify()
         getData()
-    },[])
+    },[props.uri,token])
     
     return(
       <>
@@ -95,7 +118,7 @@ export default function Tables(props){
            </th>
            
          ))}
-         <th>Accion</th>
+         {role==="Director"?<th>Accion</th>:null}
         </tr>
         </thead>
         <tbody>
@@ -105,8 +128,14 @@ export default function Tables(props){
               <td key={colIndex}>{item[property]}</td>
             ))}
             <td>
-              <button>Accion</button>
-              <button>Accion</button>
+              {role==="Director"?
+              <>
+              <button>Modificar</button>
+              <button onClick={(e)=>deleteElement(e)} name= {item.id} >Eliminar</button>
+              </>
+              :null
+            }
+              
             </td>
           </tr>
         ))}

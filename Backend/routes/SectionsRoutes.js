@@ -2,20 +2,7 @@ const express = require("express");
 const router = express.Router();
 const SectionsControllers = require("../controllers/SectionsControllers");
 router.get("/", function (req, res, next) {
-  if (req.query.id) {
-    SectionsControllers.One(req.query.id)
-      .then((result) => {
-        res.status(200).json({ message: "Peticion exitosa", body: result });
-      })
-      .catch((e) => {
-        res
-          .status(500)
-          .json({
-            message: "Algo no ha salido como se esperaba",
-            error: e.message,
-          });
-      });
-  } else {
+  
     SectionsControllers.All()
       .then((result) => {
         res.status(200).json({ message: "Peticion exitosa", body: result });
@@ -29,7 +16,7 @@ router.get("/", function (req, res, next) {
           });
       });
   }
-});
+);
 router.post("/agregar", function (req, res, next) {
   SectionsControllers.Create(req.body)
     .then(() => {

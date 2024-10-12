@@ -18,18 +18,7 @@ class SectionsModels{
   }
   
 
-  One(idReq) { 
-    return new Promise((resolve,reject)=>{
-      let consult = `SELECT  * FROM secciones WHERE id=${idReq}`
-      connection.query(consult,function(error,results,fields){
-        if(error){
-          reject(error)
-        }else{
-          resolve(results)
-        }
-      })
-     })
-    }
+  
 
     Create(registro){
       return new Promise((resolve, reject) => {

@@ -13,17 +13,7 @@ class SectionsControllers{
     });
   }
 
-  One(idReq) {
-    return new Promise((resolve,reject)=>{
-        SectionsModels.One(idReq)
-        .then((results) => {
-          resolve(results)
-      })
-      .catch((error) => {
-          reject(error)
-      });
-    });
-  }
+  
 
   Create(registro){
     return new Promise((resolve, reject) =>{
