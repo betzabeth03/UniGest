@@ -1,0 +1,15 @@
+.addActivities{
+    background: url('../assets/loginFondo.png');
+    background-repeat: no-repeat;
+    background-size: 100vw;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+}
+
+.addAct{
+    display: flex;
+    justify-content: center;
+}
