@@ -25,21 +25,26 @@ export default function FormLogin() {
   }
   return (
     <div>
-        <div className='imageLogin'>
-            <img src={logoSolo} alt="logoSolo" width='40%'/>
-        </div>
-    <form onSubmit={(e)=>handleSubmit(e)} className='loginForm'>
-        <input className='inputLogin' type="text" placeholder='Usuario' name='user'/>
-        <input className='inputLogin' type="password" placeholder='Contraseña' name="pass"/>
-        {
-          error? <div> {error} </div>:<div></div>
-        }
-        <input className='submitLogin' type="submit" value='Iniciar Sesión'/>
-        <p className='registerLogin'>
-            ¿No estás registrado?  
-        <a href="RegisterUser"> Registrarse</a>
-        </p>
-    </form>
+      <div className='buildLogin'>
+          <div className='imageLogin'>
+              <img src={logoSolo} alt="logoSolo" width='40%'/>
+          </div>
+          <form onSubmit={(e)=>handleSubmit(e)} className='loginForm'>
+              <input className='inputLogin' type="text" placeholder='Usuario' name='user'/>
+              <input className='inputLogin' type="password" placeholder='Contraseña' name="pass"/>
+              {
+                error? <div> {error} </div>:<div></div>
+              }
+              <input className='submitLogin' type="submit" value='Iniciar Sesión'/>
+              <p className='registerLogin'>
+                  ¿No estás registrado?  
+              <a href="RegisterUser"> Registrarse</a>
+              </p>
+          </form>
+          <div className='nameLogin'>
+              Unigest
+          </div>
+      </div>
     </div>
   )
 }

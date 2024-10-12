@@ -7,6 +7,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 
 export default  function Landing() {
+  const landing = true
   const token = Cookies.get('jwt')
   const [active, setActive] = useState(null)
   useEffect(()=>{
@@ -24,7 +25,7 @@ export default  function Landing() {
   return (
     
     <div className='landing'>
-        <Header active={active}/>
+        <Header active={active} landing={landing}/>
     <p> {active} </p>
         <section className='mainLanding'>
             <TextBox

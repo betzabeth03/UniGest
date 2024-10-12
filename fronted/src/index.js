@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import RegisterUser from './pages/RegisterUser';
 import Login from './pages/Login';
-
+import FormActivitiesAdd from './pages/FormActivitiesAdd';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,6 +15,7 @@ root.render(
       <Route path='/' exact element={<App/>} />
       <Route path='RegisterUser' element={<RegisterUser/>}/>
       <Route path='Login' element={<Login/>}/>
+      <Route path='FormActivitiesAdd' element={<FormActivitiesAdd/>}/>
     </Routes>
   </BrowserRouter>
 );

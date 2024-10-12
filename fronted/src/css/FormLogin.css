@@ -2,13 +2,23 @@
     display: flex;
     flex-direction: column;
     width: 30vw;
-    height: 70vh;
+    height: 60vh;
     gap: 2vw;
-    padding: 2vw;
-    border-radius: 30px;
-    background-color: rgba(255, 255, 255, 0.753);
+    padding: 1vw;
     justify-content: center;
     align-items: center;
+}
+
+.buildLogin{
+    background-color: rgba(255, 255, 255, 0.753);
+    padding: 1vw;
+    border-radius: 30px;
+}
+
+.nameLogin{
+    font-size: 36px;
+    font-weight: bolder;
+    text-align: center;
 }
 
 .inputLogin{
