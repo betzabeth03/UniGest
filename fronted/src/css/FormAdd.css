@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     padding: 2vw;
-    gap: 2vw;
+    justify-content: space-around;
     background-color: rgb(255, 255, 255);
     width: 70%;
     align-items: center;
@@ -18,7 +18,7 @@
 
 .inputAdd{
     width: 90%;
-    height: 3vw;
+    height: 3.6vw;
     background-color: #E4F1F8;
     color: black;
     border: 0;
@@ -28,7 +28,11 @@
     padding: 1vw;
     font-weight: lighter;
     border-radius: 20px;
+}
 
+::placeholder{
+    color: rgba(0, 0, 0, 0.781);
+    font-weight:lighter;
 }
 
 .formAll{
@@ -47,15 +51,16 @@
     border-bottom-left-radius: 30px ;
     background-color: #E4F1F8;
     width: 30%;
-    padding: 1vw;
+    padding: 2vw;
+    font-size: 1vw;
 }
 
 .submitAdd{
     background-color: #00255C;
     color: white;
-    padding: 1vw .4vw;
-    width: 50%;
-    font-size: 30px;
+    padding: 1vw .3vw;
+    width: 55%;
+    font-size: 1.8vw;
     border-radius: 30px;
     font-weight: bold;
 }

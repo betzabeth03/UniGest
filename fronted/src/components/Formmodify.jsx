@@ -2,7 +2,8 @@ import React from 'react'
 import logoSolo from '../assets/logoSolo.png'
 import '../css/FormAdd.css'
 
-export default function FormAdd() {
+
+export default function Formmodify() {
   return (
     <div className='formAll'>
         <div className='logoAdd'>
@@ -15,7 +16,7 @@ export default function FormAdd() {
             <input type="text" className='inputAdd' placeholder='Ingrese la materia'/>
             <input type="text" className='inputAdd' placeholder='Ingrese la seccion'/>
             <input type="text" className='inputAdd' placeholder='Ingrese la semana'/>
-            <input type="submit" value={'Agregar'} className="submitAdd" name="" id="" />
+            <input type="submit" value={'Actualizar'} className="submitAdd" name="" id="" />
         </form>
     </div>
   )
