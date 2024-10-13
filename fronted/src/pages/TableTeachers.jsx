@@ -10,12 +10,12 @@ export default function TableTeachers() {
   const btActive = 'activeMenu'
   return (
     <div>
-      <section className='teacher'>
+      <section className='mainTable'>
         <div className='logoDirector'>
           <img src={logo} alt="" width={"80%"} />
         </div>
         <Menu btProfesores={btActive}/>
-        <article className='tableTeacher'>
+        <article className='tableGeneral'>
           <Tables uri="profesores" />
 
         </article>

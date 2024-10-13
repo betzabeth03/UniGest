@@ -35,12 +35,12 @@ export default function TablesActivities() {
       {
         active == 'Director' ?
           <>
-            <section className='teacher'>
+            <section className='mainTable'>
               <div className='logoDirector'>
                 <img src={logo} alt="" width={"80%"} />
               </div>
               <Menu btActividades={btActive}/>
-              <article className='tableTeacher'>
+              <article className='tableGeneral'>
                 <Tables uri="actividades" />
 
               </article>

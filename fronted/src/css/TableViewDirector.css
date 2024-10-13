@@ -1,8 +1,8 @@
-.teacher{
+.mainTable{
     display: flex;
 }
 
-.tableTeacher{
+.tableGeneral{
     width: 100%;
     padding: 3vw;
     background-color: #F4F4F4;
