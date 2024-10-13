@@ -17,24 +17,20 @@ router.get("/", function (req, res, next) {
   }
 );
 router.post("/agregar", function (req, res, next) {
+  console.log(req.body)
   ActivitiesControllers.Create(req.body)
     .then(() => {
-      ActivitiesControllers.All().then((result) => {
-        res.render("actividades", {
-          result: result,
-          direccion: "/tablas/actividades",
-        });
+      res.status(200).json({message:"Agregado Correctamente"})
+      })
+      .catch((e) => {
+        res
+          .status(500)
+          .json({
+            message: "Algo no ha salido como se esperaba",
+            error: e.message,
+          });
       });
     })
-    .catch((e) => {
-      res
-        .status(500)
-        .json({
-          message: "Algo no ha salido como se esperaba",
-          error: e.message,
-        });
-    });
-});
 router.put("/editar/:id", function (req, res, next) {
   const idReq = req.params.id;
   const nuevosValores = req.body;
