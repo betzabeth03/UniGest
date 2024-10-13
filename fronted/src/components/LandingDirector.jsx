@@ -3,7 +3,6 @@ import Menu from '../components/Menu'
 import TextBox from '../components/TextBox'
 import Footer from '../components/Footer'
 import logo from '../assets/logo.png'
-
 import '../css/DirectorLanding.css'
 
 export default function LandingDirector() {

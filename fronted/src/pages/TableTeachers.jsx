@@ -1,8 +1,19 @@
 import React from 'react'
 import Tables from '../components/Tables'
+import Footer from '../components/Footer'
+import Menu from '../components/Menu'
+import '../css/TableTeacher.css'
+
 
 export default function TableTeachers() {
   return (
-    <Tables uri = "profesores" />
+    <div>
+      <section className='teacher'>
+        <Menu />
+        <Tables uri="profesores" />
+      </section>
+      <Footer />
+
+    </div>
   )
 }

@@ -1,0 +1,9 @@
+.teacher{
+    display: flex;
+    background-color: #F4F4F4;
+}
+
+.tableTeacher{
+    padding: 2vw;
+    background-color: #F4F4F4;
+}
