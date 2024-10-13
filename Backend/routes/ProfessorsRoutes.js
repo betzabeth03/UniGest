@@ -2,9 +2,17 @@ const express = require("express");
 const router = express.Router();
 const ProfessorsControllers = require("../controllers/ProfessorsControllers");
 router.get("/", function (req, res, next) {
-
-    ProfessorsControllers.All().then((result) => {
+    ProfessorsControllers.All()
+    .then((result) => {
       res.status(200).json({ message: "Peticion exitosa", body: result });
+    })
+    .catch((e) => {
+      res
+        .status(500)
+        .json({
+          message: "Algo no ha salido como se esperaba",
+          error: e.message,
+        });
     });
   }
 );
