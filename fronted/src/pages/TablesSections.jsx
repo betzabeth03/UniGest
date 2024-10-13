@@ -4,7 +4,7 @@ import Tables from "../components/Tables";
 export default function TablesSections() {
   return (
     <Tables
-    uri = "Secciones"
+    uri = "secciones"
     />
   )
 }
