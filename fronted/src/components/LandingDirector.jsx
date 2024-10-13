@@ -6,7 +6,7 @@ import logo from '../assets/logo.png'
 
 import '../css/DirectorLanding.css'
 
-export default function DirectorLanding() {
+export default function LandingDirector() {
   return (
     <div>
       <section className='directorMain'>

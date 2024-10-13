@@ -8,7 +8,6 @@ import RegisterUser from './pages/RegisterUser';
 import Login from './pages/Login';
 import FormActivitiesAdd from './pages/FormActivitiesAdd';
 import FormModifyActivities from './pages/FormModifyActivities';
-import DirectorLanding from './pages/DirectorLanding';
 import TablesActivities from './pages/TablesActivities';
 import TableTeachers from './pages/TableTeachers';
 import TablesSections from './pages/TablesSections';
@@ -28,7 +27,6 @@ root.render(
       <Route path='AgregarMaterias' element={<FormSubjectsAdd/>}/>
       <Route path='AgregarSecciones' element={<FormSectionsAdd/>}/>
       <Route path='FormModifyActivities' element={<FormModifyActivities/>}/>
-      <Route path='DirectorLanding' element={<DirectorLanding/>}/>
       <Route path='Profesores' element={<TableTeachers/>}/>
       <Route path='Actividades' element={<TablesActivities/>}/>
       <Route path='Materias' element={<TablesSubjects/>}/>
