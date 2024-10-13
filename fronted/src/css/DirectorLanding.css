@@ -1,0 +1,51 @@
+@font-face {
+    font-family: montLight;
+    src: url('../fonts/Montserrat-ExtraLight.otf');
+}
+
+@font-face {
+    font-family: montExtraBold;
+    src: url('../fonts/Montserrat-ExtraBold.otf');
+}
+
+.logoDirector{
+    position: absolute;
+    z-index: 1;
+    left: 5vw;
+    padding: .5vw;
+}
+
+.directorMain{
+    display: flex;
+    background: url('../assets/FondoDirector.png');
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-size: contain;
+}
+
+.welcomeDirector{
+    padding: 4vw;
+    width: 85%;
+    font-size: 36px;
+}
+
+.textLandindDirector{
+    width: 100%;
+    font-weight: lighter;
+}
+
+.textLandindDirector > h1{
+    font-size: 7vw;
+    font-family: montExtraBold;
+}
+
+.textLandindDirector > p{
+    width: 60%;
+    text-align: justify;
+}
+
+.textLandindDirector > div{
+    font-weight: bold;
+    width: 60%;
+    text-align: justify;
+}
