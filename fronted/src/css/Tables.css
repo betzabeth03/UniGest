@@ -108,3 +108,9 @@ td{
 .nextPrev{
     border: 0;
 }
+
+.nextPrevButton{
+    background: none;
+    border: 0;
+    outline: none;
+}
