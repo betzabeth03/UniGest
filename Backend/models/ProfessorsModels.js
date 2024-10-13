@@ -13,13 +13,11 @@ class ProfessorsModels{
           PMSControllers.All()
           .then((pms) => {
             for (let i = 0; i < results.length; i++) {
-              results[i].materias = []
-              results[i].secciones = []
+              results[i].materias_Secciones = []
               
               for (let j = 0; j < pms.length; j++) {
                 if (results[i].id == pms[j].idProf) {
-                  results[i].materias.push(pms[j].materia)
-                  results[i].secciones.push(pms[j].seccion) 
+                  results[i].materias_Secciones.push(pms[j].materia+ " " +pms[j].seccion)
                 }
               }
             }
