@@ -26,12 +26,14 @@ export default function TablesActivities() {
   }, [token])
 
   return (
-    <div>
+    <div className='activitiesView'>
       <Header active={active} color={color} activities={activities}/>
       <section className='tableActivities'>
+        <article className='tableShow'>
         <Tables
           uri="actividades"
         />
+        </article>
 
       </section>
       <Footer />

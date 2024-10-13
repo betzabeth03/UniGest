@@ -5,3 +5,13 @@
     padding: 3vw;
     height: 80vh;
 }
+
+.activitiesView{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.tableShow{
+    width: 80%;
+}

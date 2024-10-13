@@ -10,7 +10,10 @@ export default function TableTeachers() {
     <div>
       <section className='teacher'>
         <Menu />
-        <Tables uri="profesores" />
+        <article className='tableTeacher'>
+          <Tables uri="profesores" />
+
+        </article>
       </section>
       <Footer />
 
