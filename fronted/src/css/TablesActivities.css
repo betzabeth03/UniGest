@@ -1,0 +1,7 @@
+.tableActivities{
+    display: flex;
+    justify-content: center;
+    background-color: #B5D8EB;
+    padding: 1vw;
+    height: 80vh;
+}
