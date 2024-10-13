@@ -1,0 +1,34 @@
+.menu{
+    width: 20%;
+    background-color: #E4F1F8;
+    display: flex;
+    flex-direction: column;
+    font-size: 30px;
+    height: 100vh;
+    justify-content: space-between;
+}
+
+
+.linksMenu{
+    text-decoration: none;
+    color: black;
+    display: flex;
+    gap: 1vw;
+    padding: 1vw;
+    align-items: center;
+}
+
+.btMenu{
+    background: none;
+    outline: none;
+    border: 0;
+}
+
+.btOpen{
+    padding: 1vw;
+}
+
+.activeMenu{
+    background-color: #A6D0E7;
+    border-left: 8px solid #00255C;
+}

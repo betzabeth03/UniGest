@@ -9,6 +9,8 @@ import Login from './pages/Login';
 import FormActivitiesAdd from './pages/FormActivitiesAdd';
 import TableTest from './pages/TablesTest';
 import FormModifyActivities from './pages/FormModifyActivities';
+import DirectorLanding from './pages/DirectorLanding';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
@@ -18,6 +20,7 @@ root.render(
       <Route path='Login' element={<Login/>}/>
       <Route path='FormActivitiesAdd' element={<FormActivitiesAdd/>}/>
       <Route path='FormModifyActivities' element={<FormModifyActivities/>}/>
+      <Route path='DirectorLanding' element={<DirectorLanding/>}/>
       <Route path='Tables' element={<TableTest/>}/>
     </Routes>
   </BrowserRouter>
