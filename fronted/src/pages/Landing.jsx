@@ -26,7 +26,6 @@ export default  function Landing() {
     
     <div className='landing'>
         <Header active={active} landing={landing}/>
-    <p> {active} </p>
         <section className='mainLanding'>
             <TextBox
             title={['Bienvenido a UniGest']}

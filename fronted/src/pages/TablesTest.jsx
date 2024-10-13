@@ -3,7 +3,7 @@ import Tables from "../components/Tables";
 export default function TableTest(){
     return(
         <Tables
-        uri = "actividades"
+        uri = "materias"
         />
     )
 }
