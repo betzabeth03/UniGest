@@ -1,17 +1,106 @@
-body{
-    background-color: #F4F4F4;
-    height: 99vh;
-}
 .center{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    border-radius: 40px;
+    background-color: white;
+    padding-bottom: 2vw;
+    width: 80%;
 }
+
+.headTable{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 2vw;
+    font-size: 30px;
+    align-items: center;
+    width: 100%;
+    gap: 1vw;
+}
+
+.addSearch{
+    display: flex;
+    font-size: 24px;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1vw;
+}
+
+.search{
+    display: flex;
+    align-items: center;
+    background-color: #E4F1F8;
+    border-radius: 30px;
+    padding: .5vw;
+    font-size: 24px;
+    justify-content: center;
+    gap: 2vw;
+    width: 50%;
+}
+
+.searchButton{
+    font-size: 30px;
+    background: none;
+    outline: none;
+    border: 0;   
+}
+
+.addButton{
+    font-size: 30px;
+    padding: .5vw 2vw;
+    background-color: #00255C;
+    color: white;
+    border-radius: 30px;
+}
+
+.tableButton{
+    background:none;
+    outline: none;
+    border: 0;
+}
+
+
+.buttonsTable{
+    display: flex;
+    gap: 1vw;
+    justify-content: center;
+}
+
+.inputSearch{
+    background:none;
+    outline: none;
+    border: 0;
+    height: 2vw;
+    font-size: 24px;
+    width: 70%;
+}
+
+.formtable{
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+
 table{
-    border:1px solid black;
+    width: 100%;
+    border-collapse: collapse;
 }
 th{
     background-color: #E4F1F8;
+    text-transform: capitalize;
+    padding: .5vw;
+    font-size: 24px;
 }
-tr{
+
+td{
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 24px;
+    border-bottom: 1px solid black;
+}
+
+.titleTable{
+    text-transform: capitalize;
 }

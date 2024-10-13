@@ -27,7 +27,7 @@ export default function FormAdd(props) {
         <form onSubmit={(e)=>handleSubmit(e)} className='formAdd'>
             <label className='activities'> {props.uri.charAt(0).toUpperCase() + props.uri.slice(1)} </label>
             {props.propiedades.map((element,index)=>(
-              <div key={index}>
+              <div className='divAdd' key={index}>
                 <input type="text" placeholder={`Ingresa ${element}`}  name={element.split(" ")[1]} className='inputAdd' />
               </div>
             ))}
