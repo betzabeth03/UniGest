@@ -87,7 +87,6 @@ export default function Tables(props) {
     verify()
     getData()
   }, [props.uri, token])
-
   return (
     <>
       <div className="center">

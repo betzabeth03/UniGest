@@ -6,13 +6,15 @@ import logo from '../assets/logo.png'
 import '../css/DirectorLanding.css'
 
 export default function LandingDirector() {
+  const btActive = 'activeMenu'
+
   return (
     <div>
       <section className='directorMain'>
         <div className='logoDirector'>
           <img src={logo} alt="" width={"80%"}/>
         </div>
-        <Menu />
+        <Menu btIni={btActive}/>
         <article className='welcomeDirector'>
           <TextBox title={['Bienvenido a UniGest']}
             span={['¡Bienvenido al sistema de gestion administrativo!']}
