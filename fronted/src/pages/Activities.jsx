@@ -6,6 +6,7 @@ import Cookies from 'js-cookie'
 
 export default function Activities() {
     const activities = true
+    const color = 'blue'
     const token = Cookies.get('jwt')
     const [active, setActive] = useState(null)
     useEffect(() => {
@@ -23,7 +24,7 @@ export default function Activities() {
 
     return (
         <div>
-            <Header active={active} activities={activities} />
+            <Header active={active} activities={activities} color={color}/>
 
 
             <Footer />

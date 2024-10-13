@@ -11,6 +11,10 @@ import TableTest from './pages/TablesTest';
 import FormModifyActivities from './pages/FormModifyActivities';
 import DirectorLanding from './pages/DirectorLanding';
 import Activities from './pages/Activities';
+import TablesActivities from './pages/TablesActivities';
+import TableTeachers from './pages/TableTeachers';
+import TablesSections from './pages/TablesSections';
+import TablesSubjects from './pages/TablesSubjects';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -24,6 +28,10 @@ root.render(
       <Route path='DirectorLanding' element={<DirectorLanding/>}/>
       <Route path='Activities' element={<Activities/>}/>
       <Route path='Tables' element={<TableTest/>}/>
+      <Route path='TableTeachers' element={<TableTeachers/>}/>
+      <Route path='TablesActivities' element={<TablesActivities/>}/>
+      <Route path='TablesSubjects' element={<TablesSubjects/>}/>
+      <Route path='TablesSections' element={<TablesSections/>}/>
     </Routes>
   </BrowserRouter>
 );

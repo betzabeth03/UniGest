@@ -3,7 +3,7 @@ import img from '../assets/logo.png'
 import '../css/Header.css'
 import Cookies from 'js-cookie'
 
-export default function Header({landing, active, activities}) {
+export default function Header({landing, active, activities, color}) {
   async function logout() {
     Cookies.remove('jwt')
     window.location.replace('/')
@@ -11,7 +11,7 @@ export default function Header({landing, active, activities}) {
 
   return (
     <div>
-        <header className='header'>
+        <header className={`header ${color}`}>
             <div className='logo'>
                 <img src={img} alt="logoImg" />
             </div>
