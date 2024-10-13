@@ -153,6 +153,7 @@ export default function Tables(props) {
               <td className="nextPrev">
                 {previusData.length > 0 ? <button onClick={() => getPreviusData()}>Anterior</button> : null}
                 {nextData.length > 0 ? <button onClick={() => getNextData()}>Siguiente</button> : null}
+                <p>maricon</p>
               </td>
             </tr>
           </tbody>
