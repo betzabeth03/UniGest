@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../css/Menu.css'
 
-export default function Menu({inicio}) {
+export default function Menu() {
     const [open,setOpen]=useState(null)
     const [classLinks, setClassLinks] = useState('')
     const [displayMenu, setDisplayMenu]=useState('')
