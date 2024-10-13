@@ -7,15 +7,15 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import RegisterUser from './pages/RegisterUser';
 import Login from './pages/Login';
 import FormActivitiesAdd from './pages/FormActivitiesAdd';
-import TableTest from './pages/TablesTest';
 import FormModifyActivities from './pages/FormModifyActivities';
 import DirectorLanding from './pages/DirectorLanding';
-import Activities from './pages/Activities';
 import TablesActivities from './pages/TablesActivities';
 import TableTeachers from './pages/TableTeachers';
 import TablesSections from './pages/TablesSections';
 import TablesSubjects from './pages/TablesSubjects';
-
+import FormProfessorsAdd from './pages/FromProfessorsAdd'
+import FormSectionsAdd from './pages/FormSectionsAdd'
+import FormSubjectsAdd from './pages/FormSubjectsAdd'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
@@ -24,14 +24,15 @@ root.render(
       <Route path='RegisterUser' element={<RegisterUser/>}/>
       <Route path='Login' element={<Login/>}/>
       <Route path='AgregarActividades' element={<FormActivitiesAdd/>}/>
+      <Route path='AgregarProfesores' element={<FormProfessorsAdd/>}/>
+      <Route path='AgregarMaterias' element={<FormSubjectsAdd/>}/>
+      <Route path='AgregarSecciones' element={<FormSectionsAdd/>}/>
       <Route path='FormModifyActivities' element={<FormModifyActivities/>}/>
       <Route path='DirectorLanding' element={<DirectorLanding/>}/>
-      <Route path='Activities' element={<Activities/>}/>
-      <Route path='Tables' element={<TableTest/>}/>
-      <Route path='TableTeachers' element={<TableTeachers/>}/>
-      <Route path='TablesActivities' element={<TablesActivities/>}/>
-      <Route path='TablesSubjects' element={<TablesSubjects/>}/>
-      <Route path='TablesSections' element={<TablesSections/>}/>
+      <Route path='Profesores' element={<TableTeachers/>}/>
+      <Route path='Actividades' element={<TablesActivities/>}/>
+      <Route path='Materias' element={<TablesSubjects/>}/>
+      <Route path='Secciones' element={<TablesSections/>}/>
     </Routes>
   </BrowserRouter>
 );

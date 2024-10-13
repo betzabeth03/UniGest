@@ -23,7 +23,7 @@ class SectionsModels{
     Create(registro){
       return new Promise((resolve, reject) => {
         let nombreR = registro.nombre
-        let periodoAcademicoR= registro.periodoAcademico
+        let periodoAcademicoR= registro.periodo
         let periodoDate = new Date(periodoAcademicoR)
         let periodoAcademicoIso = periodoDate.toISOString().slice(0,10).replace('T','')
         console.log(periodoAcademicoIso)
