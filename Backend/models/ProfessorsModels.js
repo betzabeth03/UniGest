@@ -1,5 +1,6 @@
+const e = require('express');
 const connection = require('../connection')
-
+const PMSControllers = require("../controllers/PMSControllers");
 class ProfessorsModels{
   All() {
     return new Promise((resolve,reject)=>{
@@ -8,7 +9,24 @@ class ProfessorsModels{
         if(error){
          reject(error)
         }else{
-          resolve(results)
+          console.log("llegue")
+          PMSControllers.All()
+          .then((pms) => {
+            for (let i = 0; i < results.length; i++) {
+              results[i].materias = []
+              results[i].secciones = []
+              
+              for (let j = 0; j < pms.length; j++) {
+                if (results[i].id == pms[j].idProf) {
+                  results[i].materias.push(pms[j].materia)
+                  results[i].secciones.push(pms[j].seccion) 
+                }
+              }
+            }
+            resolve(results)
+          }).catch((e) => {
+            reject(e)
+          });
         }
       })
     });

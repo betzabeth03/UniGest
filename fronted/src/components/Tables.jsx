@@ -127,35 +127,49 @@ export default function Tables(props) {
             </tr>
           </thead>
           <tbody>
-            {data.map((item, rowIndex) => (
-              <tr key={rowIndex}>
-                {propertyName.map((property, colIndex) => (
-                  <td key={colIndex}>{item[property]}</td>
-                ))}
-                <td>
-                  {(role === "Director") || (role === "Profesor" && props.uri === "actividades") ?
-                    <div className="buttonsTable">
-                      <button className="tableButton"><svg xmlns="http://www.w3.org/2000/svg" width="2vw" height="2vw" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                        <path d="M15.502 1.95a.5.5 0 0 1 0 .706L15.559 3.69l-2-2L13.502.656a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.556-2-2L5.939 9.21a.5.5 0 0 0-.121.196l-.805 2.515a.25.25 0 0 0 .316.316l2.515-.805a.5.5 0 0 0 .196-.12l6.813-6.815z" />
-                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
-                      </svg></button>
-                      <button onClick={(e) => deleteElement(e)} name={item.id} className="tableButton"><svg xmlns="http://www.w3.org/2000/svg" width="2vw" height="2vw" fill="red" className="bi bi-trash3-fill" viewBox="0 0 16 16">
-                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.995-1.85L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h5v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M5.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.57l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.57-.528M8 5.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
-                      </svg></button>
-                    </div>
-                    : null
-                  }
-
-                </td>
-              </tr>
-            ))}
-            <tr>
+  {data.map((item, rowIndex) => (
+    <tr key={rowIndex}>
+      {propertyName.map((property, colIndex) => (
+        <td key={colIndex}>
+          {Array.isArray(item[property])
+            ? item[property].length > 0
+              ? item[property].map((subItem, subIndex) => (
+                  <div key={subIndex}>{subItem}</div>
+                ))
+              : <button className="assignButton">Asignar</button>
+            : item[property] !== null && item[property] !== undefined && item[property] !== ''
+              ? item[property]
+              : <button className="assignButton">Asignar</button>
+          }
+        </td>
+      ))}
+      <td>
+        {(role === "Director") || (role === "Profesor" && props.uri === "actividades") ?
+          <div className="buttonsTable">
+            <button className="tableButton">
+              <svg xmlns="http://www.w3.org/2000/svg" width="2vw" height="2vw" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
+                <path d="M15.502 1.95a.5.5 0 0 1 0 .706L15.559 3.69l-2-2L13.502.656a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.556-2-2L5.939 9.21a.5.5 0 0 0-.121.196l-.805 2.515a.25.25 0 0 0 .316.316l2.515-.805a.5.5 0 0 0 .196-.12l6.813-6.815z" />
+                <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+              </svg>
+            </button>
+            <button onClick={(e) => deleteElement(e)} name={item.id} className="tableButton">
+              <svg xmlns="http://www.w3.org/2000/svg" width="2vw" height="2vw" fill="red" className="bi bi-trash3-fill" viewBox="0 0 16 16">
+                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.995-1.85L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h5v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M5.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.57l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.57-.528M8 5.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
+              </svg>
+            </button>
+          </div>
+          : null
+        }
+      </td>
+    </tr>
+  ))}
+   <tr>
               <td>
                 {previusData.length > 0 ? <button onClick={() => getPreviusData()}>Anterior</button> : null}
                 {nextData.length > 0 ? <button onClick={() => getNextData()}>Siguiente</button> : null}
               </td>
             </tr>
-          </tbody>
+</tbody>
         </table>
       </div>
     </>
