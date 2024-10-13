@@ -10,6 +10,7 @@ import FormActivitiesAdd from './pages/FormActivitiesAdd';
 import TableTest from './pages/TablesTest';
 import FormModifyActivities from './pages/FormModifyActivities';
 import DirectorLanding from './pages/DirectorLanding';
+import Activities from './pages/Activities';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,6 +22,7 @@ root.render(
       <Route path='FormActivitiesAdd' element={<FormActivitiesAdd/>}/>
       <Route path='FormModifyActivities' element={<FormModifyActivities/>}/>
       <Route path='DirectorLanding' element={<DirectorLanding/>}/>
+      <Route path='Activities' element={<Activities/>}/>
       <Route path='Tables' element={<TableTest/>}/>
     </Routes>
   </BrowserRouter>
