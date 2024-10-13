@@ -19,7 +19,7 @@ root.render(
       <Route path='/' exact element={<App/>} />
       <Route path='RegisterUser' element={<RegisterUser/>}/>
       <Route path='Login' element={<Login/>}/>
-      <Route path='FormActivitiesAdd' element={<FormActivitiesAdd/>}/>
+      <Route path='AgregarActividades' element={<FormActivitiesAdd/>}/>
       <Route path='FormModifyActivities' element={<FormModifyActivities/>}/>
       <Route path='DirectorLanding' element={<DirectorLanding/>}/>
       <Route path='Activities' element={<Activities/>}/>

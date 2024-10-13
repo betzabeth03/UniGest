@@ -17,9 +17,9 @@ class ActivitiesModels{
   Create(actividades){
     return new Promise((resolve, reject) => {
       let nombreAC = actividades.nombre
-      let tipoAC = actividades.tipo
+      let descripcionAC = actividades.descripcion
       let semanaAC = actividades.semana
-      let consult = `INSERT INTO actividades (nombre, tipo, semana, id) VALUES ('${nombreAC}','${tipoAC}',${semanaAC}, "")`
+      let consult = `INSERT INTO actividades (nombre, descripcion, semana, id) VALUES ('${nombreAC}','${descripcionAC}',${semanaAC}, "")`
         connection.query(consult,function(error,results,fields){
           if(error){
             reject(error)
@@ -34,9 +34,9 @@ class ActivitiesModels{
   Modify(idReq, nuevosValores) {
     return new Promise((resolve,reject)=>{
       let nombreAC = nuevosValores.nombre
-      let tipoAC = nuevosValores.tipo
+      let descripcionAC = nuevosValores.descripcion
       let semanaAC = nuevosValores.semana
-      let consult = `UPDATE actividades SET nombre = '${nombreAC}', tipo = '${tipoAC}', semana = '${semanaAC}' WHERE id = ${idReq}`
+      let consult = `UPDATE actividades SET nombre = '${nombreAC}', descripcion = '${descripcionAC}', semana = '${semanaAC}' WHERE id = ${idReq}`
       connection.query(consult,function(error,results,fields){
         if(error){
           reject(error)

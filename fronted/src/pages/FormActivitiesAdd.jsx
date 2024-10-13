@@ -29,7 +29,10 @@ export default function FormActivitiesAdd() {
     <div className='addActivities'>
         <Header active={active} activities={activities}/>
         <div className='addAct'>
-          <FormAdd/>        
+          <FormAdd
+          uri = "actividades"
+          propiedades = {["el nombre","la descripcion","la semana"]}
+          />        
         </div>
     </div>
   )

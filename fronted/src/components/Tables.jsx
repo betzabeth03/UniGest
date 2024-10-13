@@ -95,7 +95,7 @@ export default function Tables(props){
           {props.uri}
         </h1>
         <div>
-        <button>Agregar</button>
+          {(role==="Director")||(role==="Profesor"&&props.uri==="actividades")? <button onClick={()=>window.location.replace(`/Agregar${props.uri}`)}>Agregar</button>:null}
         <form onSubmit={(e)=>getOneElement(e)}>
           <button type="submit">Buscar</button>
           <input type="number" name="element" placeholder="Buscar ID"/>
@@ -118,7 +118,7 @@ export default function Tables(props){
            </th>
            
          ))}
-         {role==="Director"?<th>Accion</th>:null}
+         {(role==="Director")||(role==="Profesor"&&props.uri==="actividades")?<th>Accion</th>:null}
         </tr>
         </thead>
         <tbody>
@@ -128,7 +128,7 @@ export default function Tables(props){
               <td key={colIndex}>{item[property]}</td>
             ))}
             <td>
-              {role==="Director"?
+              {(role==="Director")||(role==="Profesor"&&props.uri==="actividades")?
               <>
               <button>Modificar</button>
               <button onClick={(e)=>deleteElement(e)} name= {item.id} >Eliminar</button>
