@@ -2,7 +2,6 @@ import Calendar from "../components/Calendar";
 import React, {useState,useEffect} from "react";
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import Tables from "../components/Tables";
 import Menu from '../components/Menu';
 import '../css/TablesActivities.css'
 import '../css/TableViewDirector.css'
@@ -49,9 +48,7 @@ export default function CalendarPage(){
               <Header active={active} color={color} activities={activities} />
               <section className='tableActivities'>
                 <article className='tableShow'>
-                  <Tables
-                    uri="actividades"
-                  />
+                <Calendar />
                 </article>
   
               </section>
