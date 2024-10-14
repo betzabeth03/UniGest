@@ -4,10 +4,32 @@
     padding: 2vw;
     justify-content: space-around;
     background-color: rgb(255, 255, 255);
-    width: 70%;
+    width: 100%;
     align-items: center;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
+}
+
+.formGeneral{
+    width: 100%;
+}
+
+.allForm{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.formDirectorAdd{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 2vw;
+    border-radius: 30px;
+    width: 50%;
+    gap: 2vw;
+    align-items: center;
+    justify-content: center;
 }
 
 .activities{
@@ -19,6 +41,24 @@
 .divAdd{
     width: 100%;
     text-align: center;
+}
+
+.divAsing{
+    display: flex;
+    width: 100%;
+    height: 10vw;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.materiaAsing, .sectionAsing{
+    font-size: 30px;
+    padding: .5vw;
+    border-radius: 10px;
+}
+
+.nameAsing{
+    font-size: 30px;
 }
 
 .inputAdd{
@@ -41,10 +81,11 @@
 }
 
 .formAll{
-    width: 60%;
+    width: 100%;
     border-radius: 30px;
     height: 70vh;
     display: flex;
+    justify-content: center;
 }
 
 .logoAdd{

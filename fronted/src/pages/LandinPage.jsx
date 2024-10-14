@@ -3,6 +3,7 @@ import Cookies from 'js-cookie'
 import Landing from "../components/Landing";
 import LandingDirector from '../components/LandingDirector'
 import axios from "axios";
+
 export default function LandinPage(){
     const token = Cookies.get('jwt')
     const [active, setActive] = useState(null)

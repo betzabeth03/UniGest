@@ -1,12 +1,13 @@
 import {React,useState,useEffect} from 'react'
-import Header from '../components/Header'
+import Menu from '../components/Menu'
 import FormAdd from '../components/FormAdd'
+import Footer from '../components/Footer'
 import '../css/FormActivitiesAdd.css'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
 export default function FormActivitiesAdd() {
-  const activities = true
+  const btActive = 'activeMenu'
   const token = Cookies.get('jwt')
   const [active, setActive] = useState(null)
   useEffect(() => {
@@ -27,14 +28,17 @@ export default function FormActivitiesAdd() {
 
 
   return (
-    <div className='addActivities'>
-        <Header active={active} activities={activities}/>
-        <div className='addAct'>
-          <FormAdd
-          uri = "profesores"
-          propiedades = {["el nombre","el apellido"]}
-          />        
-        </div>
+    <div>
+      <div className='directorView'>
+          <Menu btProfesores={btActive}/>
+          <div className='formGeneral'>
+            <FormAdd
+            uri = "profesores"
+            propiedades = {["el nombre","el apellido"]}
+            />        
+          </div>
+      </div>
+      <Footer/>
     </div>
   )
 }

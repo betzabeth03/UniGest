@@ -1,4 +1,4 @@
-.addActivities{
+.addActivities {
     background: url('../assets/loginFondo.png');
     background-repeat: no-repeat;
     background-size: 100vw;
@@ -11,5 +11,22 @@
 
 .addAct{
     display: flex;
+    justify-content: center ;
+}
+
+.addActSection {
+    display: flex;
+    width: 100%;
+    align-items: center;
     justify-content: center;
+}
+
+.directorView {
+    display: flex;
+    background-color: #F4F4F4;
+    align-items: center;
+}
+
+.menuSection{
+    width: 50%;
 }

@@ -53,6 +53,13 @@
     color: white;
     border-radius: 30px;
 }
+.showButton{
+    display: block;
+}
+
+.notShowButton{
+    display: none;
+}
 
 .tableButton{
     background:none;

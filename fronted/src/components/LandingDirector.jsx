@@ -18,7 +18,7 @@ export default function LandingDirector() {
         <article className='welcomeDirector'>
           <TextBox title={['Bienvenido a UniGest']}
             span={['¡Bienvenido al sistema de gestion administrativo!']}
-            text={['Nos complace darte la bienvenida como director (Nombre). Este sistema está diseñado para facilitar la gestión administrativa, mejorar la comunicación entre docentes y estudiantes. Aquí podrá acceder a herramientas que le permitirán supervisar actividades académicas, colaborar con su equipo y fomentar un ambiente de aprendizaje positivo']}
+            text={['Nos complace darte la bienvenida como director. Este sistema está diseñado para facilitar la gestión administrativa, mejorar la comunicación entre docentes y estudiantes. Aquí podrá acceder a herramientas que le permitirán supervisar actividades académicas, colaborar con su equipo y fomentar un ambiente de aprendizaje positivo']}
             clas='textLandindDirector'
           />
         </article>
