@@ -40,6 +40,11 @@
     border-bottom: 2px solid black;
 }
 
+.inputLogin::placeholder{
+    color: black;
+    font-weight: 500;
+}
+
 .submitLogin{
     border-radius: 40px;
     width: 100%;
@@ -53,7 +58,6 @@
 
 .registerLogin{
     font-size: 24px;
-    font-weight: lighter;
     color: rgba(0, 0, 0, 0.651);
 }
 

@@ -39,7 +39,7 @@ export default function TablesActivities() {
               <div className='logoDirector'>
                 <img src={logo} alt="" width={"80%"} />
               </div>
-              <Menu btActividades={btActive}/>
+              <Menu btActividades={btActive} />
               <article className='tableGeneral'>
                 <Tables uri="actividades" />
 

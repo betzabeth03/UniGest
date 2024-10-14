@@ -12,7 +12,7 @@
     position: fixed; /* Cambiar de absolute a fixed para que se mantenga en el viewport al hacer scroll */
     top: 0; /* Asegura que cubra todo el viewport */
     left: 0; /* Asegura que cubra todo el viewport */
-    z-index: 999; /* Mayor z-index para estar por encima de otros elementos */
+    z-index: 1; /* Mayor z-index para estar por encima de otros elementos */
     width: 100vw; /* Ocupa todo el ancho del viewport */
     height: 100vh; /* Ocupa todo el alto del viewport */
     display: flex; /* Usar flex para centrar el contenido */
@@ -33,4 +33,22 @@
     flex-direction: column;
     padding: 3vh;
     border-radius: 10px;
+}
+
+.Prueba{
+    width: 70vw;
+    background-color: rgb(255, 255, 255);
+    padding: 1vw;
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+.calendarSection{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.calendarProfesor{
+    padding: 1vw;
+    background-color: #B5D8EB;
 }

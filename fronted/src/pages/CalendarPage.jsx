@@ -10,7 +10,7 @@ import Cookies from 'js-cookie'
 import logo from '../assets/logo.png'
 
 export default function CalendarPage(){
-    const activities = true
+    const plani = true
     const btPlani = 'activeMenu'
     const color = 'blue'
     const token = Cookies.get('jwt')
@@ -45,9 +45,9 @@ export default function CalendarPage(){
               <Footer />
             </>
             : <>
-              <Header active={active} color={color} activities={activities} />
-              <section className='tableActivities'>
-                <article className='tableShow'>
+              <Header active={active} color={color} plani={plani} />
+              <section className='calendarProfesor '>
+                <article className='calendarProfesor'>
                 <Calendar />
                 </article>
   

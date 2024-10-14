@@ -1,12 +1,4 @@
-@font-face {
-    font-family: montLight;
-    src: url('../fonts/Montserrat-ExtraLight.otf');
-}
 
-@font-face {
-    font-family: montExtraBold;
-    src: url('../fonts/Montserrat-ExtraBold.otf');
-}
 
 .logoDirector{
     position: absolute;
@@ -31,13 +23,12 @@
 
 .textLandindDirector{
     width: 100%;
-    font-weight: lighter;
 }
 
 .textLandindDirector > h1{
     font-size: 7vw;
     text-align: left;
-    font-family: montExtraBold;
+    font-weight: 800;
 }
 
 .textLandindDirector > p{

@@ -28,7 +28,6 @@ export default function FormActivitiesAdd() {
 
 
 
-
   return (
     <div>
       {

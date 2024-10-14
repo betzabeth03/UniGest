@@ -10,6 +10,31 @@
     justify-content: center;
 }
 
+.warning{
+    position: absolute;
+    z-index: 7;
+    width: 100%;
+    height: 100%;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.26);
+    align-items: center;
+    justify-content: center;
+
+}
+
+@keyframes exitAnimation {
+    0%{
+        transform: translateY(-50vh);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+
 .cancelButton:hover{
     background-color: #5EA9D4;
     color: white;
@@ -33,6 +58,9 @@
     display: flex;
     flex-direction: column;
     gap: 2vw;
+    animation-name: exitAnimation;
+    animation-duration: .7s;
+
 }
 
 .textExit{
