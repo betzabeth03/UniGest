@@ -1,0 +1,17 @@
+.mainTable{
+    display: flex;
+}
+
+.tableGeneral{
+    width: 100%;
+    padding: 3vw;
+    background-color: #F4F4F4;
+}
+
+
+.logoDirector{
+    position: absolute;
+    z-index: 1;
+    left: 5vw;
+    padding: .5vw;
+}

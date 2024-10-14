@@ -46,7 +46,7 @@
     border: 0;   
 }
 
-.addButton{
+.addButton, .assignButton{
     font-size: 30px;
     padding: .5vw 2vw;
     background-color: #00255C;
