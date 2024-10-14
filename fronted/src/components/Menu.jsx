@@ -4,10 +4,6 @@ import Cookies from 'js-cookie'
 import Exit from './Exit'
 
 export default function Menu({ btIni, btPlani, btMateria, btSeccion, btActividades, btProfesores }) {
-    async function logout() {
-        Cookies.remove('jwt')
-        window.location.replace('/')
-    }
     const [open, setOpen] = useState(null)
     const [classLinks, setClassLinks] = useState('')
     const [displayMenu, setDisplayMenu] = useState('')
