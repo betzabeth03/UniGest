@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import logoSolo from '../assets/logoSolo.png'
 import '../css/FormAdd.css'
 import axios from 'axios'
 import Cookies from 'js-cookie'
@@ -45,30 +44,31 @@ export default function FormAsing() {
         getData()
     }, [])
     return (
-        <div className='formAll'>
-            <div className='logoAdd'>
-                <img src={logoSolo} alt="" width="100%" />
-                <h1>UniGest</h1>
-            </div>
-            <form onSubmit={(e) => handleSubmit(e)} className='formAdd'>
+        <div className='allForm'>
+            <form onSubmit={(e) => handleSubmit(e)} className='formAsigProfesor'>
                 <label className='activities'> Asignar a {name} </label>
                 <div className='divAsing'>
-                    <label className='nameAsing'>Materia</label>
-                    <select name="materia" className='materiaAsing'>
-                        {
-                            subjects.map((subject, index) => (
-                                <option key={index} value={subject.id}>{subject.nombre}</option>
-                            ))
-                        }
-                    </select>
-                    <label className='nameAsing'>Seccion</label>
-                    <select name="seccion" className='sectionAsing'>
-                        {
-                            sections.map((section, index) => (
-                                <option key={index} value={section.id}>{section.nombre}</option>
-                            ))
-                        }
-                    </select>
+                    <div className='inputAsig'>
+                        <label className='nameAsing'>Materia</label>
+                        <select name="materia" className='materiaAsing'>
+                            {
+                                subjects.map((subject, index) => (
+                                    <option key={index} value={subject.id}>{subject.nombre}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                    <div className='inputAsig'>
+                        <label className='nameAsing'>Seccion</label>
+
+                        <select name="seccion" className='sectionAsing'>
+                            {
+                                sections.map((section, index) => (
+                                    <option key={index} value={section.id}>{section.nombre}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
                 </div>
                 <input type="submit" value={'Agregar'} className="submitAdd" name="" />
             </form>

@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react'
 import Header from '../components/Header'
 import FormAdd from '../components/FormAdd'
 import Menu from '../components/Menu'
+import Footer from '../components/Footer'
 import '../css/FormActivitiesAdd.css'
 import axios from 'axios'
 import Cookies from 'js-cookie'
@@ -32,20 +33,22 @@ export default function FormActivitiesAdd() {
     <div>
       {
         active === 'Director' ?
-          <div className='directorView'>
-            <div className='logoDirectorSolo'>
-              <img src={logo} alt="" width={"80%"} />
-            </div>
-            <Menu btActividades={btActive} />
+          <>
+            <div className='directorView'>
+              <div className='logoDirectorSolo'>
+                <img src={logo} alt="" width={"80%"} />
+              </div>
+              <Menu btActividades={btActive} />
 
-            <div className='formGeneral'>
-              <FormAdd
-                uri="actividades"
-                propiedades={["el nombre", "la descripcion", "la semana"]}
-              />
+              <div className='formGeneral'>
+                <FormAdd
+                  uri="actividades"
+                  propiedades={["el nombre", "la descripcion", "la semana"]}
+                />
+              </div>
             </div>
-
-          </div>
+            <Footer />
+          </>
           :
           <div className='addActivities'>
             <Header active={active} activities={activities} />
