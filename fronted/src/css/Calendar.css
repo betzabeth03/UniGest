@@ -1,20 +1,24 @@
 .Blur{
     filter: blur(2px);
 }
+.calendar{
+    height: 100vh;
+
+}
 .hide{
     display: none;
 }
 .show{
-    position: relative;
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    background-color: #FFFFFF;
-    border-radius: 10px;
-    height: 50vh;
-    width: 30vw;
-    bottom: 110vh;
-    left: 40vw;
+    position: fixed; /* Cambiar de absolute a fixed para que se mantenga en el viewport al hacer scroll */
+    top: 0; /* Asegura que cubra todo el viewport */
+    left: 0; /* Asegura que cubra todo el viewport */
+    z-index: 999; /* Mayor z-index para estar por encima de otros elementos */
+    width: 100vw; /* Ocupa todo el ancho del viewport */
+    height: 100vh; /* Ocupa todo el alto del viewport */
+    display: flex; /* Usar flex para centrar el contenido */
+    background-color: rgba(0, 0, 0, 0.5); 
+    justify-content: center; 
+    align-items: center;
 }
 .buttonClose{
     font-size: 30px;
@@ -22,4 +26,11 @@
     background-color: #00255C;
     color: white;
     border-radius: 30px;
+}
+.bg-event{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 3vh;
+    border-radius: 10px;
 }

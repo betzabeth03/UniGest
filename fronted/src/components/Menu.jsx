@@ -1,17 +1,13 @@
 import React, { useState } from 'react'
 import '../css/Menu.css'
-import Cookies from 'js-cookie'
 import Exit from './Exit'
 
 export default function Menu({ btIni, btPlani, btMateria, btSeccion, btActividades, btProfesores }) {
-    async function logout() {
-        Cookies.remove('jwt')
-        window.location.replace('/')
-    }
+   
     const [open, setOpen] = useState(null)
     const [classLinks, setClassLinks] = useState('')
     const [displayMenu, setDisplayMenu] = useState('')
-    const [exit, setExit] = useState(null)
+    const [exitEmer, setExitEmer] = useState(null)
     const ini = btIni
     const plani = btPlani
     const materia = btMateria
@@ -40,12 +36,12 @@ export default function Menu({ btIni, btPlani, btMateria, btSeccion, btActividad
 
     }
 
-    async function exitSystem() {
-        setExit(true)
-        console.log(exit)
+    function handleShowExit() {
+        setExitEmer(true)
     }
-    async function notExitSystem(){
-        setExit(null)
+
+    function handleCancel() {
+        setExitEmer(false)
     }
 
     return (
@@ -69,7 +65,7 @@ export default function Menu({ btIni, btPlani, btMateria, btSeccion, btActividad
                     </a>
                 </div>
                 <div className='buttons'>
-                    <a href="/" className={`linksMenu ${plani}`}>
+                    <a href="/calendario" className={`linksMenu ${plani}`}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="2vw" height="2vw" fillRule="currentColor" className="bi bi-card-checklist" viewBox="0 0 16 16">
                             <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
                             <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0M7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0" />
@@ -121,7 +117,7 @@ export default function Menu({ btIni, btPlani, btMateria, btSeccion, btActividad
                     </a>
                 </div>
             </div>
-            <div onClick={() => exitSystem()} className='buttons'>
+            <div onClick={() => handleShowExit()} className='buttons'>
                 <div className='linksMenu'>
                     <svg xmlns="http://www.w3.org/2000/svg" width="2vw" height="2vw" fillRule="currentColor" className="bi bi-box-arrow-right" viewBox="0 0 16 16">
                         <path fillRule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
@@ -130,7 +126,7 @@ export default function Menu({ btIni, btPlani, btMateria, btSeccion, btActividad
                     <p className={classLinks}>Cerrar Sesión</p>
                 </div>
             </div>
-            <Exit exitEmer={exit} />
+            <Exit exitEmer={exitEmer} onCancel={handleCancel} />
 
         </div>
     )

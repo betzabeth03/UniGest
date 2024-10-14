@@ -1,41 +1,32 @@
-import React from 'react'
-import Cookies from 'js-cookie'
-import '../css/Exit.css'
-export default function Exit({ exitEmer }) {
+import React from 'react';
+import Cookies from 'js-cookie';
+import '../css/Exit.css';
+
+export default function Exit({ exitEmer, onCancel }) {
     async function logout() {
-        Cookies.remove('jwt')
-        window.location.replace('/')
-    }
-    let cancel = ''
-    if (exitEmer == null) {
-        cancel = 'cancel'
-    } else {
-        if (exitEmer == true) {
-            cancel = ' '
-        }
+        Cookies.remove('jwt');
+        window.location.replace('/');
     }
 
-    async function cancelar() {
-        exitEmer = null 
+    if (!exitEmer) {
+        return null;
     }
 
     return (
-        <div className={`exit ${cancel}`}>
+        <div className={`exit ${exitEmer ? '' : 'cancel'}`}>
             <div className='windonws'>
                 <div className='textExit'>
-                    <p >
-                        ¿Seguro que deseas cerrar sesión?
-                    </p>
+                    <p>¿Seguro que deseas cerrar sesión?</p>
                 </div>
                 <div className='buttonsExitWindows'>
-                    <button className='buttonsExit' onClick={()=>cancelar()}>
+                    <button className='buttonsExit' onClick={onCancel}>
                         Cancelar
                     </button>
-                    <button className='buttonsExit' onClick={() => logout()}>
+                    <button className='buttonsExit' onClick={logout}>
                         Aceptar
                     </button>
                 </div>
             </div>
         </div>
-    )
+    );
 }

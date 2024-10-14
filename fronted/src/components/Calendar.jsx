@@ -52,6 +52,7 @@ export default function Calendar() {
     <>
     <div className={isBlur?'Blur':null}>
         <FullCalendar
+        aspectRatio={2.1}
         plugins={[ dayGridPlugin, interactionPlugin ]}
         initialView="dayGridMonth"
           dateClick={handleDateClick}
@@ -61,12 +62,15 @@ export default function Calendar() {
     </div>
     {eventClicked?
     <div className={noDisplay?'hide':'show'}>
-        <div>
+        <div className='bg-event'>
+            
+        <div >
             <h2> {eventClicked.title} </h2>
             <p>El profesor que asigno esta actividad es: {eventClicked.extendedProps.profesor}, para la matateria {eventClicked.extendedProps.materia}, en la seccion: {eventClicked.extendedProps.seccion} </p>
         </div>
         <div>
         <button onClick={() => handleDivClick()} className='buttonClose'>Cerrar</button>
+        </div>
         </div>
     </div>
     :

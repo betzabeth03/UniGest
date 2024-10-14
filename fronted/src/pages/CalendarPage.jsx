@@ -1,23 +1,63 @@
 import Calendar from "../components/Calendar";
-import React, {useEffect,useState} from "react";
+import React, {useState,useEffect} from "react";
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import Tables from "../components/Tables";
+import Menu from '../components/Menu';
+import '../css/TablesActivities.css'
+import '../css/TableViewDirector.css'
 import axios from "axios";
+import Cookies from 'js-cookie'
+import logo from '../assets/logo.png'
 
 export default function CalendarPage(){
-    const [events, setEvents] = useState([]);
-    useEffect(()=>{
-        async function getEvents() {
-            await axios.get('http://localhost:3000/apms')
+    const activities = true
+    const btPlani = 'activeMenu'
+    const color = 'blue'
+    const token = Cookies.get('jwt')
+    const [active, setActive] = useState(null)
+    useEffect(() => {
+        async function getData(token) {
+          await axios.get(`http://localhost:3000/verify/${token}`)
             .then((result) => {
-                console.log(result.data.body)
-                setEvents(result.data.body)
-            }).catch((err) => {
-                console.log(err)
-            });
+              setActive(result.data.rol)
+            })
+            .catch((err) => {
+              console.log(err)
+            })
         }
-        getEvents()
-    },[])
+        getData(token)
+      }, [token])
     return(
-        <Calendar
-        />
+        <div className='activitiesView'>
+        {
+          active === 'Director' ?
+            <>
+              <section className='mainTable'>
+                <div className='logoDirector'>
+                  <img src={logo} alt="" width={"80%"} />
+                </div>
+                <Menu btPlani={btPlani}/>
+                <article className='tableGeneral'>
+                  <Calendar />
+  
+                </article>
+              </section>
+              <Footer />
+            </>
+            : <>
+              <Header active={active} color={color} activities={activities} />
+              <section className='tableActivities'>
+                <article className='tableShow'>
+                  <Tables
+                    uri="actividades"
+                  />
+                </article>
+  
+              </section>
+              <Footer />
+            </>
+        }
+      </div>
     )
 }

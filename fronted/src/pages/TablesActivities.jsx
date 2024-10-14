@@ -33,7 +33,7 @@ export default function TablesActivities() {
     <div className='activitiesView'>
 
       {
-        active == 'Director' ?
+        active === 'Director' ?
           <>
             <section className='mainTable'>
               <div className='logoDirector'>
