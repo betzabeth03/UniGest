@@ -11,7 +11,7 @@ export default function Exit({ exitEmer }) {
         cancel = 'cancel'
     } else {
         if (exitEmer == true) {
-            cancel = ''
+            cancel = ' '
         }
     }
 
