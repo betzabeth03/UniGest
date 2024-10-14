@@ -1,0 +1,25 @@
+.Blur{
+    filter: blur(2px);
+}
+.hide{
+    display: none;
+}
+.show{
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    height: 50vh;
+    width: 30vw;
+    bottom: 110vh;
+    left: 40vw;
+}
+.buttonClose{
+    font-size: 30px;
+    padding: .5vw 2vw;
+    background-color: #00255C;
+    color: white;
+    border-radius: 30px;
+}
