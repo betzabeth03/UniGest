@@ -4,8 +4,8 @@ class APMSModels {
   All() {
     return new Promise((resolve, reject) => {
       let consult = `
-                SELECT actividades.nombre AS actividad, profesores.nombre AS profesor, materias.nombre AS materia,
-                secciones.nombre AS seccion,DATE_ADD(secciones.periodoAcademico, interval actividades.semana week) AS fechaActividad,
+                SELECT actividades.nombre AS title, profesores.nombre AS profesor, materias.nombre AS materia,
+                secciones.nombre AS seccion,DATE_ADD(secciones.periodoAcademico, interval actividades.semana week) AS date,
                 actividades.descripcion AS descipcion,p_m_s.idProfesor AS idProf, p_m_s.idMaterias AS idMat, p_m_s.idSecciones AS idSec, actividades.id AS idAct
                 FROM actividades
                 JOIN a_p_m_s ON actividades.id = a_p_m_s.idActividades
@@ -19,7 +19,7 @@ class APMSModels {
           reject(error);
         } else {
           results.forEach(Element => {
-            Element.fechaActividad = Element.fechaActividad.toISOString().slice(0,10).replace('T','')
+            Element.date = Element.date.toISOString().slice(0,10).replace('T','')
           });
           resolve(results);
         }

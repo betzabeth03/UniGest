@@ -16,6 +16,7 @@ import FormProfessorsAdd from './pages/FromProfessorsAdd'
 import FormSectionsAdd from './pages/FormSectionsAdd'
 import FormSubjectsAdd from './pages/FormSubjectsAdd'
 import AsingProfessor from './pages/AsingProfessor'
+import CalendarPage from './pages/CalendarPage';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
@@ -33,6 +34,7 @@ root.render(
       <Route path='Materias' element={<TablesSubjects/>}/>
       <Route path='Secciones' element={<TablesSections/>}/>
       <Route path='Asignar' element={<AsingProfessor/>}/>
+      <Route path='Calendario' element={<CalendarPage/>}/>
     </Routes>
   </BrowserRouter>
 );
