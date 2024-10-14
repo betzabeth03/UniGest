@@ -17,10 +17,11 @@ class ProfessorsModels{
               
               for (let j = 0; j < pms.length; j++) {
                 if (results[i].id == pms[j].idProf) {
-                  results[i].materias_Secciones.push(pms[j].materia+ " " +pms[j].seccion)
+                  results[i].materias_Secciones.push(pms[j].Materias+ " " +pms[j].Secciones)
                 }
               }
             }
+
             resolve(results)
           }).catch((e) => {
             reject(e)
