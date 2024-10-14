@@ -22,7 +22,6 @@ export default function LandingDirector() {
             clas='textLandindDirector'
           />
         </article>
-
       </section>
       <Footer />
     </div>
