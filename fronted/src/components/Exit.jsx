@@ -19,10 +19,10 @@ export default function Exit({ exitEmer, onCancel }) {
                     <p>¿Seguro que deseas cerrar sesión?</p>
                 </div>
                 <div className='buttonsExitWindows'>
-                    <button className='buttonsExit' onClick={onCancel}>
+                    <button className='buttonsExit cancelButton' onClick={onCancel}>
                         Cancelar
                     </button>
-                    <button className='buttonsExit' onClick={logout}>
+                    <button className='buttonsExit aceptButton' onClick={logout}>
                         Aceptar
                     </button>
                 </div>

@@ -5,6 +5,8 @@ import Menu from '../components/Menu'
 import '../css/FormActivitiesAdd.css'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import logo from '../assets/logo.png'
+
 
 export default function FormActivitiesAdd() {
   const activities = true
@@ -32,6 +34,9 @@ export default function FormActivitiesAdd() {
       {
         active === 'Director' ?
           <div className='directorView'>
+            <div className='logoDirectorSolo'>
+              <img src={logo} alt="" width={"80%"} />
+            </div>
             <Menu btActividades={btActive} />
 
             <div className='formGeneral'>

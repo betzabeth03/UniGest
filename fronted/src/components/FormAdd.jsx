@@ -45,10 +45,10 @@ export default function FormAdd(props) {
               <label className='activities'> {props.uri.charAt(0).toUpperCase() + props.uri.slice(1)} </label>
               {props.propiedades.map((element, index) => (
                 <div className='divAdd' key={index}>
-                  <input type="text" placeholder={`Ingresa ${element}`} name={element.split(" ")[1]} className='inputAdd' />
+                  <input autoComplete="off" required type="text" placeholder={`Ingresa ${element}`} name={element.split(" ")[1]} className='inputAdd' />
                 </div>
               ))}
-              <input type="submit" value={'Agregar'} className="submitAdd" name="" />
+              <input autoComplete="off" required type="submit" value={'Agregar'} className="submitAdd" name="" />
             </form>
         </div> :
           <div className='formAll'>
@@ -60,10 +60,10 @@ export default function FormAdd(props) {
               <label className='activities'> {props.uri.charAt(0).toUpperCase() + props.uri.slice(1)} </label>
               {props.propiedades.map((element, index) => (
                 <div className='divAdd' key={index}>
-                  <input type="text" placeholder={`Ingresa ${element}`} name={element.split(" ")[1]} className='inputAdd' />
+                  <input autoComplete="off" required type="text" placeholder={`Ingresa ${element}`} name={element.split(" ")[1]} className='inputAdd' />
                 </div>
               ))}
-              <input type="submit" value={'Agregar'} className="submitAdd" name="" />
+              <input autoComplete="off" required type="submit" value={'Agregar'} className="submitAdd" name="" />
             </form>
           </div>
 

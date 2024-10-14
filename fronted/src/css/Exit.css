@@ -10,6 +10,18 @@
     justify-content: center;
 }
 
+.cancelButton:hover{
+    background-color: #5EA9D4;
+    color: white;
+    transition: all .5s ease;
+}
+
+.aceptButton:hover{
+    background-color: #FF0000;
+    color: white;
+    transition: all .5s ease;
+}
+
 .windonws{
     background-color: #262626;
     width: 40vw;

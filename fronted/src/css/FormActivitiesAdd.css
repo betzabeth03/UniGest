@@ -30,3 +30,11 @@
 .menuSection{
     width: 50%;
 }
+
+.logoDirectorSolo{
+    position: absolute;
+    z-index: 1;
+    left: 5vw;
+    top: 0;
+    padding: .5vw;
+}
