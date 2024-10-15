@@ -2,6 +2,8 @@ const connection = require("../connection")
 const jwt = require('jsonwebtoken')
 const bcryptjs = require('bcryptjs')
 require('dotenv').config();
+const ProfessorsControllers = require("../controllers/ProfessorsControllers");
+const e = require("express");
 
 
 
@@ -9,17 +11,33 @@ class AutenticationModels{
          Register(userData){
         return new Promise(async(resolve,reject)=>{
             console.log(userData)
+            const name = userData.name
+            const lastName = userData.lastName
             const user = userData.user
             const password = userData.password 
             const rol = userData.rol
+            const cedulaUser = userData.cedula
             const registerpass = userData.registerpass
             if(registerpass === process.env.REGISTERPROFESSOR&&rol=="Profesor" || registerpass === process.env.REGISTERDIRECTOR&&rol=="Director"){
                 let passwordHash = await bcryptjs.hash(password,8)
-                let consult = `INSERT INTO users (userName,password,rol) VALUES ('${user}','${passwordHash}', '${rol}')`
+                let consult = `INSERT INTO users (nombre,apellido,userName,password,rol,cedula) VALUES (' ${name}', '${lastName}','${user}','${passwordHash}', '${rol}','${cedulaUser}  ')`
                 connection.query(consult,function(error,results,fields){
                     if(error){
                         reject(error)
                     }else{
+                        if(rol === "Profesor"){
+                            const data = {
+                                nombre:name,
+                                apellido:lastName,
+                                cedula: cedulaUser
+                            }
+                            ProfessorsControllers.Create(data)
+                            .then((result) => {
+                                console.log(result)
+                            }).catch((err) => {
+                                console.log(err)
+                            });
+                        }
                         resolve(results)
                     }
                 })

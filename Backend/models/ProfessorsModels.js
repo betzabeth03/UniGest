@@ -34,8 +34,9 @@ class ProfessorsModels{
     return new Promise((resolve, reject) => {
       let nombreUS = usuario.nombre
       let apellidoUS = usuario.apellido
+      let cedula = usuario.cedula
       if(nombreUS && apellidoUS){
-        let consult = `INSERT INTO profesores (nombre, apellido, id) VALUES ('${nombreUS}','${apellidoUS}',"")`
+        let consult = `INSERT INTO profesores (nombre, apellido,cedula) VALUES ('${nombreUS}','${apellidoUS}',${cedula} )`
         connection.query(consult,function(error,results,fields){
          if(error){
            reject(error)

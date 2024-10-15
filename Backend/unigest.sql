@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-10-2024 a las 22:10:18
+-- Tiempo de generación: 15-10-2024 a las 04:03:11
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -67,6 +67,7 @@ CREATE TABLE `materias` (
 CREATE TABLE `profesores` (
   `nombre` varchar(25) NOT NULL,
   `apellido` varchar(25) NOT NULL,
+  `cedula` int(11) NOT NULL,
   `id` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -102,9 +103,12 @@ CREATE TABLE `secciones` (
 --
 
 CREATE TABLE `users` (
+  `nombre` varchar(18) NOT NULL,
+  `apellido` varchar(18) NOT NULL,
   `userName` varchar(25) NOT NULL,
   `password` varchar(300) NOT NULL,
   `rol` varchar(18) NOT NULL,
+  `cedula` int(11) NOT NULL,
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -136,7 +140,8 @@ ALTER TABLE `materias`
 -- Indices de la tabla `profesores`
 --
 ALTER TABLE `profesores`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `cedula` (`cedula`);
 
 --
 -- Indices de la tabla `p_m_s`
@@ -158,7 +163,8 @@ ALTER TABLE `secciones`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `userName` (`userName`);
+  ADD UNIQUE KEY `userName` (`userName`),
+  ADD UNIQUE KEY `cedula` (`cedula`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas

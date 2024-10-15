@@ -86,6 +86,7 @@ export default function Tables(props) {
     console.log(name)
     Cookies.set('name', name[0])
     Cookies.set('id', name[1])
+    Cookies.set('uri',props.uri)
     window.location.replace('/Asignar')
   }
   useEffect(() => {
