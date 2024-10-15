@@ -71,6 +71,8 @@ export default function Tables(props) {
   }
   async function deleteElement(item) {
     let id = item.id
+    console.log(item)
+    console.log(e)
     let verify = prompt("¿Realmente desea eliminar este elemento?(Y/N)")
     if (verify.toLowerCase() === "y") {
       await axios.delete(`http://localhost:3000/${props.uri}/eliminar/${id}`)
