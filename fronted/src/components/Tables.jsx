@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
 import '../css/Tables.css'
-import DeleteWarning from "./DeleteWarning";
 import Cookies from 'js-cookie'
 export default function Tables(props) {
   const [data, setData] = useState([])
@@ -72,15 +71,12 @@ export default function Tables(props) {
   async function deleteElement(item) {
     console.log(item.id)
     let id = item.id
-    let verify = prompt("¿Realmente desea eliminar este elemento?(Y/N)")
-    if (verify.toLowerCase() === "y") {
-      await axios.delete(`http://localhost:3000/${props.uri}/eliminar/${id}`)
-        .then(() => {
-          window.location.reload()
-        }).catch((err) => {
-          console.log(err)
-        });
-    }
+    await axios.delete(`http://localhost:3000/${props.uri}/eliminar/${id}`)
+      .then(() => {
+        window.location.reload()
+      }).catch((err) => {
+        console.log(err)
+      });
   }
   async function handleAsing(name) {
     console.log(name)
@@ -140,7 +136,7 @@ export default function Tables(props) {
                 </div>
               </div>
             </form>
-            {(role === "Director" && props.uri!== "actividades") || (role === "Profesor" && props.uri === "actividades") ? <button onClick={() => window.location.replace(`/Agregar${props.uri}`)} className="addButton">Agregar</button> : null}
+            {(role === "Director" && props.uri !== "actividades") || (role === "Profesor" && props.uri === "actividades") ? <button onClick={() => window.location.replace(`/Agregar${props.uri}`)} className="addButton">Agregar</button> : null}
           </div>
         </div>
 
@@ -154,7 +150,7 @@ export default function Tables(props) {
                 </th>
 
               ))}
-              {(role === "Director" && props.uri!== "actividades") || (role === "Profesor" && props.uri === "actividades") ? <th>Accion</th> : null}
+              {(role === "Director" && props.uri !== "actividades") || (role === "Profesor" && props.uri === "actividades") ? <th>Accion</th> : null}
             </tr>
           </thead>
           <tbody>
@@ -169,11 +165,11 @@ export default function Tables(props) {
                             <div key={subIndex}>{subItem}</div>
                           ))}
                           {(role === "Director" && props.uri === "profesores") || (role === "Profesor" && props.uri === "actividades") ?
-                          <button className="assignButton" onClick={() => handleAsing([item.nombre, item.id])}>
-                            Asignar
-                          </button>
-                          :
-                          <p>Sin Asignar</p>
+                            <button className="assignButton" onClick={() => handleAsing([item.nombre, item.id])}>
+                              Asignar
+                            </button>
+                            :
+                            <p>Sin Asignar</p>
                           }
                         </>
                       )
@@ -183,7 +179,7 @@ export default function Tables(props) {
                   </td>
                 ))}
                 <td>
-                  {(role === "Director" && props.uri!== "actividades") || (role === "Profesor" && props.uri === "actividades") ?
+                  {(role === "Director" && props.uri !== "actividades") || (role === "Profesor" && props.uri === "actividades") ?
                     <div className="buttonsTable">
                       <button className="tableButton">
                         <svg xmlns="http://www.w3.org/2000/svg" width="2vw" height="2vw" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -191,8 +187,23 @@ export default function Tables(props) {
                           <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
                         </svg>
                       </button>
-                      <button onClick={() => deleteElement(item)}   className="tableButton"> 
-                                               <svg xmlns="http://www.w3.org/2000/svg" width="2vw" height="2vw" fill="red" className="bi bi-trash3-fill" viewBox="0 0 16 16">
+                      <div className={`warning ${warning ? '' : 'cancel'}`}>
+                        <div className='windonws'>
+                          <div className='textExit'>
+                            <p>¿Seguro que deseas eliminar?</p>
+                          </div>
+                          <div className='buttonsExitWindows'>
+                            <button className='buttonsExit cancelButton' onClick={handleCancel}>
+                              Cancelar
+                            </button>
+                            <button className='buttonsExit aceptButton' onClick={() => deleteElement(item)}>
+                              Aceptar
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <button onClick={handleShowWarning} className="tableButton">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="2vw" height="2vw" fill="red" className="bi bi-trash3-fill" viewBox="0 0 16 16">
                           <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
                         </svg>
                       </button>
@@ -217,7 +228,6 @@ export default function Tables(props) {
             </tr>
           </tbody>
         </table>
-        <DeleteWarning warning={warning} onCancel={handleCancel} />
       </div>
     </>
   )
