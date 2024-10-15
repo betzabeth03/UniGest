@@ -6,10 +6,13 @@
     color: white;
     gap: 3vw;
     align-items: center;
+    justify-content: center ;
 }
 
 .inputNumber::-webkit-inner-spin-button, 
-.inputNumber::-webkit-outer-spin-button { 
+.inputNumber::-webkit-outer-spin-button,
+.inputSearch::-webkit-inner-spin-button,
+.inputSearch::-webkit-outer-spin-button{ 
   -webkit-appearance: none; 
   margin: 0; 
 }

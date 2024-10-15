@@ -5,6 +5,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 
 export default function FormAdd(props) {
+
   async function handleSubmit(e) {
     e.preventDefault()
     let obj = {}
@@ -27,7 +28,7 @@ export default function FormAdd(props) {
     async function getData(token) {
       await axios.get(`http://localhost:3000/verify/${token}`)
         .then((result) => {
-          setActive(result.data.rol)
+          setActive(result.data.user.rol)
         })
         .catch((err) => {
           console.log(err)
