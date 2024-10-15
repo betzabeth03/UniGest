@@ -13,7 +13,7 @@ export default function Activities() {
         async function getData(token) {
             await axios.get(`http://localhost:3000/verify/${token}`)
                 .then((result) => {
-                    setActive(result.data.rol)
+                    setActive(result.data.user.rol)
                 })
                 .catch((err) => {
                     console.log(err)
