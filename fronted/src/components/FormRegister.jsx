@@ -8,9 +8,12 @@ export default function FormRegister() {
     async function handleSubmit(e) {
         e.preventDefault();
         const data = {
+            name : e.target.name.value,
+            lastName : e.target.lastName.value,
             user: e.target.user.value,
             password: e.target.password.value,
             rol: e.target.puesto.value,
+            cedula : e.target.cedula.value,
             registerpass: e.target.registerpass.value
         }
         await axios.post('http://localhost:3000/register', data)
@@ -35,10 +38,10 @@ export default function FormRegister() {
     return (
         <form onSubmit={(e) => handleSubmit(e)} className='form'>
             <h1 className='titleForm'>Bienvenido</h1>
-            <input type="number" className="inputNumber" placeholder="Cedula" name="name" min={'0'} autoComplete="off" required />
+            <input type="number" className="inputNumber" placeholder="Cedula" name="cedula" min={'0'} autoComplete="off" required />
             <div className="inputNew">
                 <input type="text" className="input" placeholder="Nombre" name="name" autoComplete="off" required />
-                <input type="text" className="input" placeholder="Apellido" name="name" autoComplete="off" required />
+                <input type="text" className="input" placeholder="Apellido" name="lastName" autoComplete="off" required />
             </div>
             <div className="inputNew">
                 <input type="text" className='input' placeholder='Usuario' name="user" autoComplete="off" required />
@@ -46,7 +49,6 @@ export default function FormRegister() {
             </div>
             <div className="inputNew">
                 <select name="puesto" id="" className='list' required>
-                    <option className='select' value="Puesto">Puesto</option>
                     <option className='select' value="Profesor">Profesor</option>
                     <option className='select' value="Director">Director</option>
                 </select>

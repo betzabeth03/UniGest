@@ -69,8 +69,10 @@ class AutenticationModels{
                         if (comparation) {
                             const id = results[0].id
                             const rol = results[0].rol
+                            const cedula = results[0].cedula
+                            const name = results[0].name
                             const userName = results[0].userName
-                            const token = jwt.sign({ id: id, userName:userName, rol:rol  }, process.env.JWT_SECRET);
+                            const token = jwt.sign({ name:name,id: id, userName:userName, rol:rol, cedula:cedula  }, process.env.JWT_SECRET);
                             resolve(token)
                         } else {
                             reject(new Error("Contraseña incorrecta"))
@@ -96,7 +98,7 @@ class AutenticationModels{
                         if (!results || results.length === 0) {
                             reject(new Error("Usuario no encontrado"))
                         } else {
-                            resolve(results[0].rol)
+                            resolve(results[0])
                         }
                     }
                 });

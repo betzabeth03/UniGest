@@ -7,8 +7,6 @@ export default function FormAsing() {
     const [subjects, setSubjects] = useState([])
     const name = Cookies.get('name')
     const id = Cookies.get('id')
-    const uri = Cookies.ge('uri')
-    const prof = Cookies.get('jwt')
     console.log(name)
     async function handleSubmit(e) {
         e.preventDefault()
@@ -48,7 +46,6 @@ export default function FormAsing() {
     return (
         <div className='allForm'>
             <form onSubmit={(e) => handleSubmit(e)} className='formAsigProfesor'>
-                {uri}
                 <label className='activities'> Asignar a {name} </label>
                 <div className='divAsing'>
                     <div className='inputAsig'>
