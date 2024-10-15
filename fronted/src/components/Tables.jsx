@@ -135,7 +135,7 @@ export default function Tables(props) {
                 </div>
               </div>
             </form>
-            {(role === "Director") || (role === "Profesor" && props.uri === "actividades") ? <button onClick={() => window.location.replace(`/Agregar${props.uri}`)} className="addButton">Agregar</button> : null}
+            {(role === "Director" && props.uri !== "actividades") || (role === "Profesor" && props.uri === "actividades") ? <button onClick={() => window.location.replace(`/Agregar${props.uri}`)} className="addButton">Agregar</button> : null}
           </div>
         </div>
 
@@ -149,7 +149,7 @@ export default function Tables(props) {
                 </th>
 
               ))}
-              {(role === "Director") || (role === "Profesor" && props.uri === "actividades") ? <th>Accion</th> : null}
+              {(role === "Director" && props.uri !== "actividades") || (role === "Profesor" && props.uri === "actividades") ? <th>Accion</th> : null}
             </tr>
           </thead>
           <tbody>
@@ -163,9 +163,13 @@ export default function Tables(props) {
                           {item[property].map((subItem, subIndex) => (
                             <div key={subIndex}>{subItem}</div>
                           ))}
-                          <button className="assignButton" onClick={() => handleAsing([item.nombre, item.id])}>
-                            Asignar
-                          </button>
+                          {(role === "Director" && props.uri === "profesores") || (role === "Profesor" && props.uri === "actividades") ?
+                            <button className="assignButton" onClick={() => handleAsing([item.nombre, item.id])}>
+                              Asignar
+                            </button>
+                            :
+                            <p>Sin Asignar</p>
+                          }
                         </>
                       )
                       : item[property]
@@ -174,7 +178,7 @@ export default function Tables(props) {
                   </td>
                 ))}
                 <td>
-                  {(role === "Director") || (role === "Profesor" && props.uri === "actividades") ?
+                  {(role === "Director" && props.uri !== "actividades") || (role === "Profesor" && props.uri === "actividades") ?
                     <div className="buttonsTable">
                       <button className="tableButton">
                         <svg xmlns="http://www.w3.org/2000/svg" width="2vw" height="2vw" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
