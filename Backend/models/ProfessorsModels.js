@@ -68,14 +68,27 @@ class ProfessorsModels{
   
 Delete(idElemento){
   return new Promise((resolve,reject)=>{
-    let consult = `DELETE FROM profesores WHERE id = ${idElemento}`
-    connection.query(consult,function(error,results,fields){
-      if(error){
-        reject(error)
+    connection.query(`SELECT profesores.cedula FROM profesores WHERE id=${idElemento}`,function(err,result){
+      if(err){
+        reject(err)
       }else{
-        resolve(results)
+        let consult = `DELETE FROM profesores WHERE id = ${idElemento}`
+        connection.query(consult,function(error,results,fields){
+          if(error){
+            reject(error)
+          }else{
+            connection.query(`DELETE FROM users WHERE cedula = ${result[0].cedula}`,function(err,result3){
+              if(err){
+                reject(err)
+              }else{
+                resolve(result3)
+              }
+            })
+          }
+        })
       }
     })
+
   })
 
 
