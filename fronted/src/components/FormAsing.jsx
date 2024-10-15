@@ -5,28 +5,46 @@ import Cookies from 'js-cookie'
 export default function FormAsing() {
     const [sections, setSections] = useState([])
     const [subjects, setSubjects] = useState([])
+    const [user, setUser] = useState(null)
     const name = Cookies.get('name')
     const id = Cookies.get('id')
-    console.log(name)
+    const token = Cookies.get('jwt')
+    console.log(name, id)
     async function handleSubmit(e) {
         e.preventDefault()
         const materia = e.target.materia.value
         const seccion = e.target.seccion.value
-        const data = {
-            idProfesor: id,
-            idMaterias: materia,
-            idSecciones: seccion
+        if(user.rol=== "Profesor"){
+            const data = {
+                idActividad: id,
+                cedula : user.cedula,
+                idMaterias: materia,
+                idSecciones: seccion
+            }
+            await axios.post('http://localhost:3000/apms/agregar', data)
+                .then((result) => {
+                    console.log(result)
+                    window.location.replace('/actividades')
+                }).catch((err) => {
+                    console.log(err)
+                });
+        }else{
+            const data = {
+                idProfesor: id,
+                idMaterias: materia,
+                idSecciones: seccion
+            }
+            await axios.post('http://localhost:3000/pms/agregar', data)
+                .then((result) => {
+                    console.log(result)
+                    window.location.replace('/profesores')
+                }).catch((err) => {
+                    console.log(err)
+                });
         }
-        await axios.post('http://localhost:3000/pms/agregar', data)
-            .then((result) => {
-                console.log(result)
-                window.location.replace('/profesores')
-            }).catch((err) => {
-                console.log(err)
-            });
     }
     useEffect(() => {
-        async function getData() {
+        async function getData(token) {
             await axios.get('http://localhost:3000/materias')
                 .then((materias) => {
                     console.log(materias.data.body)
@@ -40,9 +58,16 @@ export default function FormAsing() {
                 }).catch((err) => {
                     console.log(err)
                 });
-        }
-        getData()
-    }, [])
+                    await axios.get(`http://localhost:3000/verify/${token}`)
+                      .then((result) => {
+                        setUser(result.data.user)
+                      })
+                      .catch((err) => {
+                        console.log(err)
+                      })
+                  }
+        getData(token)
+    }, [token])
     return (
         <div className='allForm'>
             <form onSubmit={(e) => handleSubmit(e)} className='formAsigProfesor'>
