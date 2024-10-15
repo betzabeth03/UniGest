@@ -103,7 +103,7 @@ export default function Tables(props) {
     async function verify() {
       await axios.get(`http://localhost:3000/verify/${token}`)
         .then((result) => {
-          setRole(result.data.rol)
+          setRole(result.data.user.rol)
         }).catch((err) => {
           console.log(err)
         });
