@@ -1,4 +1,5 @@
 const connection = require('../connection')
+const APMSControllers = require("../controllers/aPMSControllers");
 
 class ActivitiesModels{
   All() {
@@ -8,7 +9,22 @@ class ActivitiesModels{
         if(error){
          reject(error)
         }else{
-          resolve(results)
+          APMSControllers.All()
+          .then((apms) => {
+            for (let i = 0; i < results.length; i++) {
+              results[i].Clase = []
+              
+              for (let j = 0; j < apms.length; j++) {
+                if (results[i].id == apms[j].idActividades) {
+                  results[i].Clase.push(apms[j].profesor+ " " +apms[j].materias+ " " +apms[j].seccion)
+                }
+              }
+            }
+
+            resolve(results)
+          }).catch((e) => {
+            reject(e)
+          })
         }
       })
     });

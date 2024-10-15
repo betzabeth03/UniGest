@@ -9,7 +9,6 @@ class ProfessorsModels{
         if(error){
          reject(error)
         }else{
-          console.log("llegue")
           PMSControllers.All()
           .then((pms) => {
             for (let i = 0; i < results.length; i++) {
