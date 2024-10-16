@@ -19,7 +19,7 @@ export default function FormLogin() {
     }).catch((err) => {
       if(err.response){
         console.log(err.response.data.error)
-        setError(err.response.data.error)
+        setError(err.response.data.message)
     }
     });
   }
