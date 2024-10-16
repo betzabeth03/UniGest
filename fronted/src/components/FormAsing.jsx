@@ -101,6 +101,11 @@ export default function FormAsing() {
                         <>
                        <div className='inputAsig'>
                         <label className='nameAsing'>Materia</label>
+                        {subjects.length<=0?
+                            <div>
+                                <p>No hay materias disponibles</p>
+                            </div>
+                            :
                         <select name="materia" className='materiaAsing'>
                             {
                                 subjects.map((subject, index) => (
@@ -108,10 +113,16 @@ export default function FormAsing() {
                                 ))
                             }
                         </select>
+                         }
                     </div>
                     <div className='inputAsig'>
                         <label className='nameAsing'>Seccion</label>
 
+                            {sections.length<=0?
+                            <div>
+                                <p>No hay secciones disponibles</p>
+                            </div>
+                            :
                         <select name="seccion" className='sectionAsing'>
                             {
                                 sections.map((section, index) => (
@@ -119,12 +130,19 @@ export default function FormAsing() {
                                 ))
                             }
                         </select>
+                            }
                     </div>
                         </>
                     :
+                    
                     <div className='inputAsig'>
-                        <label className='nameAsing'>Materia y Seccion</label>
-
+                        
+                        <label className='nameAsing'>Clase</label>
+                        {PMS.length<=0?
+                            <div>
+                                <p>No hay clases disponibles</p>
+                            </div>
+                            :
                         <select name="materia_seccion" className='sectionAsing'>
                             {
                                 PMS.map((element, index) => (
@@ -132,8 +150,8 @@ export default function FormAsing() {
                                 ))
                             }
                         </select>
-                    </div>
                     }
+                    </div> }
                 </div>
                 <input type="submit" value={'Agregar'} className="submitAdd" name="" />
             </form>

@@ -17,7 +17,25 @@ class SubjectsModels{
     Create(registro){
       return new Promise((resolve, reject) => {
         let nombreR = registro.nombre
-        let diaClase = registro.dia
+        let diaClase = null
+        let diaUpper = registro.dia.charAt(0).toUpperCase() + registro.dia.slice(1)
+        switch(diaUpper){
+          case "Lunes": diaClase = 1 
+          break;
+          case "Martes": diaClase = 2 
+          break;
+          case "Miercoles": diaClase = 3
+          break;
+          case "Jueves": diaClase = 4
+          break;
+          case "Viernes": diaClase = 5
+          break;
+          case "Sabado": diaClase = 6
+          break;
+          case "Domingo": diaClase = 0
+          break;
+  
+        }
              let consult = `INSERT INTO materias (nombre,diaClase) VALUES ('${nombreR}','${diaClase}')`
              connection.query(consult,function(error,results,fields){
               if(error){

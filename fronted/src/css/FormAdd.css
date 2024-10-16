@@ -50,6 +50,7 @@
     width: 50%;
     justify-content: flex-start;
     gap: 2vw;
+    align-items: center;
 }
 
 .activities{

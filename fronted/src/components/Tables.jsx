@@ -81,11 +81,14 @@ export default function Tables(props) {
       });
   }
   async function handleAsing(name) {
-    console.log(name)
     Cookies.set('name', name[0])
     Cookies.set('id', name[1])
     Cookies.set('uri',props.uri)
-    window.location.replace('/Asignar')
+    if(role==="Profesor"){
+      window.location.href = `/AsignarActividad`
+    }else if(role==="Director"){
+      window.location.replace('/AsignarProfesor')
+    }
   }
   useEffect(() => {
     async function getData() {
@@ -162,7 +165,7 @@ export default function Tables(props) {
                   <td key={colIndex}>
                     {Array.isArray(item[property])
                       ? (
-                        item[property].length>0
+                        item[property].length>0||(props.uri==="actividades"&&role === "Profesor")||(role === "Director" && props.uri === "profesores")
                         ?
                         <>
                           {item[property].map((subItem, subIndex) => (
