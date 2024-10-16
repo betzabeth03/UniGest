@@ -5,21 +5,18 @@ import Cookies from 'js-cookie'
 export default function FormAsing() {
     const [sections, setSections] = useState([])
     const [subjects, setSubjects] = useState([])
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState({})
+    const [PMS,setPMS] = useState([])
     const name = Cookies.get('name')
     const id = Cookies.get('id')
     const token = Cookies.get('jwt')
-    console.log(name, id)
     async function handleSubmit(e) {
         e.preventDefault()
-        const materia = e.target.materia.value
-        const seccion = e.target.seccion.value
         if(user.rol=== "Profesor"){
+            const mat_sec = e.target.materia_seccion.value
             const data = {
-                idActividad: id,
-                cedula : user.cedula,
-                idMaterias: materia,
-                idSecciones: seccion
+                idActividades: id,
+                idPMS: mat_sec
             }
             await axios.post('http://localhost:3000/apms/agregar', data)
                 .then((result) => {
@@ -29,6 +26,8 @@ export default function FormAsing() {
                     console.log(err)
                 });
         }else{
+            const materia = e.target.materia.value
+            const seccion = e.target.seccion.value
             const data = {
                 idProfesor: id,
                 idMaterias: materia,
@@ -44,36 +43,63 @@ export default function FormAsing() {
         }
     }
     useEffect(() => {
-        async function getData(token) {
+       async function getUser(token) {
+           await axios.get(`http://localhost:3000/verify/${token}`)
+             .then((result) => {
+               setUser(result.data.user)
+             })
+             .catch((err) => {
+               console.log(err)
+             })
+       }
+       getUser(token)
+    }, [token])
+    useEffect(() => {
+        async function getDataDirector() {
             await axios.get('http://localhost:3000/materias')
                 .then((materias) => {
-                    console.log(materias.data.body)
-                    setSubjects(materias.data.body)
+                    console.log(materias.data.body);
+                    setSubjects(materias.data.body);
                 }).catch((err) => {
-                    console.log(err)
+                    console.log(err);
                 });
+    
             await axios.get('http://localhost:3000/secciones')
                 .then((secciones) => {
-                    setSections(secciones.data.body)
+                    setSections(secciones.data.body);
                 }).catch((err) => {
-                    console.log(err)
+                    console.log(err);
                 });
-                    await axios.get(`http://localhost:3000/verify/${token}`)
-                      .then((result) => {
-                        setUser(result.data.user)
-                      })
-                      .catch((err) => {
-                        console.log(err)
-                      })
-                  }
-        getData(token)
-    }, [token])
+        }
+    
+        async function getDataProfessor() {
+            await axios.get(`http://localhost:3000/pms?cedula=${user.cedula}`)
+                .then((result) => {
+                    console.log(result)
+                    setPMS(result.data.body);
+                }).catch((err) => {
+                    console.log(err);
+                });
+        }
+    
+
+       
+            if (user.rol === "Director") {
+                getDataDirector();
+            } else if (user.rol === "Profesor") {
+                getDataProfessor();
+            } 
+            
+        
+    }, [user]);
     return (
         <div className='allForm'>
             <form onSubmit={(e) => handleSubmit(e)} className='formAsigProfesor'>
                 <label className='activities'> Asignar a {name} </label>
                 <div className='divAsing'>
-                    <div className='inputAsig'>
+                        {user.rol==="Director"?
+                        <>
+                       <div className='inputAsig'>
                         <label className='nameAsing'>Materia</label>
                         <select name="materia" className='materiaAsing'>
                             {
@@ -94,6 +120,20 @@ export default function FormAsing() {
                             }
                         </select>
                     </div>
+                        </>
+                    :
+                    <div className='inputAsig'>
+                        <label className='nameAsing'>Materia y Seccion</label>
+
+                        <select name="materia_seccion" className='sectionAsing'>
+                            {
+                                PMS.map((element, index) => (
+                                    <option key={index} value={element.id}>{element.Materias_Secciones}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                    }
                 </div>
                 <input type="submit" value={'Agregar'} className="submitAdd" name="" />
             </form>

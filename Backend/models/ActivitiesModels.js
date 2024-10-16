@@ -1,5 +1,5 @@
 const connection = require('../connection')
-const APMSControllers = require("../controllers/aPMSControllers");
+const APMSControllers = require("../controllers/APMSControllers");
 
 class ActivitiesModels{
   All() {
@@ -13,14 +13,12 @@ class ActivitiesModels{
           .then((apms) => {
             for (let i = 0; i < results.length; i++) {
               results[i].Clase = []
-              
               for (let j = 0; j < apms.length; j++) {
-                if (results[i].id == apms[j].idActividades) {
-                  results[i].Clase.push(apms[j].profesor+ " " +apms[j].materias+ " " +apms[j].seccion)
+                if (results[i].id == apms[j].idAct) {
+                  results[i].Clase.push(apms[j].profesor+ " " +apms[j].materia+ " " +apms[j].seccion)
                 }
               }
             }
-
             resolve(results)
           }).catch((e) => {
             reject(e)

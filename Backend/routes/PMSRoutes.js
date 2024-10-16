@@ -2,8 +2,10 @@ const express = require("express");
 const PMSControllers = require("../controllers/PMSControllers");
 const router = express.Router();
 router.get("/", function (req, res, next) {
-  
-    PMSControllers.All().then((result) => {
+     const cedula = req.query.cedula
+     console.log(cedula)
+    PMSControllers.All(cedula)
+    .then((result) => {
       res.status(200).json({ message: "Peticion exitosa", body: result });
     });
   }

@@ -1,9 +1,9 @@
 const PMSModels = require("../models/PMSModels");
 
 class PMSControllers{
-    All(){
+    All(cedula){
       return new Promise((resolve, reject) => {   
-        PMSModels.All()
+        PMSModels.All(cedula)
        .then((result) => {
         resolve(result)
        }).catch((e) => {

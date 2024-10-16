@@ -9,7 +9,7 @@ class ProfessorsModels{
         if(error){
          reject(error)
         }else{
-          PMSControllers.All()
+          PMSControllers.All(undefined)
           .then((pms) => {
             for (let i = 0; i < results.length; i++) {
               results[i].materias_Secciones = []
@@ -20,7 +20,6 @@ class ProfessorsModels{
                 }
               }
             }
-
             resolve(results)
           }).catch((e) => {
             reject(e)

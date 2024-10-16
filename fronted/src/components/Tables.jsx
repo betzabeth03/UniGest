@@ -162,6 +162,8 @@ export default function Tables(props) {
                   <td key={colIndex}>
                     {Array.isArray(item[property])
                       ? (
+                        item[property].length>0
+                        ?
                         <>
                           {item[property].map((subItem, subIndex) => (
                             <div key={subIndex}>{subItem}</div>
@@ -171,9 +173,12 @@ export default function Tables(props) {
                               Asignar
                             </button>
                             :
-                            <p>Sin Asignar</p>
+                            null                            
                           }
                         </>
+                        :
+                        <p>Sin Asignar</p>
+
                       )
                       : item[property]
 

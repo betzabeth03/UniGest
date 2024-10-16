@@ -1,19 +1,34 @@
+const e = require("cors");
 const connection = require("../connection");
 
 class PMSModels {
-  All() {
+  All(cedula) {
     return new Promise((resolve, reject) => {
-      let consulta =
-        `SELECT profesores.nombre AS Nombre,profesores.apellido AS Apellido, materias.nombre AS Materias, secciones.nombre AS Secciones,
-        p_m_s.idProfesor AS idProf, p_m_s.idMaterias AS idMat, p_m_s.idSecciones AS idSec
-        FROM profesores
-        JOIN p_m_s ON profesores.id = p_m_s.idProfesor 
-        JOIN materias ON p_m_s.idMaterias = materias.id 
-        JOIN secciones ON p_m_s.idSecciones = secciones.id`;
+      let consulta = null
+      if(cedula===undefined){
+        consulta =
+          `SELECT profesores.nombre AS Nombre,profesores.apellido AS Apellido, materias.nombre AS Materias, secciones.nombre AS Secciones, p_m_s.id AS id, profesores.id AS idProf
+          FROM profesores
+          JOIN p_m_s ON profesores.id = p_m_s.idProfesor 
+          JOIN materias ON p_m_s.idMaterias = materias.id 
+          JOIN secciones ON p_m_s.idSecciones = secciones.id`;
+      }else{
+        consulta = `SELECT profesores.nombre AS Nombre,profesores.apellido AS Apellido, materias.nombre AS Materias, secciones.nombre AS Secciones, p_m_s.id AS id
+          FROM profesores
+          JOIN p_m_s ON profesores.id = p_m_s.idProfesor 
+          JOIN materias ON p_m_s.idMaterias = materias.id 
+          JOIN secciones ON p_m_s.idSecciones = secciones.id
+          WHERE profesores.cedula = ${cedula}`;
+      }
       connection.query(consulta, function (error, results, fields) {
         if (error) {
           reject(error);
         } else {
+          if(cedula!=null){
+            results.forEach(element => {
+              element.Materias_Secciones  = element.Materias + " - " + element.Secciones;
+            });
+          }
           resolve(results);
         }
       });
