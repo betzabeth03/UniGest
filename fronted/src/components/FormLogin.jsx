@@ -44,7 +44,7 @@ export default function FormLogin() {
               </svg>
             </div>
               {
-                error? <div className='errorRegister'> {error} </div>:<div></div>
+                error? <div className='errorRegister'> {error} </div>: null
               }
               <input className='submitLogin' type="submit" value='Iniciar Sesión'/>
               <p className='registerLogin'>
