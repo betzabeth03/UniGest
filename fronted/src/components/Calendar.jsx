@@ -20,6 +20,7 @@ export default function Calendar() {
                             title: item.title,
                             date: item.date,
                             extendedProps: {
+                                descripcion: item.descripcion,
                                 profesor: item.profesor,
                                 materia: item.materia,
                                 seccion: item.seccion
@@ -51,7 +52,7 @@ export default function Calendar() {
     return (
         <>
             <section className='calendarSection'>
-                <div className={isBlur ? 'Blur' : 'Prueba'}>
+                <div className={isBlur ? 'Blur calendarView ' : 'calendarView    '}>
                     <FullCalendar
                         aspectRatio={2.1}
                         plugins={[dayGridPlugin, interactionPlugin]}
@@ -67,11 +68,24 @@ export default function Calendar() {
                 <div className={noDisplay ? 'hide' : 'show'}>
                     <div className='bg-event'>
 
-                        <div >
-                            <h2> {eventClicked.title} </h2>
-                            <p>El profesor que asigno esta actividad es: {eventClicked.extendedProps.profesor}, para la matateria {eventClicked.extendedProps.materia}, en la seccion: {eventClicked.extendedProps.seccion} </p>
+                        <div className='cardDescription'>
+                            <h2 className='titleDescription'>
+                                {eventClicked.title}
+                            </h2>
+                            <p className='descriptionActivities'>
+                                Profesor: {eventClicked.extendedProps.profesor}
+                            </p>
+                            <p className='descriptionActivities'>
+                                Materia: {eventClicked.extendedProps.materia}
+                            </p>
+                            <p className='descriptionActivities'>
+                                Seccion: {eventClicked.extendedProps.seccion}
+                            </p>
+                            <p className='descriptionActivities'>
+                               Descripcion {eventClicked.extendedProps.descripcion}
+                            </p>
                         </div>
-                        <div>
+                        <div className='buttonCancelDescription'>
                             <button onClick={() => handleDivClick()} className='buttonClose'>Cerrar</button>
                         </div>
                     </div>

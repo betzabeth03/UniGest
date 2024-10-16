@@ -13,29 +13,40 @@
     top: 0; /* Asegura que cubra todo el viewport */
     left: 0; /* Asegura que cubra todo el viewport */
     z-index: 1; /* Mayor z-index para estar por encima de otros elementos */
-    width: 100vw; /* Ocupa todo el ancho del viewport */
+    width: 100%; /* Ocupa todo el ancho del viewport */
     height: 100vh; /* Ocupa todo el alto del viewport */
     display: flex; /* Usar flex para centrar el contenido */
     background-color: rgba(0, 0, 0, 0.5); 
     justify-content: center; 
     align-items: center;
 }
+
+.cardDescription{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1vw;
+}
+
 .buttonClose{
     font-size: 30px;
     padding: .5vw 2vw;
     background-color: #00255C;
     color: white;
+    border: 0;
     border-radius: 30px;
 }
 .bg-event{
     background-color: white;
     display: flex;
+    width: 25%;
     flex-direction: column;
     padding: 3vh;
+    gap: 1vw;
     border-radius: 10px;
 }
 
-.Prueba{
+.calendarView{
     width: 70vw;
     background-color: rgb(255, 255, 255);
     padding: 1vw;
@@ -51,4 +62,25 @@
 .calendarProfesor{
     padding: 1vw;
     background-color: #B5D8EB;
+}
+
+.descriptionActivities{
+    font-size: 24px;
+    text-align: justify;
+}
+
+.titleDescription{
+    font-size: 30px;
+}
+
+.buttonCancelDescription{
+    display: flex;
+    justify-content: center;
+}
+
+.fc-event{
+    background-color: rgb(243, 44, 9);
+    border-radius: 20px;
+    border: 0;
+    padding: .2vw;
 }

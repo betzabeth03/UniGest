@@ -127,5 +127,6 @@
     width: 55%;
     font-size: 1.8vw;
     border-radius: 30px;
+    border: 0;
     font-weight: bold;
 }
