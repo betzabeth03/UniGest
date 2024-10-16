@@ -6,7 +6,7 @@ class APMSModels {
       let consult = `
                 SELECT actividades.nombre AS title, profesores.nombre AS profesor, materias.nombre AS materia,
                 secciones.nombre AS seccion,DATE_ADD(secciones.periodoAcademico, interval actividades.semana week) AS date,
-                actividades.descripcion AS descipcion,p_m_s.idProfesor AS idProf, p_m_s.idMaterias AS idMat, p_m_s.idSecciones AS idSec, actividades.id AS idAct
+                actividades.descripcion AS descripcion,p_m_s.idProfesor AS idProf, p_m_s.idMaterias AS idMat, p_m_s.idSecciones AS idSec, actividades.id AS idAct
                 FROM actividades
                 JOIN a_p_m_s ON actividades.id = a_p_m_s.idActividades
                 JOIN p_m_s ON p_m_s.id = a_p_m_s.idPMS

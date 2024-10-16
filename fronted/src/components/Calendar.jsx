@@ -20,6 +20,7 @@ export default function Calendar() {
                             title: item.title,
                             date: item.date,
                             extendedProps: {
+                                descripcion: item.descripcion,
                                 profesor: item.profesor,
                                 materia: item.materia,
                                 seccion: item.seccion
@@ -69,7 +70,7 @@ export default function Calendar() {
 
                         <div >
                             <h2> {eventClicked.title} </h2>
-                            <p>El profesor que asigno esta actividad es: {eventClicked.extendedProps.profesor}, para la matateria {eventClicked.extendedProps.materia}, en la seccion: {eventClicked.extendedProps.seccion} </p>
+                            <p>El profesor que asigno esta actividad es: {eventClicked.extendedProps.profesor}, para la matateria {eventClicked.extendedProps.materia}, en la seccion: {eventClicked.extendedProps.seccion} {eventClicked.extendedProps.descripcion} </p>
                         </div>
                         <div>
                             <button onClick={() => handleDivClick()} className='buttonClose'>Cerrar</button>
