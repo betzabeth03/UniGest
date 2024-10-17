@@ -9,43 +9,44 @@ export default function Calendar() {
     const [isBlur, SetIsBlur] = useState(false)
     const [noDisplay, setNoDisplay] = useState(false)
     const [eventClicked, setEventClicked] = useState(null)
-    const [filter, setFilter] = useState([]); 
-    const [materias, setMaterias] = useState([]); 
-    
- 
+    const [filter, setFilter] = useState([]);
+    const [materias, setMaterias] = useState([]);
+    const [openFiltrer, setOpenFiltrer] = useState('notFiltrerForm')
+
+
     useEffect(() => {
-        
+
         async function getEvents() {
             await axios.get('http://localhost:3000/apms')
-                .then(async(result) => {
+                .then(async (result) => {
                     const materiasRes = await axios.get('http://localhost:3000/materias');
                     setMaterias(materiasRes.data.body);
                     let arrTemp = []
                     let arrSubjectsFilter = []
-                   
-            if (filter.length !== 0) {
-                arrSubjectsFilter = result.data.body.filter(evento =>
-                    filter.includes(evento.materia)
-                );
-            } else {
-                arrSubjectsFilter = result.data.body;
-            }
-                   arrSubjectsFilter.forEach((item) => {
-                        const date= new Date(item.date)
+
+                    if (filter.length !== 0) {
+                        arrSubjectsFilter = result.data.body.filter(evento =>
+                            filter.includes(evento.materia)
+                        );
+                    } else {
+                        arrSubjectsFilter = result.data.body;
+                    }
+                    arrSubjectsFilter.forEach((item) => {
+                        const date = new Date(item.date)
                         const dateDay = date.getDay()
                         let dateEvent = undefined
-                        if(dateDay===item.diaClase){
+                        if (dateDay === item.diaClase) {
                             dateEvent = item.date
-                        }else{
+                        } else {
                             let diferencia = item.diaClase - dateDay
 
-                              if (diferencia < 0) {
-                                    diferencia += 6;
-                                } 
+                            if (diferencia < 0) {
+                                diferencia += 6;
+                            }
 
                             const nuevaFecha = new Date(item.date);
                             nuevaFecha.setDate(date.getDate() + diferencia);
-                            const nuevaFechaISO = nuevaFecha.toISOString().slice(0,10).replace('T','')
+                            const nuevaFechaISO = nuevaFecha.toISOString().slice(0, 10).replace('T', '')
                             dateEvent = nuevaFechaISO
                         }
 
@@ -68,7 +69,15 @@ export default function Calendar() {
         }
         getEvents()
     }, [filter])
-    
+
+    function openFiltrerForm() {
+        if (openFiltrer === '') {
+            setOpenFiltrer('notFiltrerForm')
+        } else {
+            setOpenFiltrer('')
+        }
+    }
+
     const handleEventClick = (arg) => {
         setEventClicked(arg.event)
         SetIsBlur(true)
@@ -90,7 +99,11 @@ export default function Calendar() {
     }
 
     return (
-        <>
+        <section className='viewAllCalendar'>
+            <div className='filtrerWidth'>
+                <input type='button' className='buttonFiltrer' onClick={openFiltrerForm} value={'Filtrar'}/>
+
+            </div>
             <section className='calendarSection'>
                 <div className={isBlur ? 'Blur calendarView ' : 'calendarView    '}>
                     <FullCalendar
@@ -121,7 +134,7 @@ export default function Calendar() {
                                 Seccion: {eventClicked.extendedProps.seccion}
                             </p>
                             <p className='descriptionActivities'>
-                               Descripcion {eventClicked.extendedProps.descripcion}
+                                Descripcion {eventClicked.extendedProps.descripcion}
                             </p>
                         </div>
                         <div className='buttonCancelDescription'>
@@ -132,23 +145,30 @@ export default function Calendar() {
                 :
                 null
             }
-            <div>
-                                <form>
-                                    <h3>Filtrar por materias</h3>
-                                    {materias.map((materia) => (
-                                        <label key={materia.id}>
-                                            <input
-                                                type="checkbox"
-                                                value={materia.nombre}
-                                                onChange={handleFilterChange}
-                                                checked={filter.includes(materia.nombre)}
-                                            />
-                                            {materia.nombre}
-                                        </label>
-                                    ))}
-                                </form>
-                            </div>
-                            
-        </>
+            <div className={`filtrerForm ${openFiltrer}`}>
+                <div className='containFiltrer'>
+                    <form className='listChecked'>
+                        <div className='listFiltrer'>
+                            <h3>Filtrar por materias</h3>
+                            {materias.map((materia) => (
+                                <label key={materia.id} className='inputCheckbox'>
+                                    <input
+                                        type="checkbox"
+                                        value={materia.nombre}
+                                        onChange={handleFilterChange}
+                                        checked={filter.includes(materia.nombre)}
+                                        className='inputChecked'
+                                    />
+                                    {materia.nombre}
+                                </label>
+
+                            ))}
+                        </div>
+                        <input type='button' className='aceptButtonFiltrer' onClick={openFiltrerForm} value={'Aceptar'} />
+                    </form>
+                </div>
+            </div>
+
+        </section>
     )
 }
