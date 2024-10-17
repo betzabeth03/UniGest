@@ -120,7 +120,7 @@ export default function FormAsing() {
 
                             {sections.length<=0?
                             <div>
-                                <p>No hay secciones disponibles</p>
+                                <p className='notClas'>No hay secciones disponibles</p>
                             </div>
                             :
                         <select name="seccion" className='sectionAsing'>
@@ -140,7 +140,7 @@ export default function FormAsing() {
                         <label className='nameAsing'>Clase</label>
                         {PMS.length<=0?
                             <div>
-                                <p>No hay clases disponibles</p>
+                                <p className='notClas'>No hay clases disponibles</p>
                             </div>
                             :
                         <select name="materia_seccion" className='sectionAsing'>

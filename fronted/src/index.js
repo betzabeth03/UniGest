@@ -17,7 +17,8 @@ import FormSectionsAdd from './pages/FormSectionsAdd'
 import FormSubjectsAdd from './pages/FormSubjectsAdd'
 import AsingProfessor from './pages/AsingProfessor'
 import CalendarPage from './pages/CalendarPage';
-import AsingActivitie from './pages/AsingActivities'
+import AsingActivitie from './pages/AsingActivities';
+import Error401 from './components/Error401';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
@@ -36,6 +37,7 @@ root.render(
       <Route path='Secciones' element={<TablesSections/>}/>
       <Route path='AsignarProfesor' element={<AsingProfessor/>}/>
       <Route path='AsignarActividad' element={<AsingActivitie/>}/>
+      <Route path='Error401' element={<Error401/>}/>
 
       <Route path='Calendario' element={<CalendarPage/>}/>
     </Routes>
