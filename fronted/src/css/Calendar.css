@@ -102,9 +102,9 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100vh;
+    height:120vh;
     background-color: rgba(0, 0, 0, 0.40);
-    position: fixed;
+    position: absolute;
     z-index: 6;
     top: 0;
     left: 0;
@@ -141,9 +141,8 @@
 .listFiltrer {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     width: 100%;
-    height: 100%;
+    height: 60vh;
     font-size: 30px;
     padding: 1vw;
     border-radius: 30px;
