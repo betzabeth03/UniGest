@@ -24,11 +24,25 @@ export default function Header({ landing, active, activities, color, plani }) {
 
         {
           <ul className='links'>
-            {active ? <li><a href="/" className={landing ? 'link active' : 'link'}>Inicio</a></li> : null}
-            {active ? <li><a href="Actividades" className={activities ? 'link active' : 'link'}>Actividades</a></li> : null}
-            <li><a href="/calendario" className={plani ? 'link active': 'link'}>Planificación</a></li>
-            {active ? <li onClick={() => handleShowExit()}><p className='link'>Cerrar Sesión</p></li> : <li><a href="Login" className='link'>Iniciar Sesión</a></li>}
-            {active ? null : <li><a href="RegisterUser" className='link'>Registrarse</a></li>}
+
+            {
+              active ? <>
+                <li><a href="/" className={landing ? 'link active' : 'link'}>Inicio</a></li>
+                <li><a href="Actividades" className={activities ? 'link active' : 'link'}>Actividades</a></li>
+                <li><a href="/calendario" className={plani ? 'link active' : 'link'}>Planificación</a></li>
+                <li onClick={() => handleShowExit()}><p className='link'>Cerrar Sesión</p></li>
+              </> :
+              <>
+                {
+                  plani ? <li><a href="/" className={landing ? 'link active' : 'link'}>Inicio</a></li> : null 
+                }
+                <li><a href="/calendario" className={plani ? 'link active' : 'link'}>Planificación</a></li>
+                <li><a href="Login" className='link'>Iniciar Sesión</a></li>
+                <li><a href="RegisterUser" className='link'>Registrarse</a></li>
+              </>
+            }
+
+           
           </ul>
         }
       </header>

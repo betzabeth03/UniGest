@@ -102,12 +102,10 @@ export default function Calendar() {
 
     return (
         <section className='viewAllCalendar'>
-            <div className='filtrerWidth'>
-                <input type='button' className='buttonFiltrer' onClick={openFiltrerForm} value={'Filtrar'}/>
 
-            </div>
             <section className='calendarSection'>
                 <div className={isBlur ? 'Blur calendarView ' : 'calendarView    '}>
+                <input type='button' className='buttonFiltrer' onClick={openFiltrerForm} value={'Filtrar'}/>
                     <FullCalendar
                         aspectRatio={2.1}
                         plugins={[dayGridPlugin, interactionPlugin]}
