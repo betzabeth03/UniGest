@@ -1,34 +1,44 @@
-.Blur{
+.Blur {
     filter: blur(2px);
 }
-.calendar{
+
+.calendar {
     height: 100vh;
 
 }
-.hide{
+
+.hide {
     display: none;
 }
-.show{
-    position: fixed; /* Cambiar de absolute a fixed para que se mantenga en el viewport al hacer scroll */
-    top: 0; /* Asegura que cubra todo el viewport */
-    left: 0; /* Asegura que cubra todo el viewport */
-    z-index: 1; /* Mayor z-index para estar por encima de otros elementos */
-    width: 100%; /* Ocupa todo el ancho del viewport */
-    height: 100vh; /* Ocupa todo el alto del viewport */
-    display: flex; /* Usar flex para centrar el contenido */
-    background-color: rgba(0, 0, 0, 0.5); 
-    justify-content: center; 
+
+.show {
+    position: fixed;
+    /* Cambiar de absolute a fixed para que se mantenga en el viewport al hacer scroll */
+    top: 0;
+    /* Asegura que cubra todo el viewport */
+    left: 0;
+    /* Asegura que cubra todo el viewport */
+    z-index: 1;
+    /* Mayor z-index para estar por encima de otros elementos */
+    width: 100%;
+    /* Ocupa todo el ancho del viewport */
+    height: 100vh;
+    /* Ocupa todo el alto del viewport */
+    display: flex;
+    /* Usar flex para centrar el contenido */
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
     align-items: center;
 }
 
-.cardDescription{
+.cardDescription {
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 1vw;
 }
 
-.buttonClose{
+.buttonClose {
     font-size: 30px;
     padding: .5vw 2vw;
     background-color: #00255C;
@@ -36,7 +46,8 @@
     border: 0;
     border-radius: 30px;
 }
-.bg-event{
+
+.bg-event {
     background-color: white;
     display: flex;
     width: 25%;
@@ -46,7 +57,7 @@
     border-radius: 10px;
 }
 
-.calendarView{
+.calendarView {
     width: 70vw;
     background-color: rgb(255, 255, 255);
     padding: 1vw;
@@ -54,34 +65,156 @@
     border-radius: 30px;
 }
 
-.calendarSection{
+.calendarSection {
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-.calendarProfesor{
+.calendarProfesor {
     padding: 1vw;
     background-color: #B5D8EB;
 }
 
-.descriptionActivities{
+.descriptionActivities {
     font-size: 24px;
     text-align: justify;
 }
 
-.titleDescription{
+.titleDescription {
     font-size: 30px;
 }
 
-.buttonCancelDescription{
+.buttonCancelDescription {
     display: flex;
     justify-content: center;
 }
 
-.fc-event{
+.fc-event {
     background-color: rgb(243, 44, 9);
     border-radius: 20px;
     border: 0;
     padding: .2vw;
+}
+
+
+.filtrerForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.40);
+    position: fixed;
+    z-index: 6;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.containFiltrer{
+    padding: 1vw;
+    background-color: white;
+    width: 35%;
+    border-radius: 30px;
+}
+
+.listChecked{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.notFiltrerForm{
+    display: none;
+}
+
+.filtrerWidth{
+    width: 50%;
+}
+
+.viewAllCalendar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1vw;
+}
+
+.listFiltrer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 30px;
+    padding: 1vw;
+    border-radius: 30px;
+    overflow: scroll;
+    overflow-x: hidden;
+    gap: 1vw;
+}
+
+
+.listFiltrer::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+
+.listFiltrer::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: #C0C9CA;
+}
+
+.listFiltrer::-webkit-scrollbar-track:hover {
+    background-color: #BEC6C8;
+}
+
+.listFiltrer::-webkit-scrollbar-track:active {
+    background-color: #B8C0C2;
+}
+
+.listFiltrer::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #757575;
+}
+
+.listFiltrer::-webkit-scrollbar-thumb:hover {
+    background-color: #646464;
+}
+
+.listFiltrer::-webkit-scrollbar-thumb:active {
+    background-color: #A096A3;
+}
+
+.aceptButtonFiltrer{
+    font-size: 30px;
+    padding: .5vw 2vw;
+    background-color: #00255C;
+    color: white;
+    border: 0;
+    border-radius: 30px;
+    width: 50%;
+}
+
+.buttonFiltrer{
+    font-size: 30px;
+    padding: .5vw 2vw;
+    background-color: #00255C;
+    color: white;
+    border: 0;
+    border-radius: 30px;
+    left: 30px;
+}
+
+.inputCheckbox {
+    display: flex;
+    gap: .5vw;
+    align-items: center;
+}
+
+
+input[type="checkbox"]{
+    width: 20px;
+    height: 20px;
 }
