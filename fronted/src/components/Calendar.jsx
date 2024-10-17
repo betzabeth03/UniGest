@@ -13,12 +13,29 @@ export default function Calendar() {
         async function getEvents() {
             await axios.get('http://localhost:3000/apms')
                 .then((result) => {
-                    console.log(result.data.body)
                     let arrTemp = []
                     result.data.body.forEach((item) => {
+                        const date= new Date(item.date)
+                        const dateDay = date.getDay()
+                        let dateEvent = undefined
+                        if(dateDay===item.diaClase){
+                            dateEvent = item.date
+                        }else{
+                            let diferencia = item.diaClase - dateDay
+
+                              if (diferencia < 0) {
+                                    diferencia += 6;
+                                } 
+
+                            const nuevaFecha = new Date(item.date);
+                            nuevaFecha.setDate(date.getDate() + diferencia);
+                            const nuevaFechaISO = nuevaFecha.toISOString().slice(0,10).replace('T','')
+                            dateEvent = nuevaFechaISO
+                        }
+
                         let eventTemp = {
                             title: item.title,
-                            date: item.date,
+                            date: dateEvent,
                             extendedProps: {
                                 descripcion: item.descripcion,
                                 profesor: item.profesor,

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-10-2024 a las 04:03:11
+-- Tiempo de generación: 17-10-2024 a las 02:19:31
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -54,7 +54,7 @@ CREATE TABLE `a_p_m_s` (
 
 CREATE TABLE `materias` (
   `nombre` varchar(18) NOT NULL,
-  `diaClase` varchar(18) NOT NULL,
+  `diaClase` int(18) NOT NULL,
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

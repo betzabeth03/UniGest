@@ -6,7 +6,26 @@ class SubjectsModels{
         connection.query(consult,function(error,results,fields){
           if(error){
            reject(error)
-          }else{
+          }else{results.forEach(element => {
+            
+            switch(element.diaClase){
+              case 1: element.diaClase = "lunes"
+              break;
+              case 2:  element.diaClase = "Martes"
+              break;
+              case 3:  element.diaClase = "Miercoles"
+              break;
+              case 4:  element.diaClase = "Jueves"
+              break;
+              case 5:  element.diaClase = "Viernes"
+              break;
+              case 6:  element.diaClase = "Sabado"
+              break;
+              case 0:  element.diaClase = "Domingo"
+              break;
+      
+            }
+          });
             resolve(results)
           }
         })
