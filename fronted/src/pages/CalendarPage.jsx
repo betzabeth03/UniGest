@@ -27,6 +27,7 @@ export default function CalendarPage(){
         }
         getData(token)
       }, [token])
+      
     return(
         <div className='activitiesView'>
         {
@@ -48,7 +49,8 @@ export default function CalendarPage(){
               <Header active={active} color={color} plani={plani} />
               <section className='calendarProfesor '>
                 <article className='calendarProfesor'>
-                <Calendar />
+                <Calendar
+                />
                 </article>
   
               </section>

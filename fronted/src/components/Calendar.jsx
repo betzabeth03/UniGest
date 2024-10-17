@@ -9,12 +9,28 @@ export default function Calendar() {
     const [isBlur, SetIsBlur] = useState(false)
     const [noDisplay, setNoDisplay] = useState(false)
     const [eventClicked, setEventClicked] = useState(null)
+    const [filter, setFilter] = useState([]); 
+    const [materias, setMaterias] = useState([]); 
+    
+ 
     useEffect(() => {
+        
         async function getEvents() {
             await axios.get('http://localhost:3000/apms')
-                .then((result) => {
+                .then(async(result) => {
+                    const materiasRes = await axios.get('http://localhost:3000/materias');
+                    setMaterias(materiasRes.data.body);
                     let arrTemp = []
-                    result.data.body.forEach((item) => {
+                    let arrSubjectsFilter = []
+                   
+            if (filter.length !== 0) {
+                arrSubjectsFilter = result.data.body.filter(evento =>
+                    filter.includes(evento.materia)
+                );
+            } else {
+                arrSubjectsFilter = result.data.body;
+            }
+                   arrSubjectsFilter.forEach((item) => {
                         const date= new Date(item.date)
                         const dateDay = date.getDay()
                         let dateEvent = undefined
@@ -51,12 +67,9 @@ export default function Calendar() {
                 });
         }
         getEvents()
-    }, [])
-    const handleDateClick = (arg) => {
-        console.log(arg);
-    }
+    }, [filter])
+    
     const handleEventClick = (arg) => {
-        console.log(arg.event.extendedProps.profesor);
         setEventClicked(arg.event)
         SetIsBlur(true)
         setNoDisplay(false)
@@ -64,6 +77,16 @@ export default function Calendar() {
     const handleDivClick = () => {
         SetIsBlur(false)
         setNoDisplay(true)
+    }
+    function handleFilterChange(e) {
+        const { value, checked } = e.target
+        setFilter(prevState => {
+            if (checked) {
+                return [...prevState, value]
+            } else {
+                return prevState.filter(materia => materia !== value)
+            }
+        });
     }
 
     return (
@@ -74,7 +97,6 @@ export default function Calendar() {
                         aspectRatio={2.1}
                         plugins={[dayGridPlugin, interactionPlugin]}
                         initialView="dayGridMonth"
-                        dateClick={handleDateClick}
                         eventClick={handleEventClick}
                         events={events}
                     />
@@ -110,6 +132,23 @@ export default function Calendar() {
                 :
                 null
             }
+            <div>
+                                <form>
+                                    <h3>Filtrar por materias</h3>
+                                    {materias.map((materia) => (
+                                        <label key={materia.id}>
+                                            <input
+                                                type="checkbox"
+                                                value={materia.nombre}
+                                                onChange={handleFilterChange}
+                                                checked={filter.includes(materia.nombre)}
+                                            />
+                                            {materia.nombre}
+                                        </label>
+                                    ))}
+                                </form>
+                            </div>
+                            
         </>
     )
 }
