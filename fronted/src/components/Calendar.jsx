@@ -36,12 +36,14 @@ export default function Calendar() {
                         const dateDay = date.getDay()
                         let dateEvent = undefined
                         if (dateDay === item.diaClase) {
-                            dateEvent = item.date
+                            const nuevaFecha = new Date(item.date)
+                             nuevaFecha.setDate(date.getDate() - 1)
+                             const nuevaFechaISO = nuevaFecha.toISOString().slice(0, 10).replace('T', '')
+                              dateEvent = nuevaFechaISO;
                         } else {
                             let diferencia = item.diaClase - dateDay
-
-                            if (diferencia < 0) {
-                                diferencia += 6;
+                            if (diferencia <= 1) {
+                                diferencia = diferencia + 6;
                             }
 
                             const nuevaFecha = new Date(item.date);

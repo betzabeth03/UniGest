@@ -9,7 +9,9 @@ class SubjectsModels{
           }else{results.forEach(element => {
             
             switch(element.diaClase){
-              case 1: element.diaClase = "lunes"
+              case 0:  element.diaClase = "Domingo"
+              break;
+              case 1: element.diaClase = "Lunes"
               break;
               case 2:  element.diaClase = "Martes"
               break;
@@ -20,8 +22,6 @@ class SubjectsModels{
               case 5:  element.diaClase = "Viernes"
               break;
               case 6:  element.diaClase = "Sabado"
-              break;
-              case 0:  element.diaClase = "Domingo"
               break;
       
             }
@@ -38,7 +38,10 @@ class SubjectsModels{
         let nombreR = registro.nombre
         let diaClase = null
         let diaUpper = registro.dia.charAt(0).toUpperCase() + registro.dia.slice(1)
+        
         switch(diaUpper){
+          case "Domingo": diaClase = 0
+          break;
           case "Lunes": diaClase = 1 
           break;
           case "Martes": diaClase = 2 
@@ -51,9 +54,6 @@ class SubjectsModels{
           break;
           case "Sabado": diaClase = 6
           break;
-          case "Domingo": diaClase = 0
-          break;
-  
         }
              let consult = `INSERT INTO materias (nombre,diaClase) VALUES ('${nombreR}','${diaClase}')`
              connection.query(consult,function(error,results,fields){
