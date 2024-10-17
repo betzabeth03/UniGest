@@ -41,10 +41,10 @@ export default function FormActivitiesAdd() {
               <Menu btActividades={btActive} />
 
               <div className='formGeneral'>
-                <FormModify
-                  uri="actividades"
-                  propiedades={["el nombre", "la descripcion", "la semana"]}
-                />
+              <FormModify
+            uri="secciones"
+            propiedades={["el nombre", "el periodo academico"]}
+          />
               </div>
             </div>
             <Footer />
@@ -53,10 +53,10 @@ export default function FormActivitiesAdd() {
           <div className='addActivities'>
             <Header active={active} activities={activities} />
             <div className='addAct'>
-              <FormModify
-                uri="actividades"
-                propiedades={["el nombre", "la descripcion", "la semana"]}
-              />
+            <FormModify
+            uri="secciones"
+            propiedades={["el nombre", "el periodo academico"]}
+          />
             </div>
           </div>
 

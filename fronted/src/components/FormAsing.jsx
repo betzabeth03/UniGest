@@ -41,6 +41,9 @@ export default function FormAsing() {
                     console.log(err)
                 });
         }
+        Cookies.remove('name')
+        Cookies.remove('id')
+
     }
     useEffect(() => {
        async function getUser(token) {

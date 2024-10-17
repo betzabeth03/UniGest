@@ -90,6 +90,17 @@ export default function Tables(props) {
       window.location.replace('/AsignarProfesor')
     }
   }
+  function handleModify(item){
+    if(props.uri==="profesores"){
+      Cookies.set('cedula',item.cedula)
+    }
+    console.log(item)
+    Cookies.set('id', item.id)
+    Cookies.set('name', item.nombre)
+
+    window.location.replace(`/Modificar${props.uri}`)
+
+  }
   useEffect(() => {
     async function getData() {
       await axios.get(`http://localhost:3000/${props.uri}`)
@@ -191,7 +202,7 @@ export default function Tables(props) {
                 <td>
                   {(role === "Director" && props.uri !== "actividades") || (role === "Profesor" && props.uri === "actividades") ?
                     <div className="buttonsTable">
-                      <button className="tableButton">
+                      <button className="tableButton" onClick={()=>handleModify(item)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="2vw" height="2vw" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
                           <path d="M15.502 1.95a.5.5 0 0 1 0 .706L15.559 3.69l-2-2L13.502.656a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.556-2-2L5.939 9.21a.5.5 0 0 0-.121.196l-.805 2.515a.25.25 0 0 0 .316.316l2.515-.805a.5.5 0 0 0 .196-.12l6.813-6.815z" />
                           <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />

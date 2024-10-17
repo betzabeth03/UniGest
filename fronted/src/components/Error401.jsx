@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../css/Error401.css'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 export default function Error401() {
+    useEffect(()=>{
+        setTimeout(() => {
+            window.location.replace('/Login')
+        }, 5000);
+    })
     return (
         <div className='section401'>
             <div className='error401'>

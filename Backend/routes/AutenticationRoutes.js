@@ -46,6 +46,18 @@ router.get("/verify/:token", function (req, res, next) {
         .json({ error: "Error al autenticar", message: e.message });
     });
 });
+router.put('/editar/:cedula',function(req,res){
+  let cedula = req.params.cedula
+  const nuevosValores = req.body
+  AutenticationControllers.Modify(cedula,nuevosValores)
+  .then(() => {
+    res.status(200) .json({ result: "Usuario Editado"});
+  }).catch((e) => {
+    res
+    .status(401)
+    .json({ error: "Error al autenticar", message: e.message });
+});
+})
 router.get("/500", (req, res, next) => {
   res.status(500).json({message:"Algo no ha salido como se esperaba", error:e.message})
 });

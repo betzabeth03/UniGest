@@ -32,6 +32,8 @@ export default function FormAdd(props) {
         })
         .catch((err) => {
           console.log(err)
+          window.location.replace('/Error401')
+
         })
     }
     getData(token)
@@ -61,7 +63,12 @@ export default function FormAdd(props) {
               <label className='activities'> {props.uri.charAt(0).toUpperCase() + props.uri.slice(1)} </label>
               {props.propiedades.map((element, index) => (
                 <div className='divAdd' key={index}>
+                {
+                  element.split(" ")[1]==="periodo"?
+                  <input autoComplete="off" required type="date" placeholder={`Ingresa ${element}`} name={element.split(" ")[1]} className='inputAdd' />
+                    :
                   <input autoComplete="off" required type="text" placeholder={`Ingresa ${element}`} name={element.split(" ")[1]} className='inputAdd' />
+                }
                 </div>
               ))}
               <input autoComplete="off" required type="submit" value={'Agregar'} className="submitAdd" name="" />

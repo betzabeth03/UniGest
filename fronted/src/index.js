@@ -19,6 +19,9 @@ import AsingProfessor from './pages/AsingProfessor'
 import CalendarPage from './pages/CalendarPage';
 import AsingActivitie from './pages/AsingActivities';
 import Error401 from './components/Error401';
+import FormModifyProfessors from './pages/FormModifyProfessors'
+import FormModifySubjects from './pages/FormModifySubjects'
+import FormModifySections from './pages/FormModifySections'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
@@ -30,7 +33,7 @@ root.render(
       <Route path='AgregarProfesores' element={<FormProfessorsAdd/>}/>
       <Route path='AgregarMaterias' element={<FormSubjectsAdd/>}/>
       <Route path='AgregarSecciones' element={<FormSectionsAdd/>}/>
-      <Route path='FormModifyActivities' element={<FormModifyActivities/>}/>
+      <Route path='ModificarActividades' element={<FormModifyActivities/>}/>
       <Route path='Profesores' element={<TableTeachers/>}/>
       <Route path='Actividades' element={<TablesActivities/>}/>
       <Route path='Materias' element={<TablesSubjects/>}/>
@@ -38,7 +41,9 @@ root.render(
       <Route path='AsignarProfesor' element={<AsingProfessor/>}/>
       <Route path='AsignarActividad' element={<AsingActivitie/>}/>
       <Route path='Error401' element={<Error401/>}/>
-
+      <Route path='ModificarProfesores' element={<FormModifyProfessors/>}/>
+      <Route path='ModificarMaterias' element={<FormModifySubjects/>}/>
+      <Route path='ModificarSecciones' element={<FormModifySections/>}/>
       <Route path='Calendario' element={<CalendarPage/>}/>
     </Routes>
   </BrowserRouter>

@@ -45,7 +45,17 @@ class AutenticationControllers{
                 })
         })
     }
-    
+    Modify(idReq, nuevosValores){
+        return new Promise((resolve, reject) => {   
+          AutenticationModels.Modify(idReq,nuevosValores)
+          .then(() => {
+            resolve()
+          })
+          .catch((error) => {
+            reject(error)
+          });
+        });
+      }
     }
     
   

@@ -9,7 +9,8 @@ class SectionsModels{
          reject(error)
         }else{
           results.forEach(Element => {
-            Element.periodoAcademico = Element.periodoAcademico.toISOString().slice(0,10).replace('T','')
+            let dateTemp = new Date(Element.periodoAcademico)
+            Element.periodoAcademico = dateTemp.toISOString().slice(0,10).replace('T','')
           });
           resolve(results)
         }
@@ -24,6 +25,7 @@ class SectionsModels{
       return new Promise((resolve, reject) => {
         let nombreR = registro.nombre
         let periodoAcademicoR= registro.periodo
+        console.log(periodoAcademicoR)
         let periodoDate = new Date(periodoAcademicoR)
         let periodoAcademicoIso = periodoDate.toISOString().slice(0,10).replace('T','')
         console.log(periodoAcademicoIso)
@@ -41,7 +43,7 @@ class SectionsModels{
     Modify(idReq, nuevosValores) {
       return new Promise((resolve,reject)=>{
         let nombreR = nuevosValores.nombre
-        let periodoAcademicoR= nuevosValores.periodoAcademico
+        let periodoAcademicoR= nuevosValores.periodo
         let periodoDate = new Date(periodoAcademicoR)
         let periodoAcademicoIso = periodoDate.toISOString().slice(0,10).replace('T','')
         let consult = `UPDATE secciones SET nombre = '${nombreR}', periodoAcademico = '${periodoAcademicoIso}' WHERE id = ${idReq}`

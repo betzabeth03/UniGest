@@ -24,7 +24,7 @@ export default function TablesActivities() {
         })
         .catch((err) => {
           console.log(err)
-          window.location.replace('/')
+          window.location.replace('/Error401')
         })
     }
     getData(token)

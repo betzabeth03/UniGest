@@ -61,7 +61,7 @@
     color: rgba(0, 0, 0, 0.651);
 }
 
-.registerLogin > a{
+.registerLogin > a,.nameLogin > a{
     text-decoration: none;
     color: black;
     font-weight: bold;

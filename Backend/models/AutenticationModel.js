@@ -120,6 +120,21 @@ Logout(cookie){
         }
     })
 }
+Modify(cedula,values){
+    return new Promise((resolve, reject) => {
+       let cedulaFront = cedula
+       let nombre = values.nombre
+       let apellido = values.apellido
+       let consult = `UPDATE users SET nombre = '${nombre}', apellido = '${apellido}' WHERE cedula = ${cedulaFront}`
+       connection.query(consult, function(err, results, fields) {
+        if(err){
+            reject(err)
+        }else{
+            resolve()
+        }
+       })
+    })
+}
 
 }
 module.exports = new AutenticationModels()
