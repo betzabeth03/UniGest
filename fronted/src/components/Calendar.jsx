@@ -12,6 +12,8 @@ export default function Calendar() {
     const [filter, setFilter] = useState([]);
     const [materias, setMaterias] = useState([]);
     const [openFiltrer, setOpenFiltrer] = useState('notFiltrerForm')
+    const [animation, setAnimation] = useState('')
+    const [animationDescription, setAnimationDescription]= useState('')
 
 
     useEffect(() => {
@@ -74,9 +76,13 @@ export default function Calendar() {
 
     function openFiltrerForm() {
         if (openFiltrer === '') {
-            setOpenFiltrer('notFiltrerForm')
+            setAnimation('animation')
+            setTimeout(() => {
+                setOpenFiltrer('notFiltrerForm')
+            }, 1000);
         } else {
             setOpenFiltrer('')
+            setAnimation('')
         }
     }
 
@@ -84,10 +90,16 @@ export default function Calendar() {
         setEventClicked(arg.event)
         SetIsBlur(true)
         setNoDisplay(false)
+        setAnimationDescription('')
     }
     const handleDivClick = () => {
-        SetIsBlur(false)
-        setNoDisplay(true)
+        if (animationDescription === '') {
+            setAnimationDescription('animation')
+            setTimeout(() => {
+                SetIsBlur(false)
+                setNoDisplay(true)
+            }, 1000);
+        }   
     }
     function handleFilterChange(e) {
         const { value, checked } = e.target
@@ -118,7 +130,7 @@ export default function Calendar() {
             </section>
             {eventClicked ?
                 <div className={noDisplay ? 'hide' : 'show'}>
-                    <div className='bg-event'>
+                    <div className={`bg-event ${animationDescription}`}>
 
                         <div className='cardDescription'>
                             <h2 className='titleDescription'>
@@ -146,7 +158,7 @@ export default function Calendar() {
                 null
             }
             <div className={`filtrerForm ${openFiltrer}`}>
-                <div className='containFiltrer'>
+                <div className={`containFiltrer ${animation}`}>
                     <form className='listChecked'>
                         <div className='listFiltrer'>
                             <h3>Filtrar por materias</h3>
