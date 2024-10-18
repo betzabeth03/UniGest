@@ -79,7 +79,7 @@ export default function Calendar() {
             setAnimation('animation')
             setTimeout(() => {
                 setOpenFiltrer('notFiltrerForm')
-            }, 1000);
+            }, 500);
         } else {
             setOpenFiltrer('')
             setAnimation('')
@@ -98,7 +98,7 @@ export default function Calendar() {
             setTimeout(() => {
                 SetIsBlur(false)
                 setNoDisplay(true)
-            }, 1000);
+            }, 500);
         }   
     }
     function handleFilterChange(e) {

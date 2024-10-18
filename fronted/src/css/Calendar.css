@@ -49,7 +49,7 @@
     gap: 1vw;
     border-radius: 10px;
     animation: animationDescription;
-    animation-duration: 1.5s;
+    animation-duration: .6s;
 }
 
 @keyframes animationDescription {
@@ -147,7 +147,7 @@
     width: 35%;
     border-radius: 30px;
     animation: animationFiltrer;
-    animation-duration: 1.5s;
+    animation-duration: .6s;
 }
 
 .listChecked{
@@ -159,7 +159,7 @@
 
 .animation{
     animation: animationFiltrerExit;
-    animation-duration: 1.5s;
+    animation-duration: .6s;
 }
 
 .notFiltrerForm{
@@ -232,6 +232,7 @@
 .buttonFiltrer{
     font-size: 30px;
     padding: .5vw 2vw;
+    width: 20%;
     background-color: #00255C;
     color: white;
     border: 0;
@@ -239,7 +240,7 @@
     left: 30px;
     position: relative;
     z-index: 2;
-    left: 45%;
+    left: 18%;
     top: 6%;
 }
 
