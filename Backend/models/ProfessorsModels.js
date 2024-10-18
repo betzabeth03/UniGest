@@ -34,7 +34,9 @@ class ProfessorsModels{
       let nombreUS = usuario.nombre
       let apellidoUS = usuario.apellido
       let cedula = usuario.cedula
-      if(nombreUS && apellidoUS){
+      if(nombreUS==undefined|| apellidoUS==undefined || cedula==undefined||nombreUS.trim()===" "|| apellidoUS.trim()===" " || cedula.trim()===""){
+        reject(new Error("No se pueden pasar datos vacios"))
+      }
         let consult = `INSERT INTO profesores (nombre, apellido,cedula) VALUES ('${nombreUS}','${apellidoUS}',${cedula} )`
         connection.query(consult,function(error,results,fields){
          if(error){
@@ -42,23 +44,24 @@ class ProfessorsModels{
          }else{
            resolve(results)
          }
-        })
-      }else{
-        reject(new Error( 'No se enviaron los datos completos'))
-      }
-     
-           
+        })    
     })
   }
  Modify(idReq, nuevosValores) {
   return new Promise((resolve, reject) => {
     let nombreUs = nuevosValores.nombre
     let apellidoUS= nuevosValores.apellido
+    if(nombreUS==undefined|| apellidoUS==undefined || cedula==undefined||nombreUs.trim()===" "|| apellidoUS.trim()===" " || cedula.trim()===""){
+      reject(new Error("No se pueden pasar datos vacios"))
+    }
     let consult = `UPDATE profesores SET nombre = '${nombreUs}', apellido = '${apellidoUS}' WHERE id = ${idReq}`
     connection.query(consult,function(error,results,fields){
       if(error){
         reject(error)
       }else{
+        if(results.length===0){
+          reject(new Error("No se encontro el profesor"))
+      }
         resolve(results)
       }
     })

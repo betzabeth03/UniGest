@@ -30,6 +30,9 @@ class APMSModels {
     return new Promise((resolve, reject) => {
       let idPMS = data.idPMS;
       let idActividades = data.idActividades;
+      if(idPMS==undefined||idActividades==undefined||idPMS.trim()==""||idActividades.trim()===""){
+        reject(new Error("No se pueden pasar datos vacios"))
+      }
       let consulta = `INSERT INTO a_p_m_s (idPMS,idActividades) VALUES (${idPMS},${idActividades})`;
       connection.query(consulta, function (error, results, fields) {
         if (error) {
@@ -44,12 +47,18 @@ class APMSModels {
     return new Promise((resolve, reject) => {
       let idPMS = data.idPMS;
       let idActividades = data.idActividades;
+      if(idPMS==undefined||idActividades==undefined||idPMS.trim()==""||idActividades.trim()===""){
+        reject(new Error("No se pueden pasar datos vacios"))
+      }
       console.log(idPMS, idActividades);
       let consulta = `UPDATE a_p_m_s SET idPMS = ${idPMS}, idActividades = ${idActividades} WHERE id = ${id} `;
       connection.query(consulta, function (error, results, fields) {
         if (error) {
           reject(error);
         } else {
+          if(results.length===0){
+            reject(new Error("No se encontro la clase"))
+        }
           resolve(results);
         }
       });

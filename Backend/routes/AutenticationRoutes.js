@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const AutenticationControllers = require("../controllers/AutenticationControllers");
-const RelacionesModelos = require("../models/RelacionesModelos");
 
 router.post("/register", function (req, res, next) {
   AutenticationControllers.Register(req.body)

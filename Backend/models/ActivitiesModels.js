@@ -33,6 +33,9 @@ class ActivitiesModels{
       let nombreAC = actividades.nombre
       let descripcionAC = actividades.descripcion
       let semanaAC = actividades.semana
+      if(!nombreAC||!descripcionAC||!semanaAC||nombreAC.trim()===" "||descripcionAC.trim()===""||semanaAC.trim()===""){
+        reject(new Error("No se pueden enviar datos vacios"))
+      }
       let consult = `INSERT INTO actividades (nombre, descripcion, semana, id) VALUES ('${nombreAC}','${descripcionAC}',${semanaAC}, "")`
         connection.query(consult,function(error,results,fields){
           if(error){
@@ -50,11 +53,17 @@ class ActivitiesModels{
       let nombreAC = nuevosValores.nombre
       let descripcionAC = nuevosValores.descripcion
       let semanaAC = nuevosValores.semana
+      if(!nombreAC||!descripcionAC||!semanaAC||nombreAC.trim()===" "||descripcionAC.trim()===""||semanaAC.trim()===""){
+        reject(new Error("No se pueden enviar datos vacios"))
+      }
       let consult = `UPDATE actividades SET nombre = '${nombreAC}', descripcion = '${descripcionAC}', semana = '${semanaAC}' WHERE id = ${idReq}`
       connection.query(consult,function(error,results,fields){
         if(error){
           reject(error)
         }else{
+          if(results.length===0){
+            reject(new Error("No se encontro la actividad"))
+        }
           resolve(results)
        }
       }

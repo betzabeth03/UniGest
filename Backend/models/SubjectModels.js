@@ -38,7 +38,9 @@ class SubjectsModels{
         let nombreR = registro.nombre
         let diaClase = null
         let diaUpper = registro.dia.charAt(0).toUpperCase() + registro.dia.slice(1)
-        
+        if(nombreR==undefined||diaUpper==undefined||nombreR.trim()===""||diaUpper.trim()===""){
+          reject(new Error("No se pueden enviar datos vacios"))
+        }
         switch(diaUpper){
           case "Domingo": diaClase = 0
           break;
@@ -69,11 +71,35 @@ class SubjectsModels{
     Modify(idReq, nuevosValores) {
       return new Promise((resolve,reject)=>{
         let nombreR = nuevosValores.nombre
-        let consult = `UPDATE materias SET nombre = '${nombreR}' WHERE id = ${idReq}`
+        let diaClase = null
+        let diaUpper = registro.dia.charAt(0).toUpperCase() + registro.dia.slice(1)
+        if(nombreR==undefined||diaUpper==undefined||nombreR.trim()===""||diaUpper.trim()===""){
+          reject(new Error("No se pueden enviar datos vacios"))
+        }
+        switch(diaUpper){
+          case "Domingo": diaClase = 0
+          break;
+          case "Lunes": diaClase = 1 
+          break;
+          case "Martes": diaClase = 2 
+          break;
+          case "Miercoles": diaClase = 3
+          break;
+          case "Jueves": diaClase = 4
+          break;
+          case "Viernes": diaClase = 5
+          break;
+          case "Sabado": diaClase = 6
+          break;
+        }
+        let consult = `UPDATE materias SET nombre = '${nombreR}', diaClase=${diaClase} WHERE id = ${idReq}`
         connection.query(consult,function(error,results,fields){
           if(error){
             reject(error)
           }else{
+            if(results.length===0){
+              reject(new Error("No se encontro la materia"))
+          }
             resolve(results)
          }
         })

@@ -39,6 +39,9 @@ class PMSModels {
       let idProfesor = data.idProfesor;
       let idMaterias = data.idMaterias;
       let idSecciones = data.idSecciones;
+      if(idProfesor==undefined||idMaterias==undefined||idSecciones==undefined||idProfesor.trim()===" "||idMaterias.trim()===" "||idSecciones.trim()===" "){
+        reject(new Error("No se pueden enviar datos vacios"))
+      }
       let consult = `INSERT INTO p_m_s (idProfesor,idMaterias,idSecciones) VALUES (${idProfesor},${idMaterias},${idSecciones})`;
       connection.query(consult, function (error, results, fields) {
         if (error) {
@@ -54,11 +57,17 @@ class PMSModels {
       let idProfesorVar = data.idProfesor;
       let idMateriasVar = data.idMaterias;
       let idSeccionesVar = data.idSecciones;
+      if(idProfesorVar==undefined||idMateriasVar==undefined||idSeccionesVar==undefined||idProfesorVar.trim()===" "||idMateriasVar.trim()===" "||idSeccionesVar.trim()===" "){
+        reject(new Error("No se pueden enviar datos vacios"))
+      }
       let consulta = `UPDATE p_m_s SET idProfesor = ${idProfesorVar}, idMaterias = ${idMateriasVar}, idSecciones = ${idSeccionesVar} WHERE id = ${id} `;
       connection.query(consulta, function (error, results, fields) {
         if (error) {
           reject(error);
         } else {
+          if(results.length===0){
+            reject(new Error("No se encontro la clase asignada"))
+        }
           resolve(results);
         }
       });
