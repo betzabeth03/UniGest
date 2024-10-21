@@ -3,6 +3,8 @@ import '../css/FormLogin.css'
 import logoSolo from '../assets/logoSolo.png'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import { motion } from 'framer-motion'
+
 export default function FormLogin() {
   const [error,setError] = useState(null)
   function handleSubmit(e){
@@ -44,9 +46,9 @@ export default function FormLogin() {
               </svg>
             </div>
               {
-                error? <div className='errorRegister'> {error} </div>: null
+                error? <motion.div initial={{y:0, opacity:0}} animate={{y:10, opacity:1}} className='errorRegister'> {error} </motion.div>: null
               }
-              <input className='submitLogin' type="submit" value='Iniciar Sesión'/>
+              <motion.input whileHover={{scale:.9, backgroundColor:"#000000e7", border:"2px solid black"}} transition={{ease:"linear"}} className='submitLogin' type="submit" value='Iniciar Sesión'/>
               <p className='registerLogin'>
                   ¿No estás registrado?  
               <a href="RegisterUser"> Registrarse</a>

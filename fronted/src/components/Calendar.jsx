@@ -162,7 +162,7 @@ export default function Calendar() {
                                         </p>
                                     </div>
                                     <div className='buttonCancelDescription'>
-                                        <button onClick={() => handleDivClick()} className='buttonClose'>Cerrar</button>
+                                        <motion.button whileHover={{scale:.9, backgroundColor:"white", border:"2px solid #00255c", color:"#00255c"}} onClick={() => handleDivClick()} className='buttonClose'>Cerrar</motion.button>
                                     </div>
                                 </motion.div>
                             )}
@@ -197,7 +197,7 @@ export default function Calendar() {
 
                                         ))}
                                     </div>
-                                    <input type='button' className='aceptButtonFiltrer' onClick={openFiltrerForm} value={'Aceptar'} />
+                                    <motion.input whileHover={{scale:.9, backgroundColor:"white", border:"2px solid #00255c", color:"#00255c"}} type='button' className='aceptButtonFiltrer' onClick={openFiltrerForm} value={'Aceptar'} />
                                 </form>
                             </motion.div>
                         </div>
