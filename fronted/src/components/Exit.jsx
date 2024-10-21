@@ -26,7 +26,6 @@ export default function Exit({ exitEmer, onCancel }) {
                         Aceptar
                     </button>
                 </div>
-                
             </div>
         </div>
     );
